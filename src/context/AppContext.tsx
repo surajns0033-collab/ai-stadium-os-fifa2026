@@ -1,3 +1,17 @@
+/**
+ * @module AppContext
+ * @description Central application state management using React Context API.
+ * Implements an event-driven architecture with a global event bus,
+ * role-based access control (RBAC), and system observability logging.
+ * 
+ * Design Decisions:
+ * - Context API chosen over Redux/Zustand to minimize bundle size
+ * - Event bus pattern enables decoupled module communication
+ * - Log rotation (50 entries max) prevents memory leaks in long sessions
+ * 
+ * @see {@link GlobalEvent} for event schema
+ * @see {@link UserRole} for RBAC persona types
+ */
 "use client";
 import React, { createContext, useContext, useState } from 'react';
 
