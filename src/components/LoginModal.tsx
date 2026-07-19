@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { Bot, User, Shield, Stethoscope, Users, Building, Settings, X, Train } from 'lucide-react';
 
-const PRIMARY_PERSONAS: { role: any; icon: React.ElementType; color: string }[] = [
+const PRIMARY_PERSONAS: { role: string; icon: React.ElementType; color: string }[] = [
   { role: 'Organizer', icon: Settings, color: 'text-blue-400' },
   { role: 'Venue Staff', icon: Building, color: 'text-orange-400' },
   { role: 'Volunteer', icon: Users, color: 'text-green-400' },
   { role: 'Fan', icon: User, color: 'text-purple-400' },
 ];
 
-const EXTENDED_PERSONAS: { role: any; icon: React.ElementType; color: string }[] = [
+const EXTENDED_PERSONAS: { role: string; icon: React.ElementType; color: string }[] = [
   { role: 'Security Team', icon: Shield, color: 'text-red-400' },
   { role: 'Medical Team', icon: Stethoscope, color: 'text-pink-400' },
   { role: 'Transport Authority', icon: Train, color: 'text-yellow-400' },
@@ -20,17 +20,17 @@ const EXTENDED_PERSONAS: { role: any; icon: React.ElementType; color: string }[]
 export default function LoginModal({ onClose }: { onClose: () => void }) {
   const { login } = useAppContext();
   const [isSimulating, setIsSimulating] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<any | null>(null);
+  const [selectedRole, setSelectedRole] = useState<string | null>(null);
 
-  const handleLogin = (role: any, isExtended: boolean = false) => {
+  const handleLogin = (role: string) => {
     // Basic mock user object creation based on selected role
     const mockUser = {
-      id: Math.random().toString(),
+      id: `usr_${Date.now()}`,
       name: `Mock ${role}`,
       role: role.toUpperCase() === 'ORGANIZER' || role.toUpperCase() === 'FAN' || role.toUpperCase() === 'SECURITY' || role.toUpperCase() === 'MEDICAL' ? role.toUpperCase() : 'FAN',
       permissions: ['ALL']
     };
-    login(mockUser as any);
+    login(mockUser as { id: string; name: string; role: "ORGANIZER" | "FAN" | "SECURITY" | "MEDICAL"; permissions: string[] });
     setSelectedRole(role);
     setIsSimulating(true);
     
