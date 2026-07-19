@@ -20,6 +20,11 @@ const TransportDashboard = dynamic(() => import('../dashboards/TransportDashboar
 const SecurityDashboard = dynamic(() => import('../dashboards/SecurityDashboard'), { ssr: false });
 const MedicalDashboard = dynamic(() => import('../dashboards/MedicalDashboard'), { ssr: false });
 const GatesDashboard = dynamic(() => import('../dashboards/GatesDashboard'), { ssr: false });
+const SustainabilityDashboard = dynamic(() => import('../dashboards/SustainabilityDashboard'), { ssr: false });
+const VolunteerDashboard = dynamic(() => import('../dashboards/VolunteerDashboard'), { ssr: false });
+const WashroomDashboard = dynamic(() => import('../dashboards/WashroomDashboard'), { ssr: false });
+const VenueOperationsDashboard = dynamic(() => import('../dashboards/VenueOperationsDashboard'), { ssr: false });
+const LanguageCenterDashboard = dynamic(() => import('../dashboards/LanguageCenterDashboard'), { ssr: false });
 const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
 const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
 const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
@@ -188,6 +193,26 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
        return <GatesDashboard />;
     }
 
+    if (activeTab === 'Sustainability') {
+       return <SustainabilityDashboard />;
+    }
+
+    if (activeTab === 'Volunteers') {
+       return <VolunteerDashboard />;
+    }
+
+    if (activeTab === 'Washrooms') {
+       return <WashroomDashboard />;
+    }
+
+    if (activeTab === 'Venue Operations') {
+       return <VenueOperationsDashboard />;
+    }
+
+    if (activeTab === 'Language Center') {
+       return <LanguageCenterDashboard />;
+    }
+
     if (activeTab === 'Data Center') {
        return <DataCenterWorkspace />;
     }
@@ -249,6 +274,11 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
     'Security',
     'Medical',
     'Gates',
+    'Sustainability',
+    'Volunteers',
+    'Washrooms',
+    'Venue Operations',
+    'Language Center',
     'Data Center',
     'Digital Twin',
     'Platform Overview',
