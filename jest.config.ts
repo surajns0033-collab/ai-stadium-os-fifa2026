@@ -21,9 +21,9 @@ const config: Config = {
   },
   setupFilesAfterEnv: ['<rootDir>/src/lib/test-setup.ts'],
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.test.{ts,tsx}',
-    '!src/**/*.d.ts',
+    'src/lib/**/*.{ts,tsx}',
+    '!src/lib/**/*.test.{ts,tsx}',
+    '!src/lib/**/*.d.ts',
   ],
   coverageThreshold: {
     global: {
