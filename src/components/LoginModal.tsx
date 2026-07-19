@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from 'react';
-import { useAppContext, PersonaRole } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 import { Bot, User, Shield, Stethoscope, Users, Building, Settings, X, Train } from 'lucide-react';
 
-const PRIMARY_PERSONAS: { role: PersonaRole; icon: React.ElementType; color: string }[] = [
+const PRIMARY_PERSONAS: { role: any; icon: React.ElementType; color: string }[] = [
   { role: 'Organizer', icon: Settings, color: 'text-blue-400' },
   { role: 'Venue Staff', icon: Building, color: 'text-orange-400' },
   { role: 'Volunteer', icon: Users, color: 'text-green-400' },
