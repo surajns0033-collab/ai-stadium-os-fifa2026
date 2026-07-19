@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import HeroAICard from './HeroAICard';
-import UniversalNotificationCenter from './UniversalNotificationCenter';
-import AICopilotsPanel from './AICopilotsPanel';
-import LiveTimeline from './LiveTimeline';
-import DigitalTwinMap from '@/components/DigitalTwinMap';
-import ExecutiveCommandDashboard from '../dashboards/ExecutiveCommandDashboard';
-import SpecializedDashboard from '../dashboards/SpecializedDashboard';
-import DataCenterWorkspace from './DataCenterWorkspace';
-import SystemArchitectureWorkspace from './SystemArchitectureWorkspace';
-import IdentitySecurityWorkspace from './IdentitySecurityWorkspace';
-import OperationsCommandWorkspace from './OperationsCommandWorkspace';
-import PlatformOverviewWorkspace from './PlatformOverviewWorkspace';
+import dynamic from 'next/dynamic';
+
+const UniversalNotificationCenter = dynamic(() => import('./UniversalNotificationCenter'), { ssr: false });
+const AICopilotsPanel = dynamic(() => import('./AICopilotsPanel'), { ssr: false });
+const LiveTimeline = dynamic(() => import('./LiveTimeline'), { ssr: false });
+const DigitalTwinMap = dynamic(() => import('@/components/DigitalTwinMap'), { ssr: false });
+const ExecutiveCommandDashboard = dynamic(() => import('../dashboards/ExecutiveCommandDashboard'), { ssr: false });
+const SpecializedDashboard = dynamic(() => import('../dashboards/SpecializedDashboard'), { ssr: false });
+const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
+const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
+const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
+const OperationsCommandWorkspace = dynamic(() => import('./OperationsCommandWorkspace'), { ssr: false });
+const PlatformOverviewWorkspace = dynamic(() => import('./PlatformOverviewWorkspace'), { ssr: false });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const DASHBOARD_CONFIGS: Record<string, any> = {
