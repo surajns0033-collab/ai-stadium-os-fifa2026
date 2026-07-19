@@ -42,6 +42,7 @@ export default function OperationsCommandWorkspace() {
         </div>
         {/* Messages Grid */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 overflow-y-auto custom-scrollbar pr-1">
+          {[
             { audience: 'Fans (App/Signage)', color: 'text-green-400', tone: 'EN/ES/FR', msg: `\u201cPlease stay hydrated! Free water stations now open at Sector 112. Medical assistance available at Gate C.\u201d` },
             { audience: 'Volunteers', color: 'text-purple-400', tone: 'Simple Language', msg: `\u201cRedirect fans away from Sector 112. Distribute water from Supply Room B. Support medical teams on request.\u201d` },
             { audience: 'Executives', color: 'text-orange-400', tone: 'Formal Mode', msg: `\u201cHeat incident active — Sector 112. Mitigation deployed. No impact to match schedule. Resolution ETA: 15 mins.\u201d` },
