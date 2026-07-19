@@ -193,6 +193,16 @@ export default function OrganizerWorkspace() {
     );
   };
 
+  const fullBleedTabs = [
+    'Data Center',
+    'Digital Twin',
+    'Platform Overview',
+    'Operations Command',
+    'System Architecture',
+    'Identity & Security'
+  ];
+  const isFullBleedWorkspace = fullBleedTabs.includes(activeTab);
+
   return (
     <div className="h-screen w-full bg-[#0A0015] overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30">
       
@@ -211,35 +221,40 @@ export default function OrganizerWorkspace() {
         {/* Persistent Left Navigation */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        {/* Central Workspace (Split View Layout) */}
-        <main className="flex-1 flex flex-col h-full overflow-hidden p-4">
-          
-          <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+        {isFullBleedWorkspace ? (
+          <main className="flex-1 flex flex-col h-full overflow-hidden">
+            {renderMainContent()}
+          </main>
+        ) : (
+          /* Central Workspace (Split View Layout) */
+          <main className="flex-1 flex flex-col h-full overflow-hidden p-4">
             
-            {/* Left Column in Workspace */}
-            <div className="flex-1 flex flex-col gap-4 min-w-0">
-              {/* Hero AI Summary Card */}
-              <div className="flex-shrink-0">
-                <HeroAICard />
-              </div>
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
               
-              {/* Dynamic Primary Content */}
-              {renderMainContent()}
+              {/* Left Column in Workspace */}
+              <div className="flex-1 flex flex-col gap-4 min-w-0">
+                {/* Hero AI Summary Card */}
+                <div className="flex-shrink-0">
+                  <HeroAICard />
+                </div>
+                
+                {/* Dynamic Primary Content */}
+                {renderMainContent()}
+              </div>
+
+              {/* Right Column in Workspace (Notifications) */}
+              <div className="w-full lg:w-96 flex-shrink-0 flex flex-col min-h-0">
+                <UniversalNotificationCenter />
+              </div>
+
             </div>
 
-            {/* Right Column in Workspace (Notifications) */}
-            <div className="w-full lg:w-96 flex-shrink-0 flex flex-col min-h-0">
-              <UniversalNotificationCenter />
+            {/* Bottom Live Timeline */}
+            <div className="mt-4 flex-shrink-0">
+              <LiveTimeline />
             </div>
-
-          </div>
-
-          {/* Bottom Live Timeline */}
-          <div className="mt-4 flex-shrink-0">
-            <LiveTimeline />
-          </div>
-
-        </main>
+          </main>
+        )}
 
         {/* Right AI Assistant Panel */}
         <AICopilotsPanel />
