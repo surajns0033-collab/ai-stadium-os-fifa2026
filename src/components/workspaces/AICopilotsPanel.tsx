@@ -100,13 +100,16 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
            else if (lowercaseQuery.includes('food')) targetTab = 'Food';
            else if (lowercaseQuery.includes('medical')) targetTab = 'Medical';
            else if (lowercaseQuery.includes('security')) targetTab = 'Security';
-           else if (lowercaseQuery.includes('transport') || lowercaseQuery.includes('metro')) targetTab = 'Transportation';
+           else if (lowercaseQuery.includes('transport') || lowercaseQuery.includes('metro') || lowercaseQuery.includes('parking')) targetTab = 'Transportation';
            else if (lowercaseQuery.includes('sustain')) targetTab = 'Sustainability';
            else if (lowercaseQuery.includes('volunteer')) targetTab = 'Volunteers';
            else if (lowercaseQuery.includes('report')) targetTab = 'Reports';
-           else if (lowercaseQuery.includes('twin') || lowercaseQuery.includes('map')) targetTab = 'Digital Twin';
-           else if (lowercaseQuery.includes('data')) targetTab = 'Data Center';
+           else if (lowercaseQuery.includes('twin') || lowercaseQuery.includes('map') || lowercaseQuery.includes('simulations') || lowercaseQuery.includes('stadium')) targetTab = 'Digital Twin';
+           else if (lowercaseQuery.includes('data') || lowercaseQuery.includes('ticket') || lowercaseQuery.includes('marketplace') || lowercaseQuery.includes('weather')) targetTab = 'Data Center';
            else if (lowercaseQuery.includes('ops') || lowercaseQuery.includes('operations')) targetTab = 'Operations Command';
+           else if (lowercaseQuery.includes('infrastructure')) targetTab = 'Venue Operations';
+           else if (lowercaseQuery.includes('analytics')) targetTab = 'Platform Overview';
+           else if (lowercaseQuery.includes('admin')) targetTab = 'System Architecture';
 
            onNavigate(targetTab);
 
