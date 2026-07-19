@@ -18,18 +18,18 @@ interface UniversalWorkflowModalProps {
   context: WorkflowContext | null;
 }
 
+// Loading Steps for the "Universal Interaction Pipeline"
+const LOADING_STEPS = [
+  "🧠 AI Understanding Stadium Context...",
+  "📊 Analyzing Operational Data...",
+  "📈 Predicting Future Conditions...",
+  "🤖 Generating Recommendations...",
+  "🌍 Translating Results..."
+];
+
 export default function UniversalWorkflowModal({ isOpen, onClose, context }: UniversalWorkflowModalProps) {
   const [loadingStep, setLoadingStep] = useState(0);
   const [isProcessing, setIsProcessing] = useState(true);
-
-  // Loading Steps for the "Universal Interaction Pipeline"
-  const loadingSteps = [
-    "🧠 AI Understanding Stadium Context...",
-    "📊 Analyzing Operational Data...",
-    "📈 Predicting Future Conditions...",
-    "🤖 Generating Recommendations...",
-    "🌍 Translating Results..."
-  ];
 
   useEffect(() => {
     if (isOpen) {
@@ -41,7 +41,7 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
       
       const interval = setInterval(() => {
         setLoadingStep(prev => {
-          if (prev >= loadingSteps.length - 1) {
+          if (prev >= LOADING_STEPS.length - 1) {
             clearInterval(interval);
             setTimeout(() => setIsProcessing(false), 500);
             return prev;
@@ -55,7 +55,6 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
         clearInterval(interval);
       };
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, context]);
 
   if (!isOpen || !context) return null;
@@ -163,7 +162,7 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
               <div className="text-center">
                 <h4 className="text-lg font-bold text-white mb-2">Universal Interaction Pipeline</h4>
                 <div className="flex flex-col gap-2">
-                  {loadingSteps.map((step, idx) => (
+                  {LOADING_STEPS.map((step, idx) => (
                     <div key={idx} className={`text-sm transition-all duration-500 ${idx === loadingStep ? 'text-blue-400 font-bold scale-105' : idx < loadingStep ? 'text-slate-500 line-through' : 'text-slate-700 opacity-50'}`}>
                       {step}
                     </div>
