@@ -5,7 +5,7 @@ import UniversalAIResponse, { AIResponseData } from './workspaces/UniversalAIRes
 
 export type WorkflowType = 'search' | 'explain' | 'simulate' | 'broadcast' | 'compare' | 'history' | 'audit' | 'click_action';
 
-interface WorkflowContext {
+export interface WorkflowContext {
   type: WorkflowType;
   query?: string;
   sourceModule?: string;
