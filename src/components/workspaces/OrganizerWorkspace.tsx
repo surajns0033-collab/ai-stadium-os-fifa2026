@@ -194,6 +194,7 @@ export default function OrganizerWorkspace() {
   };
 
   const fullBleedTabs = [
+    'Home',
     'Data Center',
     'Digital Twin',
     'Platform Overview',

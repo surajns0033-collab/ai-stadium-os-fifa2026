@@ -41,16 +41,17 @@ export default function OperationsCommandWorkspace() {
           </div>
         </div>
         {/* Messages Grid */}
-        <div className="flex-1 grid grid-cols-2 gap-3 overflow-y-auto custom-scrollbar pr-1">
-          {[
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 overflow-y-auto custom-scrollbar pr-1">
             { audience: 'Fans (App/Signage)', color: 'text-green-400', tone: 'EN/ES/FR', msg: `\u201cPlease stay hydrated! Free water stations now open at Sector 112. Medical assistance available at Gate C.\u201d` },
             { audience: 'Volunteers', color: 'text-purple-400', tone: 'Simple Language', msg: `\u201cRedirect fans away from Sector 112. Distribute water from Supply Room B. Support medical teams on request.\u201d` },
             { audience: 'Executives', color: 'text-orange-400', tone: 'Formal Mode', msg: `\u201cHeat incident active — Sector 112. Mitigation deployed. No impact to match schedule. Resolution ETA: 15 mins.\u201d` },
             { audience: 'Security', color: 'text-blue-400', tone: 'Action Mode', msg: `\u201cClear emergency lane 4 for medical cart. Maintain perimeter around Sector 112. Report to Channel 7.\u201d` },
             { audience: 'Medical Team', color: 'text-red-400', tone: 'Clinical Mode', msg: `\u201c3x heat exhaustion cases confirmed. Deploy 2x medics with IV fluids to Sector 112, Row G.\u201d` },
             { audience: 'Transport Authority', color: 'text-yellow-400', tone: 'Operational', msg: `\u201cHold Shuttle Bus #14 at North Gate for 10 mins to avoid crowd surge overlap with medical response.\u201d` },
+            { audience: 'VIP Support', color: 'text-teal-400', tone: 'Concierge', msg: `\u201cMedical incident in Sector 112. VIP routes unaffected. Please reassure guests if asked.\u201d` },
+            { audience: 'Broadcast Media', color: 'text-pink-400', tone: 'Press', msg: `\u201cMinor heat incident in Sector 112. Medical teams on-site. Match continues without interruption.\u201d` },
           ].map((m, i) => (
-            <div key={i} className="bg-slate-900 border border-slate-700 rounded-xl p-3 flex flex-col">
+            <div key={i} className="bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4 flex flex-col hover:border-slate-500 hover:shadow-[0_8px_16px_-6px_rgba(59,130,246,0.15)] hover:-translate-y-0.5 transition-all duration-300">
               <div className="flex justify-between items-center mb-2">
                 <span className={`text-xs font-bold uppercase tracking-wider ${m.color}`}>{m.audience}</span>
                 <span className="text-[9px] bg-slate-800 px-2 py-0.5 rounded text-slate-400 border border-slate-700 flex items-center gap-1"><Languages size={9} /> {m.tone}</span>
@@ -76,7 +77,7 @@ export default function OperationsCommandWorkspace() {
       <p className="text-sm text-slate-400 mb-4">AI-generated tasks with approval workflows and intelligent escalation when unacknowledged.</p>
       <div className="flex-1 overflow-y-auto custom-scrollbar space-y-3 pr-1">
         {TASKS.map(task => (
-          <div key={task.id} className="bg-[#05000A] border border-slate-800 rounded-xl overflow-hidden">
+          <div key={task.id} className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 rounded-2xl overflow-hidden hover:border-slate-500 transition-all duration-300 hover:shadow-[0_8px_20px_-8px_rgba(255,255,255,0.05)]">
             <div className="p-4 flex items-center gap-3 cursor-pointer" onClick={() => setExpandedTask(expandedTask === task.id ? null : task.id)}>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
@@ -89,8 +90,8 @@ export default function OperationsCommandWorkspace() {
               {expandedTask === task.id ? <ChevronUp size={16} className="text-slate-500" /> : <ChevronDown size={16} className="text-slate-500" />}
             </div>
             {expandedTask === task.id && (
-              <div className="px-4 pb-4 border-t border-slate-800 pt-3 flex gap-4">
-                <div className="flex-1 space-y-1">
+              <div className="px-4 pb-4 border-t border-slate-800 pt-3 flex flex-col md:flex-row gap-6">
+                <div className="flex-1 max-w-2xl space-y-1">
                   <div className="text-[10px] font-bold text-slate-500 uppercase mb-2">Escalation Path</div>
                   {task.escalation.map((step, si) => (
                     <div key={si} className="flex items-center gap-2">
@@ -99,10 +100,10 @@ export default function OperationsCommandWorkspace() {
                     </div>
                   ))}
                 </div>
-                <div className="flex flex-col gap-2 justify-end">
-                  <button className="px-3 py-1.5 bg-green-600 hover:bg-green-500 text-white text-xs font-bold rounded">Approve</button>
-                  <button className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded">Modify</button>
-                  <button className="px-3 py-1.5 bg-red-900/40 text-red-400 border border-red-500/30 text-xs font-bold rounded">Reject</button>
+                <div className="flex flex-row md:flex-col gap-2 md:justify-end items-end md:items-stretch">
+                  <button className="px-6 py-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold rounded">Approve</button>
+                  <button className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded">Modify</button>
+                  <button className="px-6 py-2 bg-red-900/40 text-red-400 border border-red-500/30 text-xs font-bold rounded">Reject</button>
                 </div>
               </div>
             )}
@@ -124,7 +125,7 @@ export default function OperationsCommandWorkspace() {
           { name: 'Metro Arrival Prep', enabled: true, condition: 'Metro_Arrival < 4m AND Density > 70%', actions: ['Open Gate C Overflow', 'Deploy 3 Volunteers', 'Generate Transport Advisory'] },
           { name: 'Sustainability Alert', enabled: false, condition: 'Power_Usage > 95% Capacity', actions: ['Switch to Solar Battery', 'Reduce HVAC by 15%', 'Notify Facilities Manager'] },
         ].map((rule, i) => (
-          <div key={i} className="bg-slate-900 border border-slate-700 rounded-xl p-4">
+          <div key={i} className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 rounded-2xl p-5 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_8px_20px_-8px_rgba(168,85,247,0.15)] group">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-white">{rule.name}</span>
               <div className={`w-8 h-4 rounded-full flex items-center px-0.5 ${rule.enabled ? 'bg-green-500' : 'bg-slate-700'}`}>
@@ -202,9 +203,9 @@ export default function OperationsCommandWorkspace() {
     <div className="glass-panel p-6 animate-fade-in h-full flex flex-col">
       <h3 className="font-bold text-lg text-white mb-1 flex items-center gap-2"><FileText size={20} className="text-teal-400" /> AI Meeting &amp; Briefing Generator</h3>
       <p className="text-sm text-slate-400 mb-4">1-click AI briefing generation for all stakeholders. Each briefing contains summaries, metrics, risks, recommendations, and follow-up tasks.</p>
-      <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-3 overflow-y-auto custom-scrollbar pr-1">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-1">
         {BRIEFINGS.map((b, i) => (
-          <div key={i} className={`bg-slate-900 border rounded-xl p-4 flex flex-col cursor-pointer transition-all ${generatedBriefing === b.label ? 'border-teal-500/50 bg-teal-500/5' : 'border-slate-700 hover:border-slate-500'}`} onClick={() => setGeneratedBriefing(generatedBriefing === b.label ? null : b.label)}>
+          <div key={i} className={`bg-slate-900/80 backdrop-blur-md border rounded-2xl p-5 flex flex-col cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-10px_rgba(45,212,191,0.2)] ${generatedBriefing === b.label ? 'border-teal-500 bg-teal-500/10 shadow-[0_0_20px_rgba(45,212,191,0.15)]' : 'border-slate-700/50 hover:border-teal-500/50'}`} onClick={() => setGeneratedBriefing(generatedBriefing === b.label ? null : b.label)}>
             <div className="text-2xl mb-2">{b.icon}</div>
             <div className="font-bold text-sm text-white mb-2">{b.label}</div>
             {generatedBriefing === b.label ? (
@@ -282,7 +283,7 @@ export default function OperationsCommandWorkspace() {
           { label: 'Avg Response Time', value: '2m 14s', color: 'text-yellow-400' },
           { label: 'Languages Used', value: '24', color: 'text-[#E20074]' },
         ].map((s, i) => (
-          <div key={i} className="bg-slate-900 border border-slate-700 rounded-xl p-4 text-center">
+          <div key={i} className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 rounded-2xl p-5 text-center hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_-10px_rgba(59,130,246,0.2)]">
             <div className={`text-2xl font-black ${s.color}`}>{s.value}</div>
             <div className="text-xs text-slate-400 mt-1">{s.label}</div>
           </div>
@@ -322,21 +323,22 @@ export default function OperationsCommandWorkspace() {
   ];
 
   return (
-    <div className="h-full w-full flex flex-col p-6 bg-[#0A0015] overflow-hidden text-white">
-      <div className="mb-4 shrink-0">
-        <h2 className="text-2xl font-black tracking-tight flex items-center gap-3">
+    <div className="h-full w-full flex flex-col p-6 bg-gradient-to-br from-[#05000A] via-[#0A0015] to-[#120020] overflow-hidden text-white relative">
+      <div className="max-w-7xl mx-auto w-full flex flex-col h-full overflow-hidden relative z-10">
+        <div className="mb-6 shrink-0">
+          <h2 className="text-3xl font-black tracking-tight flex items-center gap-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-[#E20074]">
           Operations Command
           <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-blue-500/20 text-blue-400 rounded border border-blue-500/30">Part 10 — Full Spec</span>
         </h2>
         <p className="text-slate-400 text-sm">Zero Trust Security · AI Communication · Workflow Engine · Automation · Escalation · Briefings</p>
       </div>
 
-      <div className="flex gap-1 mb-4 border-b border-slate-800 pb-px overflow-x-auto custom-scrollbar shrink-0">
+      <div className="flex gap-2 mb-6 pb-2 overflow-x-auto custom-scrollbar shrink-0">
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-3 py-2 text-[11px] font-bold uppercase tracking-wider transition-colors border-b-2 whitespace-nowrap flex items-center gap-1.5 ${activeTab === tab.id ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-500 hover:text-slate-300'}`}
+            className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-300 rounded-full flex items-center gap-2 whitespace-nowrap ${activeTab === tab.id ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] border border-transparent' : 'bg-slate-900/50 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-700/50'}`}
           >
             {tab.icon} {tab.label}
           </button>
@@ -351,6 +353,7 @@ export default function OperationsCommandWorkspace() {
         {activeTab === 'briefings' && renderBriefings()}
         {activeTab === 'notifications' && renderNotifications()}
         {activeTab === 'analytics' && renderAnalytics()}
+      </div>
       </div>
     </div>
   );

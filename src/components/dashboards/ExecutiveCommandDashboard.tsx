@@ -43,9 +43,10 @@ export default function ExecutiveCommandDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
 
         {/* Overall Health Score */}
-        <div className="glass-panel p-6 border border-emerald-500/20 bg-emerald-500/5 flex flex-col items-center justify-center text-center relative overflow-hidden">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Overall Stadium Health</div>
-          <div className="text-7xl font-black text-white leading-none mb-1" style={{ textShadow: '0 0 30px rgba(26,166,93,0.4)' }}>96</div>
+        <div className="glass-panel p-6 border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-xl flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-emerald-400/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
+          <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-3 relative z-10">Overall Stadium Health</div>
+          <div className="text-7xl font-black text-white leading-none mb-1 relative z-10 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] group-hover:scale-105 transition-transform duration-500">96</div>
           <div className="text-lg text-slate-400 font-medium mb-2">/100</div>
           <div className="flex items-center gap-1 text-sm text-emerald-400 font-bold">
             <TrendingUp size={15} /> +2% since kickoff
@@ -54,10 +55,11 @@ export default function ExecutiveCommandDashboard() {
         </div>
 
         {/* AI Operational Summary */}
-        <div className="lg:col-span-2 glass-panel p-5 border border-blue-500/30 bg-blue-950/10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded"></div>
-          <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3 flex items-center gap-2 pl-2">
-            <Sparkles size={14} /> AI Operational Summary
+        <div className="lg:col-span-2 glass-panel p-6 border border-blue-500/30 bg-blue-950/20 backdrop-blur-xl relative overflow-hidden group hover:border-blue-400/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
+          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-400 to-purple-500 rounded"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-blue-400/20 transition-all duration-500"></div>
+          <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-4 flex items-center gap-2 pl-2 relative z-10">
+            <Sparkles size={14} className="animate-pulse" /> AI Operational Summary
           </h3>
           <div className="grid grid-cols-2 gap-4 pl-2">
             <div>
@@ -77,14 +79,15 @@ export default function ExecutiveCommandDashboard() {
       </div>
 
       {/* Domain Health Scores — large, readable cards */}
-      <div className="glass-panel p-5 border border-slate-700/50 mb-4">
+      <div className="glass-panel p-6 border border-slate-700/50 mb-6 bg-slate-900/50 backdrop-blur-xl rounded-3xl">
         <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Domain Health Scores — Click any to inspect</h3>
         <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3">
           {scores.map(s => (
             <div
               key={s.name}
               onClick={() => setSelectedScore(selectedScore === s.name ? null : s.name)}
-              className={`flex flex-col items-center justify-center p-3 rounded-xl border cursor-pointer transition-all duration-200 hover:scale-105 ${s.bgClass} ${selectedScore === s.name ? `ring-2 ${s.ringClass} border-transparent` : 'border-slate-700/50 hover:border-slate-500'}`}
+              className={`flex flex-col items-center justify-center p-3 rounded-2xl border cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_16px_-6px_currentColor] hover:-translate-y-1 ${s.bgClass} ${selectedScore === s.name ? `ring-2 ${s.ringClass} border-transparent shadow-[0_0_20px_currentColor] scale-105` : 'border-slate-700/50 hover:border-slate-400/50'} text-[color:var(--tw-shadow-color)]`}
+              style={{ '--tw-shadow-color': s.colorClass === 'text-emerald-400' ? 'rgba(52,211,153,0.3)' : s.colorClass === 'text-yellow-400' ? 'rgba(251,191,36,0.3)' : 'rgba(96,165,250,0.3)' } as React.CSSProperties}
             >
               <div className={`text-2xl font-black leading-none ${s.colorClass}`}>{s.value}</div>
               <div className="text-[9px] text-slate-300 mt-1.5 uppercase tracking-wider text-center font-bold leading-tight">{s.name}</div>
@@ -108,7 +111,7 @@ export default function ExecutiveCommandDashboard() {
       {/* KPI Cards — 2×2 grid, large readable text */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {kpis.map((kpi, idx) => (
-          <div key={idx} className="glass-panel p-5 border border-slate-700/50 hover:border-slate-500 transition-colors group cursor-pointer">
+          <div key={idx} className="glass-panel p-6 border border-slate-700/50 rounded-3xl bg-slate-900/50 backdrop-blur-xl hover:border-slate-500 transition-all duration-300 hover:shadow-[0_12px_24px_-12px_rgba(255,255,255,0.1)] group cursor-pointer hover:-translate-y-1">
             <div className="flex justify-between items-start mb-3">
               <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{kpi.label}</div>
               <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center bg-emerald-500/10 shrink-0">
