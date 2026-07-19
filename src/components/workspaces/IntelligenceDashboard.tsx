@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Activity, MapPin, AlertCircle, RefreshCw } from 'lucide-react';
+import { MapPin, AlertCircle, RefreshCw } from 'lucide-react';
 
 type IntelligenceDashboardProps = {
   title: string;

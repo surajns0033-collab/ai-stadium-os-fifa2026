@@ -8,11 +8,10 @@
  * @accessibility All interactive elements have ARIA labels
  */
 "use client";
-import React, { useState, useCallback } from 'react';
-import { Search, Mic, Bell, Globe, AlertTriangle, User, ShieldAlert } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, Mic, Bell, Globe, User, ShieldAlert } from 'lucide-react';
 import { useAppContext } from '@/context/AppContext';
 import UniversalWorkflowModal, { WorkflowContext } from './UniversalWorkflowModal';
-import { sanitizeInput } from '@/lib/utils';
 
 export default function Header() {
   const { currentUser } = useAppContext();

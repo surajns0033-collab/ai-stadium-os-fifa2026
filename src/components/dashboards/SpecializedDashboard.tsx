@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import DashboardWrapper from './DashboardWrapper';
-import { Sparkles, ArrowRight, Brain, Zap, ShieldAlert, BarChart } from 'lucide-react';
+import { Sparkles, ArrowRight, Brain, Zap, BarChart } from 'lucide-react';
 import UniversalAIResponse, { AIResponseData } from '../workspaces/UniversalAIResponse';
 
 export interface SpecializedDashboardProps {

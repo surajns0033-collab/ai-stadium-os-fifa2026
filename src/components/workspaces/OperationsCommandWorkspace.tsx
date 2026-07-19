@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
   MessageSquare, RefreshCw, GitPullRequest, FileText, ShieldAlert, ArrowRight,
   Play, FastForward, CheckSquare, Settings2, Languages, Megaphone, Bell, BarChart3,
-  Users, Clock, ChevronDown, ChevronUp, Zap
+  ChevronDown, ChevronUp, Zap
 } from 'lucide-react';
 
 type TabId = 'communication' | 'tasks' | 'automation' | 'timeline' | 'briefings' | 'notifications' | 'analytics';

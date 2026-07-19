@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { Bot, MessageSquare, Plus, FileText, Globe, Lightbulb, ChevronDown, CheckCircle2, CircleDashed, Brain } from 'lucide-react';
+import { Bot, MessageSquare, Globe, Lightbulb, ChevronDown, CheckCircle2, CircleDashed, Brain } from 'lucide-react';
 import UniversalAIResponse, { AIResponseData } from './UniversalAIResponse';
 import { useAIMemory } from '@/context/AIMemoryContext';
 

@@ -14,21 +14,13 @@
  * @accessibility Uses semantic HTML and ARIA labels for screen readers
  */
 "use client";
-import React, { memo } from 'react';
+import React from 'react';
 import { Brain, AlertTriangle, Zap, MessageSquare } from 'lucide-react';
 
 /** Gate capacity data structure */
 interface GateData {
   readonly name: string;
   readonly capacity: number;
-}
-
-/** AI recommendation output structure */
-interface AIRecommendation {
-  type: 'critical' | 'warning' | 'normal';
-  title: string;
-  reasoning: string;
-  action: string;
 }
 
 /** Static gate capacity data — in production, sourced from IoT sensors */
@@ -38,15 +30,6 @@ const GATES: readonly GateData[] = [
   { name: 'Gate C', capacity: 38 },
   { name: 'Gate D', capacity: 78 },
 ] as const;
-
-/**
- * Validates gate capacity is within expected bounds (0-100%).
- * @param capacity - Raw capacity percentage
- * @returns Sanitized capacity clamped to valid range
- */
-function sanitizeCapacity(capacity: number): number {
-  return Math.max(0, Math.min(100, Math.round(capacity)));
-}
 
 export default function AICopilot() {
   const criticalGates = GATES.filter(g => g.capacity >= 90);
