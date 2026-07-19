@@ -11,6 +11,7 @@ const LiveTimeline = dynamic(() => import('./LiveTimeline'), { ssr: false });
 const DigitalTwinMap = dynamic(() => import('@/components/DigitalTwinMap'), { ssr: false });
 const ExecutiveCommandDashboard = dynamic(() => import('../dashboards/ExecutiveCommandDashboard'), { ssr: false });
 const SpecializedDashboard = dynamic(() => import('../dashboards/SpecializedDashboard'), { ssr: false });
+const CrowdDashboard = dynamic(() => import('../dashboards/CrowdDashboard'), { ssr: false });
 const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
 const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
 const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
@@ -143,6 +144,10 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
        return <ExecutiveCommandDashboard />;
     }
     
+    if (activeTab === 'Crowd') {
+       return <CrowdDashboard />;
+    }
+
     if (activeTab === 'Data Center') {
        return <DataCenterWorkspace />;
     }
@@ -195,6 +200,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
 
   const fullBleedTabs = [
     'Home',
+    'Crowd',
     'Data Center',
     'Digital Twin',
     'Platform Overview',
