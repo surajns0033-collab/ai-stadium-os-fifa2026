@@ -17,6 +17,9 @@ const FootballOperationsDashboard = dynamic(() => import('../dashboards/Football
 const ParkingDashboard = dynamic(() => import('../dashboards/ParkingDashboard'), { ssr: false });
 const FoodDashboard = dynamic(() => import('../dashboards/FoodDashboard'), { ssr: false });
 const TransportDashboard = dynamic(() => import('../dashboards/TransportDashboard'), { ssr: false });
+const SecurityDashboard = dynamic(() => import('../dashboards/SecurityDashboard'), { ssr: false });
+const MedicalDashboard = dynamic(() => import('../dashboards/MedicalDashboard'), { ssr: false });
+const GatesDashboard = dynamic(() => import('../dashboards/GatesDashboard'), { ssr: false });
 const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
 const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
 const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
@@ -173,6 +176,18 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
        return <TransportDashboard />;
     }
 
+    if (activeTab === 'Security') {
+       return <SecurityDashboard />;
+    }
+
+    if (activeTab === 'Medical') {
+       return <MedicalDashboard />;
+    }
+
+    if (activeTab === 'Gates') {
+       return <GatesDashboard />;
+    }
+
     if (activeTab === 'Data Center') {
        return <DataCenterWorkspace />;
     }
@@ -231,6 +246,9 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
     'Parking',
     'Food',
     'Transportation',
+    'Security',
+    'Medical',
+    'Gates',
     'Data Center',
     'Digital Twin',
     'Platform Overview',
