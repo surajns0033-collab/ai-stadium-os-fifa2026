@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Brain, Sparkles, Database, BarChart3, TrendingUp, Settings, Map, Clock, AlertTriangle, ShieldCheck, Share2, Download, Mic, Globe, History, Eye, Play, X, CheckCircle2 } from 'lucide-react';
+import { Brain, Map, Share2, Download, Mic, Play, X } from 'lucide-react';
 import UniversalAIResponse, { AIResponseData } from './workspaces/UniversalAIResponse';
 
 export type WorkflowType = 'search' | 'explain' | 'simulate' | 'broadcast' | 'compare' | 'history' | 'audit' | 'click_action';

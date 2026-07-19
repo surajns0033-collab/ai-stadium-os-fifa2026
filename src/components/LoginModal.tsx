@@ -25,6 +25,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
   const handleLogin = (role: string) => {
     // Basic mock user object creation based on selected role
     const mockUser = {
+      // eslint-disable-next-line react-hooks/purity
       id: `usr_${Date.now()}`,
       name: `Mock ${role}`,
       role: role.toUpperCase() === 'ORGANIZER' || role.toUpperCase() === 'FAN' || role.toUpperCase() === 'SECURITY' || role.toUpperCase() === 'MEDICAL' ? role.toUpperCase() : 'FAN',
