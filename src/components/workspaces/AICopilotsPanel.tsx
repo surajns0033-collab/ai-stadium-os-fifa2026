@@ -100,7 +100,8 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
            if (['tickets', 'ticketing'].some(k => lowerIntent.includes(k))) targetTab = 'Home';
            else if (['crowd', 'flow'].some(k => lowerIntent.includes(k))) targetTab = 'Crowd';
            else if (['gates', 'door'].some(k => lowerIntent.includes(k))) targetTab = 'Gates';
-           else if (['transport', 'train', 'metro', 'parking'].some(k => lowerIntent.includes(k))) targetTab = 'Transportation';
+           else if (['transport', 'train', 'metro', 'bus', 'shuttle'].some(k => lowerIntent.includes(k))) targetTab = 'Transportation';
+           else if (['parking', 'car', 'ev'].some(k => lowerIntent.includes(k))) targetTab = 'Parking';
            else if (['medical', 'health', 'ambulance'].some(k => lowerIntent.includes(k))) targetTab = 'Medical';
            else if (['security', 'threat', 'police'].some(k => lowerIntent.includes(k))) targetTab = 'Security';
            else if (['food', 'f&b', 'inventory'].some(k => lowerIntent.includes(k))) targetTab = 'Food';

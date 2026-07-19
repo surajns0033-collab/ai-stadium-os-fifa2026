@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { LayoutDashboard, Users, DoorOpen, Utensils, Droplets, Activity, ShieldAlert, Train, Leaf, Navigation, Map, LineChart, FileText, Settings, HeartPulse, Building2, Languages, Network, Database } from 'lucide-react';
+import { LayoutDashboard, Users, DoorOpen, Utensils, Droplets, Activity, ShieldAlert, Train, Leaf, Navigation, Map, LineChart, FileText, Settings, HeartPulse, Building2, Languages, Network, Database, Car } from 'lucide-react';
 
 const MENU_ITEMS = [
   { id: 'Home', label: 'Command Center', icon: LayoutDashboard },
@@ -15,10 +15,11 @@ const MENU_ITEMS = [
 const DOMAINS = [
   { id: 'Crowd', label: 'Crowd Intelligence', icon: Users },
   { id: 'Gates', label: 'Gate Analytics', icon: DoorOpen },
-  { id: 'Transportation', label: 'Transport Sync', icon: Train },
+  { id: 'Transportation', label: 'Transit & Transport', icon: Train },
+  { id: 'Parking', label: 'Parking Dashboard', icon: Car },
   { id: 'Medical', label: 'Medical Operations', icon: HeartPulse },
   { id: 'Security', label: 'Security & Threat', icon: ShieldAlert },
-  { id: 'Food', label: 'F&B Inventory', icon: Utensils },
+  { id: 'Food', label: 'Food & Beverage', icon: Utensils },
   { id: 'Washrooms', label: 'Washroom Status', icon: Droplets },
   { id: 'Stadium', label: 'Stadium Dashboard', icon: Navigation },
   { id: 'Football Operations', label: 'Football Operations', icon: Activity },
