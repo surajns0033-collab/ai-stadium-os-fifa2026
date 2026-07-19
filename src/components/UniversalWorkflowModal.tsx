@@ -72,6 +72,7 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
         predictedOutcome: 'Wait times return to under 4m in 15 mins.',
         confidence: 96,
         timeSaved: '18 mins',
+        alternatives: 'None',
         usersAffected: '800 Fans'
       };
     }
@@ -86,6 +87,7 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
         predictedOutcome: 'Prevents 85% of projected bottleneck at North Concourse.',
         confidence: 91,
         timeSaved: '45 mins',
+        alternatives: 'None',
         usersAffected: '12,000 Fans'
       };
     }
@@ -100,6 +102,7 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
         predictedOutcome: 'Sector cleared in 3m 45s.',
         confidence: 99,
         timeSaved: '2 mins',
+        alternatives: 'None',
         usersAffected: '1,500 Fans'
       };
     }
@@ -113,6 +116,7 @@ export default function UniversalWorkflowModal({ isOpen, onClose, context }: Uni
       risk: 'Low',
       predictedOutcome: 'Stable operations.',
       confidence: 94,
+      alternatives: 'None',
       timeSaved: '5 mins',
       usersAffected: '0 Fans'
     };

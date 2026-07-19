@@ -10,7 +10,7 @@ const PRIMARY_PERSONAS: { role: any; icon: React.ElementType; color: string }[] 
   { role: 'Fan', icon: User, color: 'text-purple-400' },
 ];
 
-const EXTENDED_PERSONAS: { role: PersonaRole; icon: React.ElementType; color: string }[] = [
+const EXTENDED_PERSONAS: { role: any; icon: React.ElementType; color: string }[] = [
   { role: 'Security Team', icon: Shield, color: 'text-red-400' },
   { role: 'Medical Team', icon: Stethoscope, color: 'text-pink-400' },
   { role: 'Transport Authority', icon: Train, color: 'text-yellow-400' },
@@ -18,17 +18,25 @@ const EXTENDED_PERSONAS: { role: PersonaRole; icon: React.ElementType; color: st
 ];
 
 export default function LoginModal({ onClose }: { onClose: () => void }) {
-  const { setCurrentUser } = useAppContext();
+  const { login } = useAppContext();
   const [isSimulating, setIsSimulating] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<PersonaRole | null>(null);
+  const [selectedRole, setSelectedRole] = useState<any | null>(null);
 
-  const handleLogin = (role: PersonaRole) => {
+  const handleLogin = (role: any, isExtended: boolean = false) => {
+    // Basic mock user object creation based on selected role
+    const mockUser = {
+      id: Math.random().toString(),
+      name: `Mock ${role}`,
+      role: role.toUpperCase() === 'ORGANIZER' || role.toUpperCase() === 'FAN' || role.toUpperCase() === 'SECURITY' || role.toUpperCase() === 'MEDICAL' ? role.toUpperCase() : 'FAN',
+      permissions: ['ALL']
+    };
+    login(mockUser as any);
     setSelectedRole(role);
     setIsSimulating(true);
     
     // AI Welcome Experience simulation as specified in Part 3
     setTimeout(() => {
-      setCurrentUser({ name: `Demo ${role}`, role });
+      // Logic removed as it is now handled by the login call above
     }, 2500);
   };
 
