@@ -33,7 +33,7 @@ type Message = {
   responseData?: AIResponseData;
 };
 
-export default function AICopilotsPanel() {
+export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   const { memory } = useAIMemory();
   const [activeCopilot, setActiveCopilot] = useState('Orchestrator AI');
   const [isCopilotMenuOpen, setIsCopilotMenuOpen] = useState(false);
@@ -89,7 +89,34 @@ export default function AICopilotsPanel() {
       if (stepIndex > cascade.length) {
         clearInterval(interval);
         
-        // Replace simulation with Universal Response
+        // Basic Intent Parsing for Navigation
+        const lowercaseQuery = query.toLowerCase();
+        const isNavigation = lowercaseQuery.includes('navigate') || lowercaseQuery.includes('go to') || lowercaseQuery.includes('show me');
+        
+        if (isNavigation && onNavigate) {
+           let targetTab = 'Home';
+           if (lowercaseQuery.includes('crowd')) targetTab = 'Crowd';
+           else if (lowercaseQuery.includes('gate')) targetTab = 'Gates';
+           else if (lowercaseQuery.includes('food')) targetTab = 'Food';
+           else if (lowercaseQuery.includes('medical')) targetTab = 'Medical';
+           else if (lowercaseQuery.includes('security')) targetTab = 'Security';
+           else if (lowercaseQuery.includes('transport') || lowercaseQuery.includes('metro')) targetTab = 'Transportation';
+           else if (lowercaseQuery.includes('sustain')) targetTab = 'Sustainability';
+           else if (lowercaseQuery.includes('volunteer')) targetTab = 'Volunteers';
+           else if (lowercaseQuery.includes('report')) targetTab = 'Reports';
+           else if (lowercaseQuery.includes('twin') || lowercaseQuery.includes('map')) targetTab = 'Digital Twin';
+           else if (lowercaseQuery.includes('data')) targetTab = 'Data Center';
+           else if (lowercaseQuery.includes('ops') || lowercaseQuery.includes('operations')) targetTab = 'Operations Command';
+
+           onNavigate(targetTab);
+
+           setMessages(prev => prev.map(msg => 
+             msg.id === aiMsgId ? { id: aiMsgId, sender: 'ai', text: `Navigated to ${targetTab}.` } : msg
+           ));
+           return;
+        }
+
+        // Replace simulation with Universal Response for non-navigation queries
         const finalResponse: AIResponseData = {
           summary: `Resolved issue at ${memory.currentGate || 'Sector 4'}. Redirected flow.`,
           reasoning: `Crowd AI detected 82% density at ${memory.currentGate || 'Sector 4'}. Transport AI confirmed Metro Line 2 surge. Navigation AI calculated alternate route via Gate C.`,
@@ -228,6 +255,12 @@ export default function AICopilotsPanel() {
 
             {msg.sender === 'ai' && msg.responseData && (
               <UniversalAIResponse response={msg.responseData} />
+            )}
+
+            {msg.sender === 'ai' && msg.text && !msg.isSimulating && (
+              <div className="bg-slate-800 text-white px-4 py-2 rounded-2xl rounded-tl-sm max-w-[85%] text-sm shadow-md mt-2">
+                {msg.text}
+              </div>
             )}
           </div>
         ))}

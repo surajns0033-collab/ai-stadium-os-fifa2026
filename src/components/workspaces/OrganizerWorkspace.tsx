@@ -258,7 +258,7 @@ export default function OrganizerWorkspace() {
         )}
 
         {/* Right AI Assistant Panel */}
-        <AICopilotsPanel />
+        <AICopilotsPanel onNavigate={setActiveTab} />
 
       </div>
     </div>
