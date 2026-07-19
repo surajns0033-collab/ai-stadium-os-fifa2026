@@ -7,7 +7,7 @@ export type AIResponseData = {
   reasoning: string;
   data: string;
   recommendation: string;
-  alternatives: string;
+  alternatives?: string;
   risk: string;
   predictedOutcome: string;
   confidence: number;

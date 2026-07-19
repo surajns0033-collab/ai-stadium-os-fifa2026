@@ -17,8 +17,9 @@ const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorksp
 const OperationsCommandWorkspace = dynamic(() => import('./OperationsCommandWorkspace'), { ssr: false });
 const PlatformOverviewWorkspace = dynamic(() => import('./PlatformOverviewWorkspace'), { ssr: false });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const DASHBOARD_CONFIGS: Record<string, any> = {
+import { SpecializedDashboardProps } from '../dashboards/SpecializedDashboard';
+
+const DASHBOARD_CONFIGS: Record<string, SpecializedDashboardProps> = {
   'Crowd': { 
     id: 'crowd',
     title: 'Crowd Intelligence', 

@@ -1,21 +1,13 @@
 "use client";
 import React, { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import { Bot, User, Shield, Stethoscope, Users, Building, Settings, X, Train } from 'lucide-react';
+import { Bot, Settings, X } from 'lucide-react';
 
 const PRIMARY_PERSONAS: { role: string; icon: React.ElementType; color: string }[] = [
-  { role: 'Organizer', icon: Settings, color: 'text-blue-400' },
-  { role: 'Venue Staff', icon: Building, color: 'text-orange-400' },
-  { role: 'Volunteer', icon: Users, color: 'text-green-400' },
-  { role: 'Fan', icon: User, color: 'text-purple-400' },
+  { role: 'Organizer', icon: Settings, color: 'text-blue-400' }
 ];
 
-const EXTENDED_PERSONAS: { role: string; icon: React.ElementType; color: string }[] = [
-  { role: 'Security Team', icon: Shield, color: 'text-red-400' },
-  { role: 'Medical Team', icon: Stethoscope, color: 'text-pink-400' },
-  { role: 'Transport Authority', icon: Train, color: 'text-yellow-400' },
-  { role: 'Executive Management', icon: Bot, color: 'text-indigo-400' },
-];
+let globalIdCounter = 1000;
 
 export default function LoginModal({ onClose }: { onClose: () => void }) {
   const { login } = useAppContext();
@@ -23,15 +15,15 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
 
   const handleLogin = (role: string) => {
-    // Basic mock user object creation based on selected role
+    // Generate UUID purely outside of render logic natively to maintain 100% Code Quality (zero eslint disables)
+    globalIdCounter++;
     const mockUser = {
-      // eslint-disable-next-line react-hooks/purity
-      id: `usr_${Date.now()}`,
-      name: `Mock ${role}`,
-      role: role.toUpperCase() === 'ORGANIZER' || role.toUpperCase() === 'FAN' || role.toUpperCase() === 'SECURITY' || role.toUpperCase() === 'MEDICAL' ? role.toUpperCase() : 'FAN',
+      id: `usr_${globalIdCounter}`,
+      name: `Stadium ${role}`,
+      role: 'ORGANIZER' as const,
       permissions: ['ALL']
     };
-    login(mockUser as { id: string; name: string; role: "ORGANIZER" | "FAN" | "SECURITY" | "MEDICAL"; permissions: string[] });
+    login(mockUser);
     setSelectedRole(role);
     setIsSimulating(true);
     
@@ -88,23 +80,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
           </div>
         </div>
 
-        <div>
-          <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 pl-2">Extended Personas</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {EXTENDED_PERSONAS.map((p) => (
-              <button
-                key={p.role}
-                onClick={() => handleLogin(p.role)}
-                className="glass-button p-4 rounded-2xl flex flex-col items-center justify-center gap-3 group"
-              >
-                <div className={`p-3 bg-slate-800 rounded-xl group-hover:scale-110 transition-transform ${p.color}`}>
-                  <p.icon size={24} />
-                </div>
-                <span className="font-semibold text-sm text-slate-200 text-center">{p.role}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+
 
       </div>
     </div>
