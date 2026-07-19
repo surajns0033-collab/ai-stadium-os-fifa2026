@@ -7,6 +7,8 @@ import type { NextConfig } from "next";
  * security best practices for a production-grade platform.
  */
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  compress: true,
   /** Security headers applied to all routes */
   async headers() {
     return [

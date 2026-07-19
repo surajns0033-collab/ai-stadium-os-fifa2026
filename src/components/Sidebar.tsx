@@ -47,7 +47,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
       </div>
 
       <div className="flex-1 overflow-y-auto py-6 px-4 custom-scrollbar">
-        <div className="space-y-1 mb-8">
+        <div className="space-y-1 mb-8" role="tablist" aria-label="Main Workspaces">
           <div className="px-3 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Main Workspaces</div>
           {MENU_ITEMS.map(item => {
             const Icon = item.icon;
@@ -56,6 +56,8 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
+                role="tab"
+                aria-selected={isActive}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
                   isActive 
                     ? 'bg-blue-600/20 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.1)] border border-blue-500/20' 
@@ -71,7 +73,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           })}
         </div>
 
-        <div className="space-y-1">
+        <div className="space-y-1" role="tablist" aria-label="Domain Dashboards">
           <div className="px-3 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Domain Dashboards</div>
           {DOMAINS.map(item => {
             const Icon = item.icon;
@@ -80,6 +82,8 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
+                role="tab"
+                aria-selected={isActive}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all group ${
                   isActive 
                     ? 'bg-gradient-to-r from-[#E20074]/20 to-transparent text-[#E20074] border-l-2 border-[#E20074]' 

@@ -39,7 +39,7 @@ export default function Header() {
               placeholder="Natural Language AI Search (e.g. 'Why is Gate B crowded?')..." 
               className="w-full bg-slate-900/50 border border-slate-700/50 rounded-full py-2 pl-10 pr-12 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all shadow-inner"
             />
-            <button className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-400 transition-colors">
+            <button aria-label="Voice search" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-400 transition-colors">
               <Mic size={18} />
             </button>
           </div>
@@ -48,13 +48,13 @@ export default function Header() {
         {/* Toolbar Actions */}
         <div className="flex items-center space-x-4">
           {/* Language Profile */}
-          <button className="glass-button p-2 rounded-full relative group">
+          <button aria-label="Change language" className="glass-button p-2 rounded-full relative group">
             <Globe size={20} className="text-slate-300 group-hover:text-white" />
             <span className="absolute -top-1 -right-1 bg-indigo-500 text-[10px] font-bold px-1.5 rounded-full border border-slate-900">EN</span>
           </button>
           
           {/* Notifications */}
-          <button className="glass-button p-2 rounded-full relative group">
+          <button aria-label="Notifications" className="glass-button p-2 rounded-full relative group">
             <Bell size={20} className="text-slate-300 group-hover:text-white" />
             <span className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full animate-ping"></span>
             <span className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
