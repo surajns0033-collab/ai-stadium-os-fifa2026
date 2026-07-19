@@ -182,6 +182,12 @@ export default function AICopilotsPanel() {
               <button onClick={() => simulateAgentCollaboration("Translate the medical emergency announcement to Spanish.")} className="w-full text-left p-3 rounded-xl bg-slate-800/50 hover:bg-slate-800 text-sm font-medium text-slate-300 transition-colors border border-slate-700/50 flex items-center">
                 <Globe size={16} className="text-purple-400 mr-3 shrink-0" /> Translate Announcement
               </button>
+              <button onClick={() => simulateAgentCollaboration("Navigate to Crowd Intelligence and show me sector B.")} className="w-full text-left p-3 rounded-xl bg-slate-800/50 hover:bg-slate-800 text-sm font-medium text-slate-300 transition-colors border border-slate-700/50 flex items-center">
+                <Globe size={16} className="text-blue-400 mr-3 shrink-0" /> Navigate Dashboard
+              </button>
+              <button onClick={() => simulateAgentCollaboration("Generate the final Executive Match Report.")} className="w-full text-left p-3 rounded-xl bg-slate-800/50 hover:bg-slate-800 text-sm font-medium text-slate-300 transition-colors border border-slate-700/50 flex items-center">
+                <Lightbulb size={16} className="text-emerald-400 mr-3 shrink-0" /> Generate Report
+              </button>
             </div>
           </div>
         )}
