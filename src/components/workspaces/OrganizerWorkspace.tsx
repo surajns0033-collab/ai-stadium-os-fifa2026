@@ -135,7 +135,7 @@ const DASHBOARD_CONFIGS: Record<string, SpecializedDashboardProps> = {
   }
 };
 
-export default function OrganizerWorkspace() {
+export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () => void }) {
   const [activeTab, setActiveTab] = useState('Home');
 
   const renderMainContent = () => {
@@ -214,7 +214,7 @@ export default function OrganizerWorkspace() {
       </div>
 
       {/* Top AI Toolbar */}
-      <Header />
+      <Header onOpenLogin={onOpenLogin} />
 
       {/* Main Layout Area */}
       <div className="flex-1 flex overflow-hidden z-10 relative">

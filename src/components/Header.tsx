@@ -13,7 +13,7 @@ import { Search, Mic, Bell, Globe, User, ShieldAlert } from 'lucide-react';
 import { useAppContext } from '@/context/AppContext';
 import UniversalWorkflowModal, { WorkflowContext } from './UniversalWorkflowModal';
 
-export default function Header() {
+export default function Header({ onOpenLogin }: { onOpenLogin?: () => void }) {
   const { currentUser } = useAppContext();
   const [searchQuery, setSearchQuery] = useState('');
   const [workflowContext, setWorkflowContext] = useState<WorkflowContext | null>(null);
@@ -70,18 +70,27 @@ export default function Header() {
 
           <div className="w-px h-6 bg-slate-700/50 mx-2"></div>
 
-          {/* User Profile */}
-          <div className="flex items-center space-x-3 pl-2">
-            <div className="text-right hidden md:block">
-              <div className="text-sm font-bold text-white">{currentUser?.name || 'Unknown'}</div>
-              <div className="text-xs text-blue-400 font-medium tracking-wide">{currentUser?.role || 'Guest'}</div>
-            </div>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 p-[2px] shadow-lg">
-              <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center">
-                <User size={18} className="text-slate-300" />
+          {/* User Profile or Login */}
+          {currentUser ? (
+            <div className="flex items-center space-x-3 pl-2">
+              <div className="text-right hidden md:block">
+                <div className="text-sm font-bold text-white">{currentUser.name}</div>
+                <div className="text-xs text-blue-400 font-medium tracking-wide">{currentUser.role}</div>
+              </div>
+              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 p-[2px] shadow-lg">
+                <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center">
+                  <User size={18} className="text-slate-300" />
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <button 
+              onClick={onOpenLogin}
+              className="px-5 py-1.5 bg-gradient-to-r from-[#2B7CE4] to-[#1AA65D] hover:from-[#1AA65D] hover:to-[#2B7CE4] rounded-full text-sm font-bold text-white transition-all shadow-[0_0_15px_rgba(43,124,228,0.3)] hover:shadow-[0_0_20px_rgba(43,124,228,0.5)]"
+            >
+              Sign In
+            </button>
+          )}
         </div>
       </header>
       
