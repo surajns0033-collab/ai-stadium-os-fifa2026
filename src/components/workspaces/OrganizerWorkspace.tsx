@@ -12,6 +12,8 @@ const DigitalTwinMap = dynamic(() => import('@/components/DigitalTwinMap'), { ss
 const ExecutiveCommandDashboard = dynamic(() => import('../dashboards/ExecutiveCommandDashboard'), { ssr: false });
 const SpecializedDashboard = dynamic(() => import('../dashboards/SpecializedDashboard'), { ssr: false });
 const CrowdDashboard = dynamic(() => import('../dashboards/CrowdDashboard'), { ssr: false });
+const StadiumDashboard = dynamic(() => import('../dashboards/StadiumDashboard'), { ssr: false });
+const FootballOperationsDashboard = dynamic(() => import('../dashboards/FootballOperationsDashboard'), { ssr: false });
 const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
 const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
 const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
@@ -148,6 +150,14 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
        return <CrowdDashboard />;
     }
 
+    if (activeTab === 'Stadium') {
+       return <StadiumDashboard />;
+    }
+
+    if (activeTab === 'Football Operations') {
+       return <FootballOperationsDashboard />;
+    }
+
     if (activeTab === 'Data Center') {
        return <DataCenterWorkspace />;
     }
@@ -201,6 +211,8 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   const fullBleedTabs = [
     'Home',
     'Crowd',
+    'Stadium',
+    'Football Operations',
     'Data Center',
     'Digital Twin',
     'Platform Overview',

@@ -94,17 +94,26 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
         const isNavigation = lowercaseQuery.includes('navigate') || lowercaseQuery.includes('go to') || lowercaseQuery.includes('show me');
         
         if (isNavigation && onNavigate) {
+           const lowerIntent = lowercaseQuery.replace(/(navigate|go to|show me)/g, '').trim();
            let targetTab = 'Home';
-           if (lowercaseQuery.includes('crowd')) targetTab = 'Crowd';
-           else if (lowercaseQuery.includes('gate')) targetTab = 'Gates';
-           else if (lowercaseQuery.includes('food')) targetTab = 'Food';
-           else if (lowercaseQuery.includes('medical')) targetTab = 'Medical';
-           else if (lowercaseQuery.includes('security')) targetTab = 'Security';
-           else if (lowercaseQuery.includes('transport') || lowercaseQuery.includes('metro') || lowercaseQuery.includes('parking')) targetTab = 'Transportation';
-           else if (lowercaseQuery.includes('sustain')) targetTab = 'Sustainability';
-           else if (lowercaseQuery.includes('volunteer')) targetTab = 'Volunteers';
-           else if (lowercaseQuery.includes('report')) targetTab = 'Reports';
-           else if (lowercaseQuery.includes('twin') || lowercaseQuery.includes('map') || lowercaseQuery.includes('simulations') || lowercaseQuery.includes('stadium')) targetTab = 'Digital Twin';
+
+           if (['tickets', 'ticketing'].some(k => lowerIntent.includes(k))) targetTab = 'Home';
+           else if (['crowd', 'flow'].some(k => lowerIntent.includes(k))) targetTab = 'Crowd';
+           else if (['gates', 'door'].some(k => lowerIntent.includes(k))) targetTab = 'Gates';
+           else if (['transport', 'train', 'metro', 'parking'].some(k => lowerIntent.includes(k))) targetTab = 'Transportation';
+           else if (['medical', 'health', 'ambulance'].some(k => lowerIntent.includes(k))) targetTab = 'Medical';
+           else if (['security', 'threat', 'police'].some(k => lowerIntent.includes(k))) targetTab = 'Security';
+           else if (['food', 'f&b', 'inventory'].some(k => lowerIntent.includes(k))) targetTab = 'Food';
+           else if (['washroom', 'toilet', 'restroom'].some(k => lowerIntent.includes(k))) targetTab = 'Washrooms';
+           else if (['stadium', 'seats', 'seating', 'capacity'].some(k => lowerIntent.includes(k))) targetTab = 'Stadium';
+           else if (['football', 'match', 'pitch', 'tactics', 'players'].some(k => lowerIntent.includes(k))) targetTab = 'Football Operations';
+           else if (['sustainability', 'energy', 'power'].some(k => lowerIntent.includes(k))) targetTab = 'Sustainability';
+           else if (['accessibility', 'wheelchair'].some(k => lowerIntent.includes(k))) targetTab = 'Accessibility';
+           else if (['volunteer', 'staff'].some(k => lowerIntent.includes(k))) targetTab = 'Volunteers';
+           else if (['infrastructure', 'venue', 'building'].some(k => lowerIntent.includes(k))) targetTab = 'Venue Operations';
+           else if (['language', 'translate'].some(k => lowerIntent.includes(k))) targetTab = 'Language Center';
+           else if (['report', 'analytics'].some(k => lowerIntent.includes(k))) targetTab = 'Reports';
+           else if (['twin', 'map', 'simulation'].some(k => lowerIntent.includes(k))) targetTab = 'Digital Twin';
            else if (lowercaseQuery.includes('data') || lowercaseQuery.includes('ticket') || lowercaseQuery.includes('marketplace') || lowercaseQuery.includes('weather')) targetTab = 'Data Center';
            else if (lowercaseQuery.includes('ops') || lowercaseQuery.includes('operations')) targetTab = 'Operations Command';
            else if (lowercaseQuery.includes('infrastructure')) targetTab = 'Venue Operations';
