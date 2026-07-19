@@ -1,17 +1,20 @@
 "use client";
-import React, { useMemo } from 'react';
-import { useAppContext } from '@/context/AppContext';
+import React from 'react';
 import { Brain, AlertTriangle, Zap, MessageSquare } from 'lucide-react';
 
+const GATES = [
+  { name: 'Gate A', capacity: 45 },
+  { name: 'Gate B', capacity: 92 },
+  { name: 'Gate C', capacity: 38 },
+  { name: 'Gate D', capacity: 78 },
+];
+
 export default function AICopilot() {
-  const { gates } = useAppContext();
+  const criticalGates = GATES.filter(g => g.capacity >= 90);
+  const warningGates = GATES.filter(g => g.capacity >= 75 && g.capacity < 90);
+  const freeGates = GATES.filter(g => g.capacity < 50);
 
-  // XAI Reasoning Engine
-  const recommendation = useMemo(() => {
-    const criticalGates = gates.filter(g => g.capacity >= 90);
-    const warningGates = gates.filter(g => g.capacity >= 75 && g.capacity < 90);
-    const freeGates = gates.filter(g => g.capacity < 50);
-
+  const recommendation = (() => {
     if (criticalGates.length > 0) {
       const g = criticalGates[0];
       const target = freeGates.length > 0 ? freeGates[0].name : 'a less crowded gate';
@@ -19,7 +22,7 @@ export default function AICopilot() {
         type: 'critical',
         title: 'High Congestion Alert',
         reasoning: `${g.name} is at ${g.capacity}% capacity, exceeding safe thresholds.`,
-        action: `Redirect incoming fans to ${target}. Dispatch 3 multilingual volunteers to assist with redirection.`,
+        action: `Redirect incoming fans to ${target}. Dispatch 3 multilingual volunteers.`,
       };
     } else if (warningGates.length > 0) {
       const g = warningGates[0];
@@ -30,18 +33,16 @@ export default function AICopilot() {
         action: `Open auxiliary scanners at ${g.name} to increase throughput.`,
       };
     }
-
     return {
       type: 'normal',
       title: 'Operations Optimal',
       reasoning: 'All gates are currently operating within optimal parameters.',
       action: 'Continue standard monitoring.',
     };
-  }, [gates]);
+  })();
 
   return (
     <div className="w-[320px] flex-shrink-0 flex flex-col h-full space-y-4">
-      {/* Copilot Header */}
       <div className="p-4 bg-slate-900/60 border border-slate-700/50 rounded-2xl flex items-center space-x-3 backdrop-blur-md">
         <div className="p-2 bg-indigo-500/20 text-indigo-400 rounded-lg">
           <Brain size={20} className="animate-pulse" />
@@ -52,8 +53,7 @@ export default function AICopilot() {
         </div>
       </div>
 
-      {/* Main Reasoning Panel */}
-      <div className="flex-1 bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 flex flex-col overflow-y-auto no-scrollbar backdrop-blur-md">
+      <div className="flex-1 bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 flex flex-col overflow-y-auto custom-scrollbar backdrop-blur-md">
         <div className="flex items-center justify-between mb-4">
           <h4 className="text-sm font-semibold text-slate-300">Active Analysis</h4>
           {recommendation.type === 'critical' && <span className="flex w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>}
@@ -61,14 +61,14 @@ export default function AICopilot() {
 
         <div className={`p-4 rounded-xl border mb-4 ${
           recommendation.type === 'critical' ? 'bg-red-500/10 border-red-500/30' :
-          recommendation.type === 'warning' ? 'bg-amber-500/10 border-amber-500/30' :
+          recommendation.type === 'warning'  ? 'bg-amber-500/10 border-amber-500/30' :
           'bg-blue-500/10 border-blue-500/30'
         }`}>
           <div className="flex items-center space-x-2 mb-2">
             {recommendation.type === 'critical' ? <AlertTriangle size={16} className="text-red-400" /> : <Zap size={16} className="text-blue-400" />}
             <span className={`font-bold text-sm ${
               recommendation.type === 'critical' ? 'text-red-400' :
-              recommendation.type === 'warning' ? 'text-amber-400' :
+              recommendation.type === 'warning'  ? 'text-amber-400' :
               'text-blue-400'
             }`}>{recommendation.title}</span>
           </div>
@@ -84,7 +84,6 @@ export default function AICopilot() {
           </div>
         </div>
 
-        {/* Dispatch Button */}
         {recommendation.type !== 'normal' && (
           <button className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-semibold transition-colors flex items-center justify-center">
             <MessageSquare size={16} className="mr-2" />
