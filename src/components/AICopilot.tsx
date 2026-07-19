@@ -14,7 +14,7 @@
  * @accessibility Uses semantic HTML and ARIA labels for screen readers
  */
 "use client";
-import React from 'react';
+import React, { memo } from 'react';
 import { Brain, AlertTriangle, Zap, MessageSquare } from 'lucide-react';
 
 /** Gate capacity data structure */

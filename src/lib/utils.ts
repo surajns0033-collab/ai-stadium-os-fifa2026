@@ -17,7 +17,8 @@
 export function sanitizeInput(input: string): string {
   if (typeof input !== 'string') return '';
   return input
-    .replace(/<[^>]*>/g, '')      // Strip HTML tags
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Strip script tags and content
+    .replace(/<[^>]*>/g, '')      // Strip other HTML tags
     .replace(/[<>"'&]/g, '')      // Remove special chars
     .trim()
     .slice(0, 500);               // Limit input length

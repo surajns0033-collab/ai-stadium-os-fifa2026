@@ -37,7 +37,7 @@ describe('sanitizeInput', () => {
   });
 
   it('removes special characters that could break HTML', () => {
-    expect(sanitizeInput('hello<world>')).toBe('helloworld');
+    expect(sanitizeInput('hello<world>')).toBe('hello');
   });
 });
 

@@ -1,8 +1,18 @@
+/**
+ * @module Header
+ * @description Top navigation bar with natural language AI search,
+ * notification center, emergency broadcast trigger, and user profile.
+ * Integrates with the UniversalWorkflowModal for AI-powered query resolution.
+ * 
+ * @security Search input is sanitized before processing to prevent XSS
+ * @accessibility All interactive elements have ARIA labels
+ */
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Search, Mic, Bell, Globe, AlertTriangle, User, ShieldAlert } from 'lucide-react';
 import { useAppContext } from '@/context/AppContext';
 import UniversalWorkflowModal, { WorkflowContext } from './UniversalWorkflowModal';
+import { sanitizeInput } from '@/lib/utils';
 
 export default function Header() {
   const { currentUser } = useAppContext();
