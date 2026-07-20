@@ -2,6 +2,7 @@
 import React from 'react';
 import { LayoutDashboard, Users, DoorOpen, Utensils, Droplets, Activity, ShieldAlert, Train, Leaf, Navigation, Map, LineChart, FileText, Settings, HeartPulse, Building2, Languages, Network, Database, Car, Brain } from 'lucide-react';
 import { useAppContext } from '@/context/AppContext';
+import { useUISounds } from '@/hooks/useUISounds';
 
 const MENU_ITEMS = [
   { id: 'Home', label: 'Command Center', icon: LayoutDashboard },
@@ -98,6 +99,7 @@ interface SidebarProps {
 
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   const { globalLang } = useAppContext();
+  const { playHover, playClick } = useUISounds();
   
   const t = (text: string) => {
     if (globalLang === 'en') return text;
@@ -126,7 +128,8 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onMouseEnter={playHover}
+                onClick={() => { playClick(); setActiveTab(item.id); }}
                 role="tab"
                 aria-selected={isActive}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -152,7 +155,8 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onMouseEnter={playHover}
+                onClick={() => { playClick(); setActiveTab(item.id); }}
                 role="tab"
                 aria-selected={isActive}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all group ${

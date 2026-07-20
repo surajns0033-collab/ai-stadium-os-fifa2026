@@ -1,286 +1,135 @@
-"use client";
 import React, { useState, useEffect } from 'react';
-import { Users, Clock, AlertTriangle, ArrowRight, Activity, Brain, Play, FastForward, Rewind, Info } from 'lucide-react';
+import { Users, Activity, AlertTriangle, TrendingUp, ChevronRight, UserCheck, ShieldAlert, Cpu } from 'lucide-react';
+import { useUISounds } from '@/hooks/useUISounds';
 
 export default function CrowdDashboard() {
-  const [timeMode, setTimeMode] = useState<'live' | 'replay' | 'predictive'>('live');
+  const [time, setTime] = useState(0);
+  const { playHover, playClick } = useUISounds();
 
-  // KPIs
-  const kpis = [
-    { label: 'Live Stadium Population', value: '42,504', trend: '+1,200/min', color: 'text-[#2B7CE4]' },
-    { label: 'Average Queue Time', value: '4m 12s', trend: '-30s', color: 'text-[#1AA65D]' },
-    { label: 'Congestion Risk', value: timeMode === 'predictive' ? 'High' : 'Moderate', trend: 'Watch North Gate', color: timeMode === 'predictive' ? 'text-[#E20074]' : 'text-yellow-400' },
-    { label: 'Predicted Entry Rate', value: '2.4k/min', trend: 'Steady', color: 'text-purple-400' }
-  ];
-
-  // Map state based on timeMode
-  const getDensityColor = (zone: string) => {
-    if (timeMode === 'predictive' && zone === 'north') return '#E20074'; // High density prediction
-    if (zone === 'north') return '#eab308'; // yellow
-    if (zone === 'south') return '#1AA65D';
-    if (zone === 'east') return '#1AA65D';
-    if (zone === 'west') return '#eab308';
-    return '#2B7CE4';
-  };
+  useEffect(() => {
+    const interval = setInterval(() => setTime(t => t + 1), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-[#0A0015] overflow-hidden text-white relative">
-      
-      {/* Background Ambience */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#2B7CE4]/5 rounded-full blur-[150px] animate-pulse-slow"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#E20074]/5 rounded-full blur-[150px] animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-      </div>
+    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+      {/* Hyper-realistic Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center z-0 opacity-40"
+        style={{ backgroundImage: "url('/crowd-bg.png')" }}
+      ></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0015] via-transparent to-[#0A0015] z-0 opacity-80"></div>
 
-      <div className="p-6 pb-2 z-10 flex justify-between items-end">
+      <div className="flex justify-between items-end shrink-0 z-10">
         <div>
-          <h2 className="text-3xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
             Crowd Intelligence
+            <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-blue-500/30 text-blue-300 rounded border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.5)]">Live Feed</span>
           </h2>
-          <p className="text-slate-400 text-sm mt-1">Live operational visualization, density mapping & predictive flow</p>
+          <p className="text-slate-300 text-sm mt-1 gaming-text-shadow font-medium">Real-time density mapping, flow prediction, and dynamic rerouting</p>
         </div>
-        
-        {/* Timeline Playback Controls */}
-        <div className="glass-panel border border-slate-700/50 p-2 rounded-2xl flex items-center gap-2 bg-slate-900/60 backdrop-blur-xl">
-          <button 
-            onClick={() => setTimeMode('replay')}
-            className={`p-2 rounded-xl transition-all ${timeMode === 'replay' ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
-          >
-            <Rewind size={18} />
-          </button>
-          
-          <div className="w-px h-6 bg-slate-700 mx-1"></div>
-          
-          <button 
-            onClick={() => setTimeMode('live')}
-            className={`px-4 py-1.5 rounded-xl text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
-              timeMode === 'live' 
-                ? 'bg-[#E20074]/20 text-[#E20074] border border-[#E20074]/40 shadow-[0_0_15px_rgba(226,0,116,0.2)]' 
-                : 'text-slate-400 hover:text-white border border-transparent'
-            }`}
-          >
-            <span className={`w-2 h-2 rounded-full ${timeMode === 'live' ? 'bg-[#E20074] animate-pulse' : 'bg-slate-500'}`}></span>
-            Live
-          </button>
-
-          <div className="w-px h-6 bg-slate-700 mx-1"></div>
-          
-          <button 
-            onClick={() => setTimeMode('predictive')}
-            className={`px-4 py-1.5 rounded-xl text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
-              timeMode === 'predictive' 
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-[0_0_15px_rgba(43,124,228,0.2)]' 
-                : 'text-slate-400 hover:text-white border border-transparent'
-            }`}
-          >
-            <Brain size={14} className={timeMode === 'predictive' ? 'animate-pulse' : ''} />
-            +30m AI Predict
-          </button>
-        </div>
-      </div>
-
-      {/* KPI Cards */}
-      <div className="grid grid-cols-4 gap-4 px-6 py-4 z-10">
-        {kpis.map((kpi, idx) => (
-          <div key={idx} className="glass-panel p-4 rounded-2xl border border-slate-700/50 bg-slate-900/40 backdrop-blur-md">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{kpi.label}</h4>
-            <div className={`text-2xl font-black ${kpi.color} flex items-center justify-between`}>
-              {kpi.value}
-              <span className="text-xs font-bold text-slate-300 bg-slate-800 px-2 py-1 rounded-full border border-slate-600">
-                {kpi.trend}
-              </span>
-            </div>
+        <div className="flex items-center gap-4">
+          <div className="glass-panel border-blue-500/30 rounded-xl px-4 py-2 text-right">
+            <div className="text-[10px] text-blue-300 font-bold uppercase gaming-text-shadow">Live Density</div>
+            <div className="text-xl font-black text-white gaming-text-shadow">82% <span className="text-xs text-blue-300 font-normal">↑ 4%</span></div>
           </div>
-        ))}
+          <div className="glass-panel border-purple-500/30 rounded-xl px-4 py-2 text-right shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+            <div className="text-[10px] text-purple-300 font-bold uppercase gaming-text-shadow">Flow Rate</div>
+            <div className="text-xl font-black text-white gaming-text-shadow flex items-center gap-2"><Activity size={18} className="text-purple-400" /> 1.2k/m</div>
+          </div>
+        </div>
       </div>
 
-      {/* Main Visualization Area */}
-      <div className="flex-1 p-6 z-10 flex gap-6 min-h-0">
+      <div className="flex-1 flex gap-6 min-h-0 z-10">
         
-        {/* Left: Stadium Map SVG */}
-        <div className="flex-1 glass-panel rounded-3xl border border-slate-700/50 bg-[#05000A]/80 backdrop-blur-xl relative overflow-hidden flex items-center justify-center">
+        {/* Main Operational Visualization (Stadium SVG over Image) */}
+        <div className="flex-[2] glass-panel rounded-3xl p-6 flex flex-col relative overflow-hidden group">
+          <h3 className="font-bold text-lg mb-4 z-10 flex items-center gap-2 gaming-text-shadow"><Users size={18} className="text-blue-400"/> Sector Density Map</h3>
           
-          {/* Map Grid Background */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
-
-          {/* Stadium Visualization */}
-          <div className="relative w-full max-w-3xl aspect-[4/3]">
-            {/* Base Stadium Structure */}
-            <svg viewBox="0 0 800 600" className="w-full h-full drop-shadow-[0_0_30px_rgba(43,124,228,0.2)]">
-              {/* Outer concourse */}
-              <rect x="50" y="50" width="700" height="500" rx="150" fill="none" stroke="#1e293b" strokeWidth="10" />
-              {/* Inner Seating */}
-              <rect x="150" y="100" width="500" height="400" rx="100" fill="none" stroke="#334155" strokeWidth="30" />
-              {/* Pitch */}
-              <rect x="250" y="180" width="300" height="240" rx="20" fill="#1AA65D" fillOpacity="0.1" stroke="#1AA65D" strokeWidth="2" />
+          <div className="flex-1 relative border border-white/10 rounded-2xl bg-black/50 overflow-hidden backdrop-blur-sm">
+            <svg viewBox="0 0 1000 600" className="w-full h-full drop-shadow-2xl">
               
-              {/* Density Heatmaps */}
-              <g style={{ mixBlendMode: 'screen' }}>
-                {/* North Zone */}
-                <circle cx="400" cy="115" r="80" fill={getDensityColor('north')} fillOpacity="0.2" filter="blur(20px)" />
-                <circle cx="400" cy="115" r="40" fill={getDensityColor('north')} fillOpacity="0.4" filter="blur(10px)" />
-                
-                {/* South Zone */}
-                <circle cx="400" cy="485" r="60" fill={getDensityColor('south')} fillOpacity="0.2" filter="blur(15px)" />
-                
-                {/* East Zone */}
-                <circle cx="635" cy="300" r="70" fill={getDensityColor('east')} fillOpacity="0.2" filter="blur(15px)" />
-                
-                {/* West Zone */}
-                <circle cx="165" cy="300" r="70" fill={getDensityColor('west')} fillOpacity="0.2" filter="blur(15px)" />
+              {/* Stadium Shape */}
+              <g transform="translate(500, 300)">
+                 <path d="M -300 -150 Q 0 -200 300 -150 L 250 150 Q 0 200 -250 150 Z" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="4" />
+                 
+                 {/* Sector Zones (Heatmap colors) */}
+                 <path d="M -300 -150 Q -150 -175 0 -200 L 0 0 L -250 150 Q -275 0 -300 -150" fill="#3b82f6" fillOpacity="0.3" stroke="#3b82f6" strokeWidth="2" className="transition-all duration-1000" />
+                 <text x="-150" y="-50" fill="#fff" fontSize="18" fontWeight="bold" className="gaming-text-shadow">SECTOR A</text>
+                 <text x="-150" y="-30" fill="#93c5fd" fontSize="12" className="gaming-text-shadow">76% Full</text>
+
+                 <path d="M 0 -200 Q 150 -175 300 -150 L 250 150 Q 125 175 0 0 Z" fill="#ef4444" fillOpacity="0.4" stroke="#ef4444" strokeWidth="2" className="animate-pulse" />
+                 <text x="150" y="-50" fill="#fff" fontSize="18" fontWeight="bold" className="gaming-text-shadow">SECTOR B</text>
+                 <text x="150" y="-30" fill="#fca5a5" fontSize="12" className="gaming-text-shadow">94% Full (Congestion)</text>
+
+                 <path d="M -250 150 Q 0 200 250 150 L 0 0 Z" fill="#10b981" fillOpacity="0.2" stroke="#10b981" strokeWidth="2" />
+                 <text x="0" y="100" fill="#fff" fontSize="18" fontWeight="bold" className="gaming-text-shadow" textAnchor="middle">SECTOR C</text>
+                 <text x="0" y="120" fill="#a7f3d0" fontSize="12" className="gaming-text-shadow" textAnchor="middle">45% Full</text>
+
+                 {/* Dynamic Flow Arrows */}
+                 <path d="M 250 150 Q 300 200 400 150" fill="none" stroke="#ef4444" strokeWidth="8" strokeDasharray="15 10" className="animate-[dash_1s_linear_infinite]" opacity="0.8" />
+                 
+                 <path d="M -250 150 Q -300 200 -400 150" fill="none" stroke="#3b82f6" strokeWidth="6" strokeDasharray="15 10" className="animate-[dash_1.5s_linear_infinite]" opacity="0.6" />
+                 
+                 {/* Re-routing Suggestion Path */}
+                 <path d="M 150 -100 Q 50 0 0 100" fill="none" stroke="#eab308" strokeWidth="4" strokeDasharray="10 5" className="animate-[dash_2s_linear_infinite]" />
+                 <text x="75" y="0" fill="#fef08a" fontSize="12" fontWeight="bold" className="gaming-text-shadow animate-pulse" transform="rotate(-53 75 0)">REROUTE TO C</text>
+
               </g>
 
-              {/* Dynamic Flow Paths */}
-              <defs>
-                <marker id="arrow" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-                  <polygon points="0 0, 6 2, 0 4" fill="#2B7CE4" />
-                </marker>
-                <marker id="arrow-alert" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-                  <polygon points="0 0, 6 2, 0 4" fill="#E20074" />
-                </marker>
-                <marker id="arrow-ai" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-                  <polygon points="0 0, 6 2, 0 4" fill="#a855f7" />
-                </marker>
-              </defs>
-
-              {/* Entry Flows */}
-              <g className="animate-[dash_3s_linear_infinite]" strokeDasharray="10 10">
-                {/* North Flow (Congested in predictive mode) */}
-                <path d="M 400 0 L 400 100" fill="none" stroke={timeMode === 'predictive' ? '#E20074' : '#2B7CE4'} strokeWidth="4" markerEnd={timeMode === 'predictive' ? 'url(#arrow-alert)' : 'url(#arrow)'} />
-                <path d="M 380 -20 Q 400 50 380 100" fill="none" stroke={timeMode === 'predictive' ? '#E20074' : '#2B7CE4'} strokeWidth="2" opacity="0.6" />
-                <path d="M 420 -20 Q 400 50 420 100" fill="none" stroke={timeMode === 'predictive' ? '#E20074' : '#2B7CE4'} strokeWidth="2" opacity="0.6" />
-                
-                {/* South Flow */}
-                <path d="M 400 600 L 400 500" fill="none" stroke="#2B7CE4" strokeWidth="4" markerEnd="url(#arrow)" />
-                
-                {/* West Flow */}
-                <path d="M 0 300 L 100 300" fill="none" stroke="#2B7CE4" strokeWidth="4" markerEnd="url(#arrow)" />
-                
-                {/* East Flow */}
-                <path d="M 800 300 L 700 300" fill="none" stroke="#2B7CE4" strokeWidth="4" markerEnd="url(#arrow)" />
-              </g>
-
-              {/* AI Recommended Alternative Routes (Visible only in predictive mode) */}
-              {timeMode === 'predictive' && (
-                <g className="animate-[dash_2s_linear_infinite]" strokeDasharray="15 15">
-                  <path d="M 380 0 Q 200 50 120 280" fill="none" stroke="#a855f7" strokeWidth="3" markerEnd="url(#arrow-ai)" />
-                  <path d="M 420 0 Q 600 50 680 280" fill="none" stroke="#a855f7" strokeWidth="3" markerEnd="url(#arrow-ai)" />
-                  <text x="200" y="80" fill="#a855f7" fontSize="12" fontWeight="bold" className="drop-shadow-lg">AI DIVERT TO WEST</text>
-                  <text x="500" y="80" fill="#a855f7" fontSize="12" fontWeight="bold" className="drop-shadow-lg">AI DIVERT TO EAST</text>
-                </g>
-              )}
-
+              <style jsx>{`
+                @keyframes dash {
+                  to { stroke-dashoffset: -30; }
+                }
+              `}</style>
             </svg>
-
-            <style jsx>{`
-              @keyframes dash {
-                to { stroke-dashoffset: -40; }
-              }
-            `}</style>
-            
-            {/* Gate Labels */}
-            <div className="absolute top-[8%] left-1/2 -translate-x-1/2 bg-black/80 px-3 py-1 rounded border border-slate-700 text-xs font-bold shadow-xl backdrop-blur-md">
-              <div className="text-slate-400 mb-0.5 uppercase tracking-wider text-[9px]">North Gate (Main)</div>
-              <div className={`flex items-center gap-2 ${timeMode === 'predictive' ? 'text-[#E20074]' : 'text-yellow-400'}`}>
-                <Activity size={12}/> {timeMode === 'predictive' ? 'Critical Queue Formation' : 'High Density'}
-              </div>
-            </div>
-            
-            <div className="absolute bottom-[8%] left-1/2 -translate-x-1/2 bg-black/80 px-3 py-1 rounded border border-slate-700 text-xs font-bold shadow-xl backdrop-blur-md">
-              <div className="text-slate-400 mb-0.5 uppercase tracking-wider text-[9px]">South Gate (VIP)</div>
-              <div className="flex items-center gap-2 text-[#1AA65D]">
-                <Activity size={12}/> Flow Steady
-              </div>
-            </div>
-
-            <div className="absolute left-[8%] top-1/2 -translate-y-1/2 bg-black/80 px-3 py-1 rounded border border-slate-700 text-xs font-bold shadow-xl backdrop-blur-md">
-              <div className="text-slate-400 mb-0.5 uppercase tracking-wider text-[9px]">West Gate</div>
-              <div className="flex items-center gap-2 text-yellow-400">
-                <Activity size={12}/> Moderate
-              </div>
-            </div>
-
-            <div className="absolute right-[8%] top-1/2 -translate-y-1/2 bg-black/80 px-3 py-1 rounded border border-slate-700 text-xs font-bold shadow-xl backdrop-blur-md">
-              <div className="text-slate-400 mb-0.5 uppercase tracking-wider text-[9px]">East Gate</div>
-              <div className="flex items-center gap-2 text-[#1AA65D]">
-                <Activity size={12}/> Flow Steady
-              </div>
-            </div>
-
-          </div>
-
-          {/* Overlay Context Info */}
-          <div className="absolute bottom-6 right-6 glass-panel p-4 rounded-2xl border border-slate-700/50 bg-slate-900/80 backdrop-blur-xl max-w-sm">
-            <h3 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
-              <Info size={16} className="text-blue-400"/> Operational State
-            </h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              {timeMode === 'live' && "Crowd density is actively peaking at the North Gate. Entry flow is steady at 2.4k/min."}
-              {timeMode === 'replay' && "Historical playback shows steady queue formation over the last 15 minutes due to Metro surge."}
-              {timeMode === 'predictive' && "AI predicts severe bottleneck at North Gate in 30m. Recommend deploying flow-diversion signage to East/West gates immediately."}
-            </p>
           </div>
         </div>
 
-        {/* Right: AI Drill-down Analytics */}
-        <div className="w-96 flex flex-col gap-4 min-h-0">
+        {/* AI Recommendations & Interactive Controls */}
+        <div className="flex-1 flex flex-col gap-4 min-w-[320px]">
           
-          <div className="flex-1 glass-panel rounded-3xl p-5 border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl overflow-y-auto custom-scrollbar">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-              <Brain size={14} className="text-purple-400"/> AI Recommendations
-            </h3>
+          <div className="glass-panel p-5 rounded-2xl border-orange-500/30">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-orange-300 mb-4 flex items-center gap-2 gaming-text-shadow"><Cpu size={14} /> AI Recommendation</h3>
             
-            <div className="space-y-3">
-              <div className="p-3 bg-[#E20074]/10 border border-[#E20074]/30 rounded-xl relative overflow-hidden group hover:border-[#E20074]/60 transition-all cursor-pointer">
-                <div className="absolute top-0 left-0 w-1 h-full bg-[#E20074]"></div>
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs font-bold text-[#E20074]">URGENT DIVERSION</span>
-                  <span className="text-[10px] text-slate-400">98% Confidence</span>
+            <div className="bg-black/60 rounded-xl p-4 border border-orange-500/50 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
+              <div className="flex justify-between items-center mb-2">
+                <div className="text-sm font-bold text-white flex items-center gap-2 gaming-text-shadow">
+                  <AlertTriangle size={14} className="text-orange-400" /> Sector B Bottleneck
                 </div>
-                <p className="text-sm text-slate-200 mb-3">Divert 30% of incoming North Gate traffic to East/West gates using digital signage.</p>
-                <button className="w-full py-2 bg-[#E20074]/20 hover:bg-[#E20074]/30 text-[#E20074] rounded-lg text-xs font-bold transition-colors">
-                  EXECUTE DIVERSION
-                </button>
+                <span className="text-[10px] bg-orange-500/30 text-orange-200 px-2 py-0.5 rounded border border-orange-500/50">92% Confidence</span>
               </div>
-
-              <div className="p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl relative overflow-hidden group hover:border-blue-500/60 transition-all cursor-pointer">
-                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs font-bold text-blue-400">VOLUNTEER DEPLOYMENT</span>
-                  <span className="text-[10px] text-slate-400">92% Confidence</span>
-                </div>
-                <p className="text-sm text-slate-200 mb-3">Deploy 12 additional crowd-control volunteers to North Gate concourse.</p>
-                <button className="w-full py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 rounded-lg text-xs font-bold transition-colors">
-                  DISPATCH TEAM
-                </button>
-              </div>
+              <p className="text-xs text-slate-300 mb-4 leading-relaxed gaming-text-shadow">Incoming metro surge in 4m will push Sector B to critical crush capacity (98%). AI suggests immediately deploying 5 volunteers to redirect flow to Sector C.</p>
+              
+              <button 
+                onMouseEnter={playHover}
+                onClick={playClick}
+                className="w-full bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white text-xs font-bold py-2.5 rounded-lg transition-all shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] flex items-center justify-center gap-2"
+              >
+                Execute Reroute Protocol <ChevronRight size={14} />
+              </button>
             </div>
+          </div>
+
+          <div className="glass-panel p-5 rounded-2xl flex-1 border-blue-500/20">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-blue-300 mb-4 flex items-center gap-2 gaming-text-shadow"><UserCheck size={14} /> Interactive Actions</h3>
             
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-6 mb-4 flex items-center gap-2">
-              <Activity size={14} className="text-slate-400"/> Queue Formation Data
-            </h3>
             <div className="space-y-3">
-              <div className="flex justify-between items-center p-2 rounded-lg bg-slate-800/50">
-                <span className="text-xs text-slate-300">North Gate</span>
-                <span className="text-xs font-bold text-[#E20074]">12m wait</span>
-              </div>
-              <div className="flex justify-between items-center p-2 rounded-lg bg-slate-800/50">
-                <span className="text-xs text-slate-300">South Gate</span>
-                <span className="text-xs font-bold text-[#1AA65D]">2m wait</span>
-              </div>
-              <div className="flex justify-between items-center p-2 rounded-lg bg-slate-800/50">
-                <span className="text-xs text-slate-300">East Gate</span>
-                <span className="text-xs font-bold text-[#1AA65D]">3m wait</span>
-              </div>
-              <div className="flex justify-between items-center p-2 rounded-lg bg-slate-800/50">
-                <span className="text-xs text-slate-300">West Gate</span>
-                <span className="text-xs font-bold text-yellow-400">6m wait</span>
-              </div>
+              {['Analyze Zone B Density', 'Predict Queue Growth (30m)', 'Run Gate Simulation'].map((action, i) => (
+                <button 
+                  key={i}
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  className="w-full text-left bg-black/40 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500/50 text-sm font-bold text-slate-200 hover:text-white p-3 rounded-xl transition-all flex items-center justify-between group gaming-text-shadow"
+                >
+                  {action}
+                  <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-400 transition-colors" />
+                </button>
+              ))}
             </div>
           </div>
 
         </div>
-
       </div>
     </div>
   );
