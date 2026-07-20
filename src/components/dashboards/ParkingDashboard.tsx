@@ -116,14 +116,14 @@ export default function ParkingDashboard() {
                   <>
                     <foreignObject x="100" y="140" width="200" height="150" className="animate-fade-in pointer-events-none">
                       <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
-                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_parking_vip_1784578393047.png')" }}></div>
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/parking_north_vip.png')" }}></div>
                         <div className="p-2">
                           <div className="text-[10px] font-bold text-yellow-400">LOT N-CAM 01</div>
                           <div className="text-xs text-white leading-tight underline">Click to expand</div>
                         </div>
                       </div>
                     </foreignObject>
-                    <rect x="100" y="140" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_parking_vip_1784578393047.png'); }} />
+                    <rect x="100" y="140" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/parking_north_vip.png'); }} />
                   </>
                 )}
               </g>
@@ -148,14 +148,14 @@ export default function ParkingDashboard() {
                   <>
                     <foreignObject x="100" y="-160" width="200" height="150" className="animate-fade-in pointer-events-none">
                       <div className="w-full h-full bg-black/95 border border-blue-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.5)]">
-                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_parking_ga_1784578413675.png')" }}></div>
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/parking_south_65.png')" }}></div>
                         <div className="p-2">
                           <div className="text-[10px] font-bold text-blue-400">LOT S-CAM 04</div>
                           <div className="text-xs text-white leading-tight underline">Click to expand</div>
                         </div>
                       </div>
                     </foreignObject>
-                    <rect x="100" y="-160" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_parking_ga_1784578413675.png'); }} />
+                    <rect x="100" y="-160" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/parking_south_65.png'); }} />
                   </>
                 )}
               </g>
@@ -221,14 +221,14 @@ export default function ParkingDashboard() {
                   <>
                     <foreignObject x="-210" y="75" width="200" height="150" className="animate-fade-in pointer-events-none">
                       <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_parking_congested.png')" }}></div>
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/parking_east_100.png')" }}></div>
                         <div className="p-2">
                           <div className="text-[10px] font-bold text-red-400">LOT E-CAM 08</div>
                           <div className="text-xs text-white leading-tight underline">Click to expand</div>
                         </div>
                       </div>
                     </foreignObject>
-                    <rect x="-210" y="75" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_parking_congested.png'); }} />
+                    <rect x="-210" y="75" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/parking_east_100.png'); }} />
                   </>
                 )}
               </g>
