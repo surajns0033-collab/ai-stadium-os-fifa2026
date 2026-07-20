@@ -95,42 +95,126 @@ export default function FoodDashboard() {
                 <path d="M 400 250 L 500 50" stroke="#10b981" strokeWidth="2" strokeDasharray="10 5" fill="none" />
               </g>
 
-              {/* --- VENDOR BLOCKS (Lower Z-Index first) --- */}
+              {/* --- HIGH Z-INDEX VENDOR BLOCKS (WITH TOOLTIPS) --- */}
 
               {/* Vendor A: Burgers (Normal) */}
-              <g transform="translate(50, 70)">
-                <rect x="0" y="0" width="200" height="90" rx="10" fill="#022c22" stroke="#10b981" strokeWidth="2" />
+              <g 
+                transform="translate(50, 70)"
+                onMouseEnter={() => { playHover(); setHoveredVendor('vendorA'); }} 
+                onMouseLeave={() => setHoveredVendor(null)}
+                className="cursor-pointer group"
+              >
+                {hoveredVendor === 'vendorA' && <rect x="0" y="0" width="200" height="260" fill="transparent" />}
+                <rect x="0" y="0" width="200" height="90" rx="10" fill="#022c22" stroke="#10b981" strokeWidth="2" className="group-hover:fill-opacity-80 transition-all" />
                 <text x="20" y="25" fill="#fff" fontSize="14" fontWeight="bold">Burger Station 1</text>
                 <rect x="20" y="45" width="160" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="45" width="130" height="8" rx="4" fill="#10b981" filter="url(#glowGreen)" />
                 <text x="20" y="75" fill="#a7f3d0" fontSize="11">Stock: 82% | Queue: Normal</text>
+
+                {hoveredVendor === 'vendorA' && (
+                  <>
+                    <foreignObject x="0" y="100" width="200" height="150" className="animate-fade-in pointer-events-none">
+                      <div className="w-full h-full bg-black/95 border border-green-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.5)]">
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_burger_vendor_1784578177175.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-green-400">BURGER CAM 1</div>
+                          <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                    <rect x="0" y="100" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_burger_vendor_1784578177175.png'); }} />
+                  </>
+                )}
               </g>
 
               {/* Vendor D: Pizza (Steady) */}
-              <g transform="translate(750, 400)">
-                <rect x="0" y="0" width="180" height="90" rx="10" fill="#172554" stroke="#3b82f6" strokeWidth="2" />
+              <g 
+                transform="translate(750, 400)"
+                onMouseEnter={() => { playHover(); setHoveredVendor('vendorD'); }} 
+                onMouseLeave={() => setHoveredVendor(null)}
+                className="cursor-pointer group"
+              >
+                {hoveredVendor === 'vendorD' && <rect x="-210" y="0" width="390" height="150" fill="transparent" />}
+                <rect x="0" y="0" width="180" height="90" rx="10" fill="#172554" stroke="#3b82f6" strokeWidth="2" className="group-hover:fill-opacity-80 transition-all" />
                 <text x="20" y="25" fill="#fff" fontSize="14" fontWeight="bold">Woodfire Pizza</text>
                 <rect x="20" y="45" width="140" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="45" width="90" height="8" rx="4" fill="#3b82f6" filter="url(#glowBlue)" />
                 <text x="20" y="75" fill="#bfdbfe" fontSize="11">Stock: 65% | Prep time: 8m</text>
+
+                {hoveredVendor === 'vendorD' && (
+                  <>
+                    <foreignObject x="-210" y="0" width="200" height="150" className="animate-fade-in pointer-events-none">
+                      <div className="w-full h-full bg-black/95 border border-blue-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_pizza_vendor_1784578196984.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-blue-400">PIZZA CAM 3</div>
+                          <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                    <rect x="-210" y="0" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_pizza_vendor_1784578196984.png'); }} />
+                  </>
+                )}
               </g>
 
               {/* Vendor E: Vegan/Healthy (Low traffic) */}
-              <g transform="translate(400, 20)">
-                <rect x="0" y="0" width="160" height="70" rx="8" fill="#022c22" stroke="#10b981" strokeWidth="1" />
+              <g 
+                transform="translate(400, 20)"
+                onMouseEnter={() => { playHover(); setHoveredVendor('vendorE'); }} 
+                onMouseLeave={() => setHoveredVendor(null)}
+                className="cursor-pointer group"
+              >
+                {hoveredVendor === 'vendorE' && <rect x="0" y="0" width="160" height="230" fill="transparent" />}
+                <rect x="0" y="0" width="160" height="70" rx="8" fill="#022c22" stroke="#10b981" strokeWidth="1" className="group-hover:fill-opacity-80 transition-all" />
                 <text x="15" y="25" fill="#fff" fontSize="12" fontWeight="bold">Green Bowl Station</text>
                 <rect x="15" y="40" width="130" height="6" rx="3" fill="#0f172a" />
                 <rect x="15" y="40" width="110" height="6" rx="3" fill="#10b981" />
                 <text x="15" y="60" fill="#a7f3d0" fontSize="10">Stock: 85% | Queue: 0m</text>
+
+                {hoveredVendor === 'vendorE' && (
+                  <>
+                    <foreignObject x="0" y="80" width="160" height="140" className="animate-fade-in pointer-events-none">
+                      <div className="w-full h-full bg-black/95 border border-green-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.5)]">
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_vegan_vendor_1784578215256.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-green-400">VEGAN CAM 2</div>
+                          <div className="text-[10px] text-white leading-tight underline">Click to expand</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                    <rect x="0" y="80" width="160" height="140" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_vegan_vendor_1784578215256.png'); }} />
+                  </>
+                )}
               </g>
 
               {/* VIP Dining Room */}
-              <g transform="translate(350, 480)">
-                <rect x="0" y="0" width="220" height="80" rx="10" fill="#422006" stroke="#ca8a04" strokeWidth="2" strokeDasharray="5 5" />
+              <g 
+                transform="translate(350, 480)"
+                onMouseEnter={() => { playHover(); setHoveredVendor('vip'); }} 
+                onMouseLeave={() => setHoveredVendor(null)}
+                className="cursor-pointer group"
+              >
+                {hoveredVendor === 'vip' && <rect x="0" y="-160" width="220" height="240" fill="transparent" />}
+                <rect x="0" y="0" width="220" height="80" rx="10" fill="#422006" stroke="#ca8a04" strokeWidth="2" strokeDasharray="5 5" className="group-hover:fill-opacity-80 transition-all" />
                 <text x="110" y="30" fill="#fef08a" fontSize="14" fontWeight="bold" textAnchor="middle" letterSpacing="1">VIP CLUB DINING</text>
                 <text x="110" y="55" fill="#fde047" fontSize="10" textAnchor="middle">Capacity: 92% | Service: Premium</text>
                 <circle cx="20" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
                 <circle cx="200" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
+
+                {hoveredVendor === 'vip' && (
+                  <>
+                    <foreignObject x="0" y="-160" width="220" height="150" className="animate-fade-in pointer-events-none">
+                      <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_vip_dining_1784578236565.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-yellow-400">VIP CAM 1</div>
+                          <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                    <rect x="0" y="-160" width="220" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_vip_dining_1784578236565.png'); }} />
+                  </>
+                )}
               </g>
 
               {/* --- HIGH Z-INDEX VENDOR BLOCKS (WITH TOOLTIPS) --- */}
@@ -159,7 +243,7 @@ export default function FoodDashboard() {
                   <>
                     <foreignObject x="0" y="110" width="200" height="160" className="animate-fade-in pointer-events-none">
                       <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_hotdog_vendor_1784576514844.png')" }}></div>
                         <div className="p-2">
                           <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
                           <div className="text-xs text-white leading-tight underline">Click to expand</div>
@@ -167,7 +251,7 @@ export default function FoodDashboard() {
                       </div>
                     </foreignObject>
                     {/* Invisible clickable rect exactly over the tooltip */}
-                    <rect x="0" y="110" width="200" height="160" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-hotdog-vendor.png'); }} />
+                    <rect x="0" y="110" width="200" height="160" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_hotdog_vendor_1784576514844.png'); }} />
                   </>
                 )}
               </g>
@@ -193,7 +277,7 @@ export default function FoodDashboard() {
                   <>
                     <foreignObject x="-210" y="0" width="200" height="160" className="animate-fade-in pointer-events-none">
                       <div className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)]">
-                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_beverage_1784576534351.png')" }}></div>
                         <div className="p-2">
                           <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
                           <div className="text-xs text-white leading-tight underline">Click to expand</div>
@@ -201,7 +285,7 @@ export default function FoodDashboard() {
                       </div>
                     </foreignObject>
                     {/* Invisible clickable rect exactly over the tooltip */}
-                    <rect x="-210" y="0" width="200" height="160" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-beverage.png'); }} />
+                    <rect x="-210" y="0" width="200" height="160" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_beverage_1784576534351.png'); }} />
                   </>
                 )}
               </g>

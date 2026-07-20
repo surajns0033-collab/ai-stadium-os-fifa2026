@@ -100,21 +100,87 @@ export default function CrowdDashboard() {
                 {/* --- SECTOR DATA OVERLAYS --- */}
                 
                 {/* Sector North (Normal) */}
-                <path d="M -200 -120 A 200 120 0 0 1 200 -120 L 280 -170 A 280 170 0 0 0 -280 -170 Z" fill="#3b82f6" fillOpacity="0.1" stroke="#3b82f6" strokeWidth="1" />
-                <circle cx="0" cy="-145" r="4" fill="#3b82f6" filter="url(#glow)" />
-                <text x="0" y="-160" fill="#93c5fd" fontSize="10" textAnchor="middle" letterSpacing="2">NORTH WING</text>
-                <text x="0" y="-125" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">62%</text>
+                <g 
+                  onMouseEnter={() => { playHover(); setHoveredZone('north'); }} 
+                  onMouseLeave={() => setHoveredZone(null)}
+                  className="cursor-pointer group"
+                >
+                  {hoveredZone === 'north' && <rect x="-300" y="-300" width="600" height="200" fill="transparent" />}
+                  <path d="M -200 -120 A 200 120 0 0 1 200 -120 L 280 -170 A 280 170 0 0 0 -280 -170 Z" fill="#3b82f6" fillOpacity="0.1" stroke="#3b82f6" strokeWidth="1" className="group-hover:fill-opacity-30 transition-all" />
+                  <circle cx="0" cy="-145" r="4" fill="#3b82f6" filter="url(#glow)" />
+                  <text x="0" y="-160" fill="#93c5fd" fontSize="10" textAnchor="middle" letterSpacing="2">NORTH WING</text>
+                  <text x="0" y="-125" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">62%</text>
+
+                  {hoveredZone === 'north' && (
+                    <>
+                      <foreignObject x="-100" y="-300" width="200" height="150" className="animate-fade-in pointer-events-none">
+                        <div className="w-full h-full bg-black/95 border border-blue-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                          <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_crowd_north_1784578297967.png')" }}></div>
+                          <div className="p-2">
+                            <div className="text-[10px] font-bold text-blue-400">NORTH WING CAM 2</div>
+                            <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                          </div>
+                        </div>
+                      </foreignObject>
+                      <rect x="-100" y="-300" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_crowd_north_1784578297967.png'); }} />
+                    </>
+                  )}
+                </g>
 
                 {/* Sector South (Warning) */}
-                <path d="M 200 120 A 200 120 0 0 1 -200 120 L -280 170 A 280 170 0 0 0 280 170 Z" fill="#eab308" fillOpacity="0.15" stroke="#eab308" strokeWidth="1" />
-                <circle cx="0" cy="145" r="4" fill="#eab308" filter="url(#glow)" className="animate-pulse" />
-                <text x="0" y="165" fill="#fef08a" fontSize="10" textAnchor="middle" letterSpacing="2">SOUTH WING</text>
-                <text x="0" y="140" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">84%</text>
+                <g 
+                  onMouseEnter={() => { playHover(); setHoveredZone('south'); }} 
+                  onMouseLeave={() => setHoveredZone(null)}
+                  className="cursor-pointer group"
+                >
+                  {hoveredZone === 'south' && <rect x="-300" y="100" width="600" height="200" fill="transparent" />}
+                  <path d="M 200 120 A 200 120 0 0 1 -200 120 L -280 170 A 280 170 0 0 0 280 170 Z" fill="#eab308" fillOpacity="0.15" stroke="#eab308" strokeWidth="1" className="group-hover:fill-opacity-30 transition-all" />
+                  <circle cx="0" cy="145" r="4" fill="#eab308" filter="url(#glow)" className="animate-pulse" />
+                  <text x="0" y="165" fill="#fef08a" fontSize="10" textAnchor="middle" letterSpacing="2">SOUTH WING</text>
+                  <text x="0" y="140" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">84%</text>
+
+                  {hoveredZone === 'south' && (
+                    <>
+                      <foreignObject x="-100" y="150" width="200" height="150" className="animate-fade-in pointer-events-none">
+                        <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
+                          <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_crowd_south_1784578317449.png')" }}></div>
+                          <div className="p-2">
+                            <div className="text-[10px] font-bold text-yellow-400">SOUTH GATE CAM 5</div>
+                            <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                          </div>
+                        </div>
+                      </foreignObject>
+                      <rect x="-100" y="150" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_crowd_south_1784578317449.png'); }} />
+                    </>
+                  )}
+                </g>
                 
                 {/* Sector West (Empty/Spare) */}
-                <path d="M -200 120 A 200 120 0 0 1 -200 -120 L -280 -170 A 280 170 0 0 0 -280 170 Z" fill="#10b981" fillOpacity="0.05" stroke="#10b981" strokeWidth="1" />
-                <text x="-240" y="20" fill="#a7f3d0" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(-90 -240 20)">WEST GATES</text>
-                <text x="-220" y="0" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">21%</text>
+                <g 
+                  onMouseEnter={() => { playHover(); setHoveredZone('west'); }} 
+                  onMouseLeave={() => setHoveredZone(null)}
+                  className="cursor-pointer group"
+                >
+                  {hoveredZone === 'west' && <rect x="-450" y="-170" width="250" height="340" fill="transparent" />}
+                  <path d="M -200 120 A 200 120 0 0 1 -200 -120 L -280 -170 A 280 170 0 0 0 -280 170 Z" fill="#10b981" fillOpacity="0.05" stroke="#10b981" strokeWidth="1" className="group-hover:fill-opacity-20 transition-all" />
+                  <text x="-240" y="20" fill="#a7f3d0" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(-90 -240 20)">WEST GATES</text>
+                  <text x="-220" y="0" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">21%</text>
+
+                  {hoveredZone === 'west' && (
+                    <>
+                      <foreignObject x="-450" y="-75" width="200" height="150" className="animate-fade-in pointer-events-none">
+                        <div className="w-full h-full bg-black/95 border border-green-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.5)]">
+                          <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural_crowd_west_1784578337622.png')" }}></div>
+                          <div className="p-2">
+                            <div className="text-[10px] font-bold text-green-400">WEST WING CAM 8</div>
+                            <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                          </div>
+                        </div>
+                      </foreignObject>
+                      <rect x="-450" y="-75" width="200" height="150" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural_crowd_west_1784578337622.png'); }} />
+                    </>
+                  )}
+                </g>
 
                 {/* --- ADVANCED FLOW LINES (Animated) --- */}
                 
