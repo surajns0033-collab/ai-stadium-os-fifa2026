@@ -5,6 +5,7 @@ import { useUISounds } from '@/hooks/useUISounds';
 export default function FoodDashboard() {
   const [time, setTime] = useState(0);
   const [hoveredVendor, setHoveredVendor] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { playHover, playClick } = useUISounds();
 
   useEffect(() => {
@@ -168,11 +169,14 @@ export default function FoodDashboard() {
               {/* Tooltip for Vendor B: Opens BELOW the vendor to avoid VIP dining */}
               {hoveredVendor === 'vendorB' && (
                 <foreignObject x="50" y="540" width="200" height="160" className="pointer-events-none animate-fade-in">
-                  <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                  <div 
+                    className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer pointer-events-auto"
+                    onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-hotdog-vendor.png'); }}
+                  >
                     <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
                     <div className="p-2">
                       <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
-                      <div className="text-xs text-white leading-tight">Critical Stock Depletion</div>
+                      <div className="text-xs text-white leading-tight">Critical Stock Depletion (Click to view)</div>
                       <div className="text-[9px] text-slate-400 mt-1">Queue: 4.5m | Demand: HIGH</div>
                     </div>
                   </div>
@@ -182,11 +186,14 @@ export default function FoodDashboard() {
               {/* Tooltip for Beverage: Opens to the LEFT of the vendor */}
               {hoveredVendor === 'beverage' && (
                 <foreignObject x="540" y="100" width="200" height="160" className="pointer-events-none animate-fade-in">
-                  <div className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+                  <div 
+                    className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)] cursor-pointer pointer-events-auto"
+                    onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-beverage.png'); }}
+                  >
                     <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
                     <div className="p-2">
                       <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
-                      <div className="text-xs text-white leading-tight">High Volume Sales</div>
+                      <div className="text-xs text-white leading-tight">High Volume Sales (Click to view)</div>
                       <div className="text-[9px] text-slate-400 mt-1">Queue: 1.2m | Flow: STEADY</div>
                     </div>
                   </div>
@@ -258,6 +265,28 @@ export default function FoodDashboard() {
 
         </div>
       </div>
+
+      {/* Full-screen Image Modal */}
+      {selectedImage && (
+        <div 
+          className="absolute inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-8 animate-fade-in cursor-pointer"
+          onClick={() => { playClick(); setSelectedImage(null); }}
+        >
+          <div className="relative max-w-5xl w-full aspect-video rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-slate-700 pointer-events-auto" onClick={e => e.stopPropagation()}>
+            <img src={selectedImage} alt="Live Camera Feed" className="w-full h-full object-cover" />
+            <button 
+              className="absolute top-4 right-4 bg-black/60 text-white rounded-full p-2 hover:bg-red-500/80 transition-colors border border-white/20"
+              onClick={() => { playClick(); setSelectedImage(null); }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur border border-purple-500/50 rounded-lg px-4 py-2">
+              <div className="text-purple-400 font-bold text-xs">LIVE FEED</div>
+              <div className="text-white text-sm">Concourse Security Camera</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

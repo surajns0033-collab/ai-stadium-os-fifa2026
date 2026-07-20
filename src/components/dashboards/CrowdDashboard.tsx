@@ -5,6 +5,7 @@ import { useUISounds } from '@/hooks/useUISounds';
 export default function CrowdDashboard() {
   const [time, setTime] = useState(0);
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { playHover, playClick } = useUISounds();
 
   useEffect(() => {
@@ -164,11 +165,14 @@ export default function CrowdDashboard() {
               {/* Tooltip for East Gate: Opens to the far right, exactly where it belongs */}
               {hoveredZone === 'east' && (
                 <foreignObject x="800" y="220" width="200" height="150" className="pointer-events-none animate-fade-in z-50">
-                  <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                  <div 
+                    className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer pointer-events-auto"
+                    onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-crowd-gate.png'); }}
+                  >
                     <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-crowd-gate.png')" }}></div>
                     <div className="p-2">
                       <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
-                      <div className="text-xs text-white leading-tight">Critical Density Alert</div>
+                      <div className="text-xs text-white leading-tight">Critical Density Alert (Click to view)</div>
                     </div>
                   </div>
                 </foreignObject>
@@ -239,6 +243,28 @@ export default function CrowdDashboard() {
 
         </div>
       </div>
+
+      {/* Full-screen Image Modal */}
+      {selectedImage && (
+        <div 
+          className="absolute inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-8 animate-fade-in cursor-pointer"
+          onClick={() => { playClick(); setSelectedImage(null); }}
+        >
+          <div className="relative max-w-5xl w-full aspect-video rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-slate-700 pointer-events-auto" onClick={e => e.stopPropagation()}>
+            <img src={selectedImage} alt="Live Camera Feed" className="w-full h-full object-cover" />
+            <button 
+              className="absolute top-4 right-4 bg-black/60 text-white rounded-full p-2 hover:bg-red-500/80 transition-colors border border-white/20"
+              onClick={() => { playClick(); setSelectedImage(null); }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur border border-red-500/50 rounded-lg px-4 py-2">
+              <div className="text-red-400 font-bold text-xs">LIVE FEED</div>
+              <div className="text-white text-sm">East Gate Camera 4 - Critical Density</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
