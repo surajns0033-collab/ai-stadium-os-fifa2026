@@ -4,6 +4,7 @@ import { useUISounds } from '@/hooks/useUISounds';
 
 export default function CrowdDashboard() {
   const [time, setTime] = useState(0);
+  const [hoveredZone, setHoveredZone] = useState<string | null>(null);
   const { playHover, playClick } = useUISounds();
 
   useEffect(() => {
@@ -56,7 +57,17 @@ export default function CrowdDashboard() {
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#3b82f6 1px, transparent 1px), linear-gradient(90deg, #3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
             
-            <svg viewBox="0 0 1000 600" className="w-full h-full drop-shadow-2xl">
+            {hoveredZone === 'east' && (
+              <div className="absolute top-[20%] right-[10%] z-20 w-48 bg-black/80 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-fade-in pointer-events-none">
+                <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/crowd-east.png')" }}></div>
+                <div className="p-2">
+                  <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
+                  <div className="text-xs text-white">Critical Density Alert</div>
+                </div>
+              </div>
+            )}
+
+            <svg viewBox="0 0 1000 600" className="w-full h-full drop-shadow-2xl relative z-10">
               <defs>
                 <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                   <feGaussianBlur stdDeviation="8" result="blur" />
@@ -110,10 +121,16 @@ export default function CrowdDashboard() {
                 <text x="0" y="140" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">84%</text>
 
                 {/* Sector East (Critical Crush Risk) */}
-                <path d="M 200 -120 A 200 120 0 0 1 200 120 L 280 170 A 280 170 0 0 0 280 -170 Z" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="2" filter="url(#glow)" />
-                <circle cx="240" cy="0" r="6" fill="#ef4444" filter="url(#heavy-glow)" className="animate-ping" />
-                <text x="250" y="-20" fill="#fca5a5" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(90 250 -20)">EAST GATES</text>
-                <text x="220" y="0" fill="#fff" fontSize="16" textAnchor="middle" fontWeight="bold">98%</text>
+                <g 
+                  onMouseEnter={() => { playHover(); setHoveredZone('east'); }} 
+                  onMouseLeave={() => setHoveredZone(null)}
+                  className="cursor-crosshair"
+                >
+                  <path d="M 200 -120 A 200 120 0 0 1 200 120 L 280 170 A 280 170 0 0 0 280 -170 Z" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="2" filter="url(#glow)" className="hover:fill-opacity-40 transition-all" />
+                  <circle cx="240" cy="0" r="6" fill="#ef4444" filter="url(#heavy-glow)" className="animate-ping" />
+                  <text x="250" y="-20" fill="#fca5a5" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(90 250 -20)">EAST GATES</text>
+                  <text x="220" y="0" fill="#fff" fontSize="16" textAnchor="middle" fontWeight="bold">98%</text>
+                </g>
                 
                 {/* Sector West (Empty/Spare) */}
                 <path d="M -200 120 A 200 120 0 0 1 -200 -120 L -280 -170 A 280 170 0 0 0 -280 170 Z" fill="#10b981" fillOpacity="0.05" stroke="#10b981" strokeWidth="1" />
@@ -170,12 +187,9 @@ export default function CrowdDashboard() {
             <div className="bg-black/60 rounded-xl border border-orange-500/50 shadow-[0_0_15px_rgba(249,115,22,0.1)] flex flex-col flex-1 overflow-hidden">
               
               {/* Situation-specific CGI Image strictly contained within the card */}
-              <div className="h-32 w-full relative shrink-0 border-b border-orange-500/30 overflow-hidden">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] hover:scale-110"
-                  style={{ backgroundImage: "url('/crowd-bg.png')" }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+              <div className="h-20 w-full relative shrink-0 border-b border-orange-500/30 overflow-hidden bg-[#0A0015] flex flex-col justify-center items-center">
+                <Activity size={24} className="text-orange-500/50 mb-1" />
+                <div className="text-[10px] font-bold text-orange-400 tracking-widest">ANALYZING TELEMETRY</div>
                 <div className="absolute bottom-2 left-3 right-3 flex justify-between items-end">
                   <div className="text-xs font-bold text-white flex items-center gap-2 drop-shadow-md">
                     <AlertTriangle size={14} className="text-orange-400" /> East Gate Crush Risk

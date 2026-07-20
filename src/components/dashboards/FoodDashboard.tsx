@@ -4,6 +4,7 @@ import { useUISounds } from '@/hooks/useUISounds';
 
 export default function FoodDashboard() {
   const [time, setTime] = useState(0);
+  const [hoveredVendor, setHoveredVendor] = useState<string | null>(null);
   const { playHover, playClick } = useUISounds();
 
   useEffect(() => {
@@ -56,7 +57,17 @@ export default function FoodDashboard() {
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
-            <svg viewBox="0 0 1000 600" className="w-full h-full drop-shadow-2xl">
+            {hoveredVendor === 'vendorB' && (
+              <div className="absolute top-[35%] left-[25%] z-20 w-48 bg-black/80 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-fade-in pointer-events-none">
+                <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/food-vendor.png')" }}></div>
+                <div className="p-2">
+                  <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
+                  <div className="text-xs text-white">Critical Stock Depletion</div>
+                </div>
+              </div>
+            )}
+
+            <svg viewBox="0 0 1000 600" className="w-full h-full drop-shadow-2xl relative z-10">
               <defs>
                 <filter id="glowGreen">
                   <feGaussianBlur stdDeviation="5" result="blur" />
@@ -77,11 +88,17 @@ export default function FoodDashboard() {
                 <text x="20" y="90" fill="#a7f3d0" fontSize="12">Stock: 85% | Queue: 1.2m</text>
 
                 {/* Vendor B (Critical) */}
-                <rect x="0" y="200" width="200" height="100" rx="10" fill="#450a0a" stroke="#ef4444" strokeWidth="2" className="animate-pulse" />
-                <text x="20" y="230" fill="#fff" fontSize="16" fontWeight="bold">Vendor B (Hotdogs)</text>
-                <rect x="20" y="260" width="160" height="10" rx="5" fill="#0f172a" />
-                <rect x="20" y="260" width="40" height="10" rx="5" fill="#ef4444" filter="url(#glowRed)" />
-                <text x="20" y="290" fill="#fca5a5" fontSize="12" className="animate-pulse">Stock: 12% | Queue: 4.5m</text>
+                <g 
+                  onMouseEnter={() => { playHover(); setHoveredVendor('vendorB'); }} 
+                  onMouseLeave={() => setHoveredVendor(null)}
+                  className="cursor-crosshair"
+                >
+                  <rect x="0" y="200" width="200" height="100" rx="10" fill="#450a0a" stroke="#ef4444" strokeWidth="2" className="animate-pulse hover:fill-opacity-80 transition-all" />
+                  <text x="20" y="230" fill="#fff" fontSize="16" fontWeight="bold">Vendor B (Hotdogs)</text>
+                  <rect x="20" y="260" width="160" height="10" rx="5" fill="#0f172a" />
+                  <rect x="20" y="260" width="40" height="10" rx="5" fill="#ef4444" filter="url(#glowRed)" />
+                  <text x="20" y="290" fill="#fca5a5" fontSize="12" className="animate-pulse">Stock: 12% | Queue: 4.5m</text>
+                </g>
 
                 {/* Warehouse */}
                 <rect x="500" y="80" width="250" height="200" rx="15" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="2" />
@@ -129,12 +146,9 @@ export default function FoodDashboard() {
             <div className="bg-black/60 rounded-xl border border-yellow-500/50 shadow-[0_0_15px_rgba(234,179,8,0.1)] flex flex-col flex-1 overflow-hidden">
               
               {/* Situation-specific CGI Image strictly contained within the card */}
-              <div className="h-32 w-full relative shrink-0 border-b border-yellow-500/30 overflow-hidden">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] hover:scale-110"
-                  style={{ backgroundImage: "url('/food-bg.png')" }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+              <div className="h-20 w-full relative shrink-0 border-b border-yellow-500/30 overflow-hidden bg-[#0A0015] flex flex-col justify-center items-center">
+                <AlertCircle size={24} className="text-yellow-500/50 mb-1" />
+                <div className="text-[10px] font-bold text-yellow-400 tracking-widest">ANALYZING POS DATA</div>
                 <div className="absolute bottom-2 left-3 right-3 flex justify-between items-end">
                   <div className="text-xs font-bold text-white flex items-center gap-2 drop-shadow-md">
                     Vendor B Depletion
