@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-
-import React, { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
 
 export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }) {
