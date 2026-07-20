@@ -110,18 +110,6 @@ export default function CrowdDashboard() {
                 <circle cx="0" cy="145" r="4" fill="#eab308" filter="url(#glow)" className="animate-pulse" />
                 <text x="0" y="165" fill="#fef08a" fontSize="10" textAnchor="middle" letterSpacing="2">SOUTH WING</text>
                 <text x="0" y="140" fill="#fff" fontSize="14" textAnchor="middle" fontWeight="bold">84%</text>
-
-                {/* Sector East (Critical Crush Risk) */}
-                <g 
-                  onMouseEnter={() => { playHover(); setHoveredZone('east'); }} 
-                  onMouseLeave={() => setHoveredZone(null)}
-                  className="cursor-crosshair group"
-                >
-                  <path d="M 200 -120 A 200 120 0 0 1 200 120 L 280 170 A 280 170 0 0 0 280 -170 Z" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="2" filter="url(#glow)" className="group-hover:fill-opacity-40 transition-all" />
-                  <circle cx="240" cy="0" r="6" fill="#ef4444" filter="url(#heavy-glow)" className="animate-ping" />
-                  <text x="250" y="-20" fill="#fca5a5" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(90 250 -20)">EAST GATES</text>
-                  <text x="220" y="0" fill="#fff" fontSize="16" textAnchor="middle" fontWeight="bold">98%</text>
-                </g>
                 
                 {/* Sector West (Empty/Spare) */}
                 <path d="M -200 120 A 200 120 0 0 1 -200 -120 L -280 -170 A 280 170 0 0 0 -280 170 Z" fill="#10b981" fillOpacity="0.05" stroke="#10b981" strokeWidth="1" />
@@ -158,25 +146,37 @@ export default function CrowdDashboard() {
                   </g>
                 ))}
 
-              </g>
+                {/* --- HIGH Z-INDEX ELEMENTS --- */}
+                
+                {/* Sector East (Critical Crush Risk) */}
+                <g 
+                  onMouseEnter={() => { playHover(); setHoveredZone('east'); }} 
+                  onMouseLeave={() => setHoveredZone(null)}
+                  className="cursor-pointer group"
+                >
+                  <path d="M 200 -120 A 200 120 0 0 1 200 120 L 280 170 A 280 170 0 0 0 280 -170 Z" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="2" filter="url(#glow)" className="group-hover:fill-opacity-40 transition-all" />
+                  <circle cx="240" cy="0" r="6" fill="#ef4444" filter="url(#heavy-glow)" className="animate-ping" />
+                  <text x="250" y="-20" fill="#fca5a5" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(90 250 -20)">EAST GATES</text>
+                  <text x="220" y="0" fill="#fff" fontSize="16" textAnchor="middle" fontWeight="bold">98%</text>
 
-              {/* GLOBAL TOOLTIPS (Rendered at the end to stay on top) */}
-              
-              {/* Tooltip for East Gate: Opens to the far right, exactly where it belongs */}
-              {hoveredZone === 'east' && (
-                <foreignObject x="800" y="220" width="200" height="150" className="pointer-events-none animate-fade-in z-50">
-                  <div 
-                    className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer pointer-events-auto"
-                    onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-crowd-gate.png'); }}
-                  >
-                    <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-crowd-gate.png')" }}></div>
-                    <div className="p-2">
-                      <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
-                      <div className="text-xs text-white leading-tight">Critical Density Alert (Click to view)</div>
-                    </div>
-                  </div>
-                </foreignObject>
-              )}
+                  {/* Tooltip for East Gate: Opens to the far right */}
+                  {hoveredZone === 'east' && (
+                    <foreignObject x="300" y="-80" width="200" height="150" className="animate-fade-in cursor-pointer">
+                      <div 
+                        className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer hover:border-red-400 transition-colors"
+                        onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-crowd-gate.png'); }}
+                      >
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-crowd-gate.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
+                          <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
+                </g>
+
+              </g>
 
               <style jsx>{`
                 @keyframes dash {

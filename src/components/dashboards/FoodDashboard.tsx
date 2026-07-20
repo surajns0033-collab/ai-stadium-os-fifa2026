@@ -95,7 +95,7 @@ export default function FoodDashboard() {
                 <path d="M 400 250 L 500 50" stroke="#10b981" strokeWidth="2" strokeDasharray="10 5" fill="none" />
               </g>
 
-              {/* --- VENDOR BLOCKS --- */}
+              {/* --- VENDOR BLOCKS (Lower Z-Index first) --- */}
 
               {/* Vendor A: Burgers (Normal) */}
               <g transform="translate(50, 70)">
@@ -104,37 +104,6 @@ export default function FoodDashboard() {
                 <rect x="20" y="45" width="160" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="45" width="130" height="8" rx="4" fill="#10b981" filter="url(#glowGreen)" />
                 <text x="20" y="75" fill="#a7f3d0" fontSize="11">Stock: 82% | Queue: Normal</text>
-              </g>
-
-              {/* Vendor B: Hotdogs (CRITICAL) */}
-              <g 
-                transform="translate(50, 430)"
-                onMouseEnter={() => { playHover(); setHoveredVendor('vendorB'); }} 
-                onMouseLeave={() => setHoveredVendor(null)}
-                className="cursor-crosshair group"
-              >
-                <rect x="0" y="0" width="200" height="100" rx="10" fill="#450a0a" stroke="#ef4444" strokeWidth="3" className="animate-pulse group-hover:fill-opacity-80 transition-all" filter="url(#glowRed)" />
-                <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Hotdog Express (South)</text>
-                <rect x="20" y="55" width="160" height="8" rx="4" fill="#0f172a" />
-                <rect x="20" y="55" width="30" height="8" rx="4" fill="#ef4444" />
-                <text x="20" y="85" fill="#fca5a5" fontSize="12" fontWeight="bold" className="animate-pulse">STOCK CRITICAL: 12%</text>
-                
-                {/* Delivery cart moving to vendor B */}
-                <circle cx="150" cy="-30" r="6" fill="#eab308" filter="url(#glowGreen)" className="animate-ping" />
-              </g>
-
-              {/* Vendor C: Beverages / Bar (High Volume) */}
-              <g 
-                transform="translate(750, 100)"
-                onMouseEnter={() => { playHover(); setHoveredVendor('beverage'); }} 
-                onMouseLeave={() => setHoveredVendor(null)}
-                className="cursor-crosshair group"
-              >
-                <rect x="0" y="0" width="220" height="100" rx="10" fill="#2e1065" stroke="#a855f7" strokeWidth="2" className="group-hover:fill-opacity-80 transition-all" />
-                <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Neon Bar & Beverages</text>
-                <rect x="20" y="55" width="180" height="8" rx="4" fill="#0f172a" />
-                <rect x="20" y="55" width="160" height="8" rx="4" fill="#a855f7" filter="url(#glowPurple)" />
-                <text x="20" y="85" fill="#d8b4fe" fontSize="11">Stock: 90% | High Revenue</text>
               </g>
 
               {/* Vendor D: Pizza (Steady) */}
@@ -164,41 +133,70 @@ export default function FoodDashboard() {
                 <circle cx="200" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
               </g>
 
-              {/* GLOBAL TOOLTIPS (Rendered at the very end so they are ALWAYS on top) */}
-              
-              {/* Tooltip for Vendor B: Opens BELOW the vendor to avoid VIP dining */}
-              {hoveredVendor === 'vendorB' && (
-                <foreignObject x="50" y="540" width="200" height="160" className="pointer-events-none animate-fade-in">
-                  <div 
-                    className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer pointer-events-auto"
-                    onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-hotdog-vendor.png'); }}
-                  >
-                    <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
-                    <div className="p-2">
-                      <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
-                      <div className="text-xs text-white leading-tight">Critical Stock Depletion (Click to view)</div>
-                      <div className="text-[9px] text-slate-400 mt-1">Queue: 4.5m | Demand: HIGH</div>
-                    </div>
-                  </div>
-                </foreignObject>
-              )}
+              {/* --- HIGH Z-INDEX VENDOR BLOCKS (WITH TOOLTIPS) --- */}
 
-              {/* Tooltip for Beverage: Opens to the LEFT of the vendor */}
-              {hoveredVendor === 'beverage' && (
-                <foreignObject x="540" y="100" width="200" height="160" className="pointer-events-none animate-fade-in">
-                  <div 
-                    className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)] cursor-pointer pointer-events-auto"
-                    onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-beverage.png'); }}
-                  >
-                    <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
-                    <div className="p-2">
-                      <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
-                      <div className="text-xs text-white leading-tight">High Volume Sales (Click to view)</div>
-                      <div className="text-[9px] text-slate-400 mt-1">Queue: 1.2m | Flow: STEADY</div>
+              {/* Vendor B: Hotdogs (CRITICAL) - Placed at end for high z-index */}
+              <g 
+                transform="translate(50, 430)"
+                onMouseEnter={() => { playHover(); setHoveredVendor('vendorB'); }} 
+                onMouseLeave={() => setHoveredVendor(null)}
+                className="cursor-pointer group"
+              >
+                <rect x="0" y="0" width="200" height="100" rx="10" fill="#450a0a" stroke="#ef4444" strokeWidth="3" className="animate-pulse group-hover:fill-opacity-80 transition-all" filter="url(#glowRed)" />
+                <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Hotdog Express (South)</text>
+                <rect x="20" y="55" width="160" height="8" rx="4" fill="#0f172a" />
+                <rect x="20" y="55" width="30" height="8" rx="4" fill="#ef4444" />
+                <text x="20" y="85" fill="#fca5a5" fontSize="12" fontWeight="bold" className="animate-pulse">STOCK CRITICAL: 12%</text>
+                
+                {/* Delivery cart moving to vendor B */}
+                <circle cx="150" cy="-30" r="6" fill="#eab308" filter="url(#glowGreen)" className="animate-ping" />
+
+                {/* Tooltip for Vendor B: Opens BELOW the vendor to avoid VIP dining */}
+                {hoveredVendor === 'vendorB' && (
+                  <foreignObject x="0" y="110" width="200" height="160" className="animate-fade-in cursor-pointer">
+                    <div 
+                      className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer hover:border-red-400 transition-colors"
+                      onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-hotdog-vendor.png'); }}
+                    >
+                      <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
+                      <div className="p-2">
+                        <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
+                        <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                      </div>
                     </div>
-                  </div>
-                </foreignObject>
-              )}
+                  </foreignObject>
+                )}
+              </g>
+
+              {/* Vendor C: Beverages / Bar (High Volume) - Placed at end for high z-index */}
+              <g 
+                transform="translate(750, 100)"
+                onMouseEnter={() => { playHover(); setHoveredVendor('beverage'); }} 
+                onMouseLeave={() => setHoveredVendor(null)}
+                className="cursor-pointer group"
+              >
+                <rect x="0" y="0" width="220" height="100" rx="10" fill="#2e1065" stroke="#a855f7" strokeWidth="2" className="group-hover:fill-opacity-80 transition-all" />
+                <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Neon Bar & Beverages</text>
+                <rect x="20" y="55" width="180" height="8" rx="4" fill="#0f172a" />
+                <rect x="20" y="55" width="160" height="8" rx="4" fill="#a855f7" filter="url(#glowPurple)" />
+                <text x="20" y="85" fill="#d8b4fe" fontSize="11">Stock: 90% | High Revenue</text>
+
+                {/* Tooltip for Beverage: Opens to the LEFT of the vendor */}
+                {hoveredVendor === 'beverage' && (
+                  <foreignObject x="-210" y="0" width="200" height="160" className="animate-fade-in cursor-pointer">
+                    <div 
+                      className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)] cursor-pointer hover:border-purple-400 transition-colors"
+                      onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-beverage.png'); }}
+                    >
+                      <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
+                      <div className="p-2">
+                        <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
+                        <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                      </div>
+                    </div>
+                  </foreignObject>
+                )}
+              </g>
 
               <style jsx>{`
                 @keyframes dash {
