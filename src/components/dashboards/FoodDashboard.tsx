@@ -142,6 +142,9 @@ export default function FoodDashboard() {
                 onMouseLeave={() => setHoveredVendor(null)}
                 className="cursor-pointer group"
               >
+                {/* Invisible bridge to prevent mouseleave when moving to tooltip */}
+                {hoveredVendor === 'vendorB' && <rect x="0" y="0" width="200" height="280" fill="transparent" />}
+                
                 <rect x="0" y="0" width="200" height="100" rx="10" fill="#450a0a" stroke="#ef4444" strokeWidth="3" className="animate-pulse group-hover:fill-opacity-80 transition-all" filter="url(#glowRed)" />
                 <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Hotdog Express (South)</text>
                 <rect x="20" y="55" width="160" height="8" rx="4" fill="#0f172a" />
@@ -153,18 +156,19 @@ export default function FoodDashboard() {
 
                 {/* Tooltip for Vendor B: Opens BELOW the vendor to avoid VIP dining */}
                 {hoveredVendor === 'vendorB' && (
-                  <foreignObject x="0" y="110" width="200" height="160" className="animate-fade-in cursor-pointer">
-                    <div 
-                      className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)] cursor-pointer hover:border-red-400 transition-colors"
-                      onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-hotdog-vendor.png'); }}
-                    >
-                      <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
-                      <div className="p-2">
-                        <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
-                        <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                  <>
+                    <foreignObject x="0" y="110" width="200" height="160" className="animate-fade-in pointer-events-none">
+                      <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
+                          <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                        </div>
                       </div>
-                    </div>
-                  </foreignObject>
+                    </foreignObject>
+                    {/* Invisible clickable rect exactly over the tooltip */}
+                    <rect x="0" y="110" width="200" height="160" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-hotdog-vendor.png'); }} />
+                  </>
                 )}
               </g>
 
@@ -175,6 +179,9 @@ export default function FoodDashboard() {
                 onMouseLeave={() => setHoveredVendor(null)}
                 className="cursor-pointer group"
               >
+                {/* Invisible bridge to prevent mouseleave when moving to tooltip */}
+                {hoveredVendor === 'beverage' && <rect x="-210" y="0" width="430" height="160" fill="transparent" />}
+
                 <rect x="0" y="0" width="220" height="100" rx="10" fill="#2e1065" stroke="#a855f7" strokeWidth="2" className="group-hover:fill-opacity-80 transition-all" />
                 <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Neon Bar & Beverages</text>
                 <rect x="20" y="55" width="180" height="8" rx="4" fill="#0f172a" />
@@ -183,18 +190,19 @@ export default function FoodDashboard() {
 
                 {/* Tooltip for Beverage: Opens to the LEFT of the vendor */}
                 {hoveredVendor === 'beverage' && (
-                  <foreignObject x="-210" y="0" width="200" height="160" className="animate-fade-in cursor-pointer">
-                    <div 
-                      className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)] cursor-pointer hover:border-purple-400 transition-colors"
-                      onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-beverage.png'); }}
-                    >
-                      <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
-                      <div className="p-2">
-                        <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
-                        <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                  <>
+                    <foreignObject x="-210" y="0" width="200" height="160" className="animate-fade-in pointer-events-none">
+                      <div className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
+                          <div className="text-xs text-white leading-tight underline">Click to expand</div>
+                        </div>
                       </div>
-                    </div>
-                  </foreignObject>
+                    </foreignObject>
+                    {/* Invisible clickable rect exactly over the tooltip */}
+                    <rect x="-210" y="0" width="200" height="160" fill="transparent" className="cursor-pointer" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/natural-beverage.png'); }} />
+                  </>
                 )}
               </g>
 
