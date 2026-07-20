@@ -120,19 +120,6 @@ export default function CrowdDashboard() {
                   <circle cx="240" cy="0" r="6" fill="#ef4444" filter="url(#heavy-glow)" className="animate-ping" />
                   <text x="250" y="-20" fill="#fca5a5" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(90 250 -20)">EAST GATES</text>
                   <text x="220" y="0" fill="#fff" fontSize="16" textAnchor="middle" fontWeight="bold">98%</text>
-
-                  {/* Hover Tooltip perfectly aligned next to East Gate */}
-                  {hoveredZone === 'east' && (
-                    <foreignObject x="300" y="-80" width="200" height="150" className="pointer-events-none animate-fade-in">
-                      <div className="w-full h-full bg-black/90 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-crowd-gate.png')" }}></div>
-                        <div className="p-2">
-                          <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
-                          <div className="text-xs text-white leading-tight">Critical Density Alert</div>
-                        </div>
-                      </div>
-                    </foreignObject>
-                  )}
                 </g>
                 
                 {/* Sector West (Empty/Spare) */}
@@ -171,6 +158,21 @@ export default function CrowdDashboard() {
                 ))}
 
               </g>
+
+              {/* GLOBAL TOOLTIPS (Rendered at the end to stay on top) */}
+              
+              {/* Tooltip for East Gate: Opens to the far right, exactly where it belongs */}
+              {hoveredZone === 'east' && (
+                <foreignObject x="800" y="220" width="200" height="150" className="pointer-events-none animate-fade-in z-50">
+                  <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                    <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-crowd-gate.png')" }}></div>
+                    <div className="p-2">
+                      <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
+                      <div className="text-xs text-white leading-tight">Critical Density Alert</div>
+                    </div>
+                  </div>
+                </foreignObject>
+              )}
 
               <style jsx>{`
                 @keyframes dash {

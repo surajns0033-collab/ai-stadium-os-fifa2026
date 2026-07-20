@@ -120,20 +120,6 @@ export default function FoodDashboard() {
                 
                 {/* Delivery cart moving to vendor B */}
                 <circle cx="150" cy="-30" r="6" fill="#eab308" filter="url(#glowGreen)" className="animate-ping" />
-                
-                {/* Hover Tooltip perfectly aligned next to vendor */}
-                {hoveredVendor === 'vendorB' && (
-                  <foreignObject x="220" y="-30" width="200" height="160" className="pointer-events-none animate-fade-in">
-                    <div className="w-full h-full bg-black/90 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-                      <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
-                      <div className="p-2">
-                        <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
-                        <div className="text-xs text-white leading-tight">Critical Stock Depletion</div>
-                        <div className="text-[9px] text-slate-400 mt-1">Queue: 4.5m | Demand: HIGH</div>
-                      </div>
-                    </div>
-                  </foreignObject>
-                )}
               </g>
 
               {/* Vendor C: Beverages / Bar (High Volume) */}
@@ -148,20 +134,6 @@ export default function FoodDashboard() {
                 <rect x="20" y="55" width="180" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="55" width="160" height="8" rx="4" fill="#a855f7" filter="url(#glowPurple)" />
                 <text x="20" y="85" fill="#d8b4fe" fontSize="11">Stock: 90% | High Revenue</text>
-
-                {/* Hover Tooltip perfectly aligned next to vendor */}
-                {hoveredVendor === 'beverage' && (
-                  <foreignObject x="-210" y="-30" width="200" height="160" className="pointer-events-none animate-fade-in">
-                    <div className="w-full h-full bg-black/90 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)]">
-                      <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
-                      <div className="p-2">
-                        <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
-                        <div className="text-xs text-white leading-tight">High Volume Sales</div>
-                        <div className="text-[9px] text-slate-400 mt-1">Queue: 1.2m | Flow: STEADY</div>
-                      </div>
-                    </div>
-                  </foreignObject>
-                )}
               </g>
 
               {/* Vendor D: Pizza (Steady) */}
@@ -190,6 +162,36 @@ export default function FoodDashboard() {
                 <circle cx="20" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
                 <circle cx="200" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
               </g>
+
+              {/* GLOBAL TOOLTIPS (Rendered at the very end so they are ALWAYS on top) */}
+              
+              {/* Tooltip for Vendor B: Opens BELOW the vendor to avoid VIP dining */}
+              {hoveredVendor === 'vendorB' && (
+                <foreignObject x="50" y="540" width="200" height="160" className="pointer-events-none animate-fade-in">
+                  <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                    <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-hotdog-vendor.png')" }}></div>
+                    <div className="p-2">
+                      <div className="text-[10px] font-bold text-red-400">CONCESSION CAM 12</div>
+                      <div className="text-xs text-white leading-tight">Critical Stock Depletion</div>
+                      <div className="text-[9px] text-slate-400 mt-1">Queue: 4.5m | Demand: HIGH</div>
+                    </div>
+                  </div>
+                </foreignObject>
+              )}
+
+              {/* Tooltip for Beverage: Opens to the LEFT of the vendor */}
+              {hoveredVendor === 'beverage' && (
+                <foreignObject x="540" y="100" width="200" height="160" className="pointer-events-none animate-fade-in">
+                  <div className="w-full h-full bg-black/95 border border-purple-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+                    <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-beverage.png')" }}></div>
+                    <div className="p-2">
+                      <div className="text-[10px] font-bold text-purple-400">BAR CAM 04</div>
+                      <div className="text-xs text-white leading-tight">High Volume Sales</div>
+                      <div className="text-[9px] text-slate-400 mt-1">Queue: 1.2m | Flow: STEADY</div>
+                    </div>
+                  </div>
+                </foreignObject>
+              )}
 
               <style jsx>{`
                 @keyframes dash {
