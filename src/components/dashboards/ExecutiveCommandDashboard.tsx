@@ -1,140 +1,189 @@
-"use client";
-import React, { useState } from 'react';
-import { Users, ShieldAlert, Sparkles, TrendingUp } from 'lucide-react';
-import DashboardWrapper from './DashboardWrapper';
+import React, { useState, useEffect } from 'react';
+import { Target, TrendingUp, DollarSign, Users, ShieldAlert, BarChart3, Activity, Map, ArrowUpRight, Zap } from 'lucide-react';
 
 export default function ExecutiveCommandDashboard() {
-  const [selectedScore, setSelectedScore] = useState<string | null>(null);
+  const [time, setTime] = useState(0);
 
-  const insights = [
-    { id: '1', message: "Overall stadium health is stable. Metro Line 2 surge predicted in 15 mins.", priority: "medium" as const, time: "Just now" },
-    { id: '2', message: "Gate B occupancy reaching 92%. Recommend redirecting to Gate D.", priority: "high" as const, time: "2m ago" },
-    { id: '3', message: "Food Court 3 inventory requires restocking in 30 minutes.", priority: "low" as const, time: "12m ago" }
-  ];
-
-  const scores = [
-    { name: 'Crowd', value: 95, status: 'Good', colorClass: 'text-emerald-400', ringClass: 'ring-emerald-500/40', bgClass: 'bg-emerald-500/10' },
-    { name: 'Transport', value: 92, status: 'Good', colorClass: 'text-yellow-400', ringClass: 'ring-yellow-500/40', bgClass: 'bg-yellow-500/10' },
-    { name: 'Food & Bev', value: 98, status: 'Excellent', colorClass: 'text-emerald-400', ringClass: 'ring-emerald-500/40', bgClass: 'bg-emerald-500/10' },
-    { name: 'Security', value: 99, status: 'Excellent', colorClass: 'text-emerald-400', ringClass: 'ring-emerald-500/40', bgClass: 'bg-emerald-500/10' },
-    { name: 'Medical', value: 97, status: 'Excellent', colorClass: 'text-emerald-400', ringClass: 'ring-emerald-500/40', bgClass: 'bg-emerald-500/10' },
-    { name: 'Access', value: 96, status: 'Good', colorClass: 'text-emerald-400', ringClass: 'ring-emerald-500/40', bgClass: 'bg-emerald-500/10' },
-    { name: 'Sustain.', value: 91, status: 'Good', colorClass: 'text-yellow-400', ringClass: 'ring-yellow-500/40', bgClass: 'bg-yellow-500/10' },
-    { name: 'Infra', value: 98, status: 'Excellent', colorClass: 'text-emerald-400', ringClass: 'ring-emerald-500/40', bgClass: 'bg-emerald-500/10' },
-    { name: 'Weather', value: 100, status: 'Excellent', colorClass: 'text-blue-400', ringClass: 'ring-blue-500/40', bgClass: 'bg-blue-500/10' },
-  ];
-
-  const selected = scores.find(s => s.name === selectedScore);
-
-  const kpis = [
-    { label: 'Crowd Density', current: '73%', prediction: '89% in 15m', trend: 'up', reason: 'Metro Line 2 arrival imminent (800 passengers)', recommendation: 'Deploy 5 volunteers to Gate C.', confidence: 97 },
-    { label: 'Avg Queue Time', current: '4.2m', prediction: '6.5m in 20m', trend: 'up', reason: 'Peak half-time demand approaching', recommendation: 'Open 3 additional food stalls in Sector North.', confidence: 94 },
-    { label: 'Medical Risk', current: 'Low', prediction: 'Medium in 30m', trend: 'up', reason: 'Temperature 32°C, high UV index', recommendation: 'Pre-position water stations in Sectors D, E.', confidence: 88 },
-    { label: 'Gate B Throughput', current: '84%', prediction: '92% in 10m', trend: 'up', reason: 'Scanner #4 marginal performance', recommendation: 'Dispatch maintenance to Gate B Scanner #4.', confidence: 96 },
-  ];
+  useEffect(() => {
+    const interval = setInterval(() => setTime(t => t + 1), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <DashboardWrapper
-      title="Executive Command"
-      subtitle="Comprehensive AI Operational Overview"
-      insights={insights}
-    >
-      {/* Top row: Health Score + AI Summary */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-
-        {/* Overall Health Score */}
-        <div className="glass-panel p-6 border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-xl flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-emerald-400/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
-          <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-3 relative z-10">Overall Stadium Health</div>
-          <div className="text-7xl font-black text-white leading-none mb-1 relative z-10 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] group-hover:scale-105 transition-transform duration-500">96</div>
-          <div className="text-lg text-slate-400 font-medium mb-2">/100</div>
-          <div className="flex items-center gap-1 text-sm text-emerald-400 font-bold">
-            <TrendingUp size={15} /> +2% since kickoff
-          </div>
-          <div className="mt-3 px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/30">EXCELLENT</div>
+    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+      <div className="flex justify-between items-end shrink-0 z-10">
+        <div>
+          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3">
+            Executive Command & Control
+            <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/30">Live Global View</span>
+          </h2>
+          <p className="text-slate-400 text-sm mt-1">Multi-stadium tournament KPIs, financial overview, and predictive operational health</p>
         </div>
-
-        {/* AI Operational Summary */}
-        <div className="lg:col-span-2 glass-panel p-6 border border-blue-500/30 bg-blue-950/20 backdrop-blur-xl relative overflow-hidden group hover:border-blue-400/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
-          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-400 to-purple-500 rounded"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-blue-400/20 transition-all duration-500"></div>
-          <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-4 flex items-center gap-2 pl-2 relative z-10">
-            <Sparkles size={14} className="animate-pulse" /> AI Operational Summary
-          </h3>
-          <div className="grid grid-cols-2 gap-4 pl-2">
-            <div>
-              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Current Situation</div>
-              <p className="text-sm text-white font-medium mb-3 leading-relaxed">All sectors stable. Rapid ingress underway at North Concourse. No critical incidents active.</p>
-              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Major Risk</div>
-              <p className="text-sm text-red-400 font-medium flex items-center gap-1"><ShieldAlert size={13} /> 5% risk of Gate B bottleneck in 15 mins.</p>
-            </div>
-            <div>
-              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Immediate Action</div>
-              <p className="text-sm text-yellow-400 font-medium mb-3 flex items-center gap-1"><Users size={13} /> Reallocate 5 volunteers to Gate B.</p>
-              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Next 15 Minutes</div>
-              <p className="text-sm text-purple-400 font-medium">Metro Line 2 arriving with 800 passengers. Prepare Gate C overflow.</p>
-            </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-2 text-right">
+            <div className="text-[10px] text-slate-500 font-bold uppercase">Tournament Revenue</div>
+            <div className="text-xl font-black text-emerald-400">$14.2M <span className="text-xs text-emerald-400 font-normal">↑ 4%</span></div>
+          </div>
+          <div className="bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-2 text-right">
+            <div className="text-[10px] text-slate-500 font-bold uppercase">Total Attendance</div>
+            <div className="text-xl font-black text-white">218,450</div>
           </div>
         </div>
       </div>
 
-      {/* Domain Health Scores — large, readable cards */}
-      <div className="glass-panel p-6 border border-slate-700/50 mb-6 bg-slate-900/50 backdrop-blur-xl rounded-3xl">
-        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Domain Health Scores — Click any to inspect</h3>
-        <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3">
-          {scores.map(s => (
-            <div
-              key={s.name}
-              onClick={() => setSelectedScore(selectedScore === s.name ? null : s.name)}
-              className={`flex flex-col items-center justify-center p-3 rounded-2xl border cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_16px_-6px_currentColor] hover:-translate-y-1 ${s.bgClass} ${selectedScore === s.name ? `ring-2 ${s.ringClass} border-transparent shadow-[0_0_20px_currentColor] scale-105` : 'border-slate-700/50 hover:border-slate-400/50'} text-[color:var(--tw-shadow-color)]`}
-              style={{ '--tw-shadow-color': s.colorClass === 'text-emerald-400' ? 'rgba(52,211,153,0.3)' : s.colorClass === 'text-yellow-400' ? 'rgba(251,191,36,0.3)' : 'rgba(96,165,250,0.3)' } as React.CSSProperties}
-            >
-              <div className={`text-2xl font-black leading-none ${s.colorClass}`}>{s.value}</div>
-              <div className="text-[9px] text-slate-300 mt-1.5 uppercase tracking-wider text-center font-bold leading-tight">{s.name}</div>
-              <div className={`text-[8px] mt-1 ${s.colorClass} opacity-70`}>{s.status}</div>
-            </div>
-          ))}
+      <div className="flex-1 flex gap-6 min-h-0 z-10">
+        
+        {/* Main Operational Visualization (Multi-Stadium Overview Map) */}
+        <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+          
+          <div className="flex justify-between items-center mb-4 z-10">
+             <h3 className="font-bold text-lg flex items-center gap-2"><Map size={18} className="text-indigo-400"/> Multi-Stadium Operations Grid</h3>
+             <div className="flex gap-2">
+                <span className="px-2 py-1 bg-slate-800 text-xs font-bold rounded">North America</span>
+             </div>
+          </div>
+          
+          <div className="flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
+            <svg viewBox="0 0 1000 600" className="w-full h-full">
+              
+              {/* Map Base (Abstract Continental Shape) */}
+              <path d="M 200 100 Q 400 50 600 100 T 900 200 Q 850 400 700 500 T 300 500 Q 150 400 100 250 Z" fill="#0f172a" stroke="#1e293b" strokeWidth="2" opacity="0.5" />
+              
+              {/* Stadium 1: MetLife (New York) - Warning State */}
+              <g transform="translate(750, 250)">
+                 <circle cx="0" cy="0" r="40" fill="none" stroke="#eab308" strokeWidth="1" strokeDasharray="4 4" className="animate-[spin_10s_linear_infinite]" />
+                 <circle cx="0" cy="0" r="15" fill="#eab308" fillOpacity="0.2" className="animate-ping" />
+                 <circle cx="0" cy="0" r="8" fill="#eab308" />
+                 <rect x="25" y="-30" width="120" height="60" rx="8" fill="#1e293b" stroke="#eab308" strokeWidth="1" />
+                 <text x="35" y="-10" fill="#fff" fontSize="12" fontWeight="bold">New York</text>
+                 <text x="35" y="5" fill="#eab308" fontSize="10">Match Active</text>
+                 <text x="35" y="20" fill="#94a3b8" fontSize="10">82,000 Fans</text>
+              </g>
+
+              {/* Stadium 2: Azteca (Mexico City) - Good State */}
+              <g transform="translate(450, 450)">
+                 <circle cx="0" cy="0" r="30" fill="none" stroke="#10b981" strokeWidth="1" strokeDasharray="4 4" className="animate-[spin_10s_linear_infinite]" />
+                 <circle cx="0" cy="0" r="8" fill="#10b981" />
+                 <rect x="20" y="-20" width="120" height="40" rx="8" fill="#1e293b" stroke="#10b981" strokeWidth="1" />
+                 <text x="30" y="-5" fill="#fff" fontSize="12" fontWeight="bold">Mexico City</text>
+                 <text x="30" y="10" fill="#10b981" fontSize="10">Pre-Match (T-45m)</text>
+              </g>
+
+              {/* Stadium 3: SoFi (Los Angeles) - Good State */}
+              <g transform="translate(250, 300)">
+                 <circle cx="0" cy="0" r="30" fill="none" stroke="#10b981" strokeWidth="1" strokeDasharray="4 4" className="animate-[spin_10s_linear_infinite]" />
+                 <circle cx="0" cy="0" r="8" fill="#10b981" />
+                 <rect x="-140" y="-20" width="120" height="40" rx="8" fill="#1e293b" stroke="#10b981" strokeWidth="1" />
+                 <text x="-130" y="-5" fill="#fff" fontSize="12" fontWeight="bold">Los Angeles</text>
+                 <text x="-130" y="10" fill="#10b981" fontSize="10">Doors Opening</text>
+              </g>
+
+              {/* Data Connections / Network Flow */}
+              <path d="M 250 300 Q 350 400 450 450" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="10 5" className="animate-[dash_2s_linear_infinite]" opacity="0.5" />
+              <path d="M 450 450 Q 600 350 750 250" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="10 5" className="animate-[dash_2s_linear_infinite_reverse]" opacity="0.5" />
+
+              <style jsx>{`
+                @keyframes dash {
+                  to { stroke-dashoffset: -30; }
+                }
+              `}</style>
+            </svg>
+          </div>
+          
+          <div className="grid grid-cols-4 gap-4 mt-4">
+             <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
+               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Total F&B Rev</div>
+               <div className="text-lg font-black text-white">$4.8M</div>
+             </div>
+             <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
+               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Merch Rev</div>
+               <div className="text-lg font-black text-white">$2.1M</div>
+             </div>
+             <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
+               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Energy Offset</div>
+               <div className="text-lg font-black text-emerald-400">14.2MWh</div>
+             </div>
+             <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
+               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">System Health</div>
+               <div className="text-lg font-black text-emerald-400">99.98%</div>
+             </div>
+          </div>
         </div>
 
-        {/* Expanded detail for selected score */}
-        {selected && (
-          <div className={`mt-3 p-3 rounded-xl border ${selected.bgClass} ${selected.ringClass.replace('ring-', 'border-')} flex items-center gap-3`}>
-            <div className={`text-4xl font-black ${selected.colorClass}`}>{selected.value}<span className="text-lg text-slate-500">/100</span></div>
-            <div>
-              <div className="font-bold text-white">{selected.name} Domain</div>
-              <div className={`text-sm ${selected.colorClass}`}>{selected.status} — All subsystems nominal. AI monitoring active.</div>
-            </div>
-          </div>
-        )}
-      </div>
+        {/* AI Executive Briefing & Predictive Insights */}
+        <div className="flex-1 flex flex-col gap-4 min-w-[320px]">
+          
+          {/* AI Executive Briefing */}
+          <div className="glass-panel p-5 rounded-2xl border border-indigo-500/30 bg-indigo-900/10">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><Zap size={14} className="text-indigo-400" /> AI Executive Briefing</h3>
+            
+            <div className="space-y-4">
+              <div className="bg-slate-900/80 rounded-xl p-4 border border-indigo-500/30">
+                <div className="flex justify-between items-center mb-2">
+                  <div className="text-sm font-bold text-white flex items-center gap-2">
+                    <TrendingUp size={14} className="text-indigo-400" /> Revenue Opportunity
+                  </div>
+                  <span className="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded">High Impact</span>
+                </div>
+                <p className="text-xs text-slate-400 mb-3">AI predicts a 15% surge in merch sales in NY Stadium at halftime due to cooler weather. Suggest deploying mobile POS units to Sectors 200-210.</p>
+                <div className="flex gap-2">
+                  <button className="flex-1 bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/50 text-indigo-400 text-xs py-1.5 rounded-lg transition-colors font-bold flex justify-center items-center gap-1">
+                    Authorize POS Deploy <ArrowUpRight size={12}/>
+                  </button>
+                </div>
+              </div>
 
-      {/* KPI Cards — 2×2 grid, large readable text */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {kpis.map((kpi, idx) => (
-          <div key={idx} className="glass-panel p-6 border border-slate-700/50 rounded-3xl bg-slate-900/50 backdrop-blur-xl hover:border-slate-500 transition-all duration-300 hover:shadow-[0_12px_24px_-12px_rgba(255,255,255,0.1)] group cursor-pointer hover:-translate-y-1">
-            <div className="flex justify-between items-start mb-3">
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{kpi.label}</div>
-              <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center bg-emerald-500/10 shrink-0">
-                <span className="text-xs font-black text-emerald-400">{kpi.confidence}%</span>
-              </div>
-            </div>
-            <div className="flex items-end gap-3 mb-3">
-              <div className="text-3xl font-black text-white">{kpi.current}</div>
-              <div className="flex items-center gap-1 px-2 py-1 bg-red-500/10 border border-red-500/20 rounded-full text-xs text-red-400 font-bold mb-0.5">
-                <TrendingUp size={11} /> {kpi.prediction}
-              </div>
-            </div>
-            <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-800 space-y-1.5">
-              <div className="text-xs text-slate-400">
-                <span className="text-slate-500 font-bold">WHY:</span> <span className="text-slate-300">{kpi.reason}</span>
-              </div>
-              <div className="text-xs text-slate-400">
-                <span className="text-slate-500 font-bold">ACTION:</span> <span className="text-blue-400 font-medium">{kpi.recommendation}</span>
+              <div className="bg-slate-900/80 rounded-xl p-4 border border-orange-500/30">
+                <div className="flex justify-between items-center mb-2">
+                  <div className="text-sm font-bold text-white flex items-center gap-2">
+                    <ShieldAlert size={14} className="text-orange-400" /> Operational Warning
+                  </div>
+                </div>
+                <p className="text-xs text-slate-400">Transit delays in Los Angeles may cause a late influx of fans (T-20m). Automated gate redirection protocol is ready to execute.</p>
               </div>
             </div>
           </div>
-        ))}
+
+          {/* Tournament Overview KPIs */}
+          <div className="glass-panel p-5 rounded-2xl border border-slate-700/50 flex-1">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><BarChart3 size={14} className="text-blue-400" /> Sustainability & Financials</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-slate-300">Revenue to Target</span>
+                  <span className="text-emerald-400 font-bold">104%</span>
+                </div>
+                <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div className="bg-emerald-500 h-full rounded-full" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+              
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-slate-300">Net Zero Carbon Target Progress</span>
+                  <span className="text-blue-400 font-bold">88%</span>
+                </div>
+                <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div className="bg-blue-500 h-full rounded-full" style={{ width: '88%' }}></div>
+                </div>
+              </div>
+              
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-slate-300">Operational Cost Efficiency</span>
+                  <span className="text-indigo-400 font-bold">94%</span>
+                </div>
+                <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div className="bg-indigo-500 h-full rounded-full" style={{ width: '94%' }}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </DashboardWrapper>
+    </div>
   );
 }

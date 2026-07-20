@@ -25,6 +25,8 @@ const VolunteerDashboard = dynamic(() => import('../dashboards/VolunteerDashboar
 const WashroomDashboard = dynamic(() => import('../dashboards/WashroomDashboard'), { ssr: false });
 const VenueOperationsDashboard = dynamic(() => import('../dashboards/VenueOperationsDashboard'), { ssr: false });
 const LanguageCenterDashboard = dynamic(() => import('../dashboards/LanguageCenterDashboard'), { ssr: false });
+const AIOperationsDashboard = dynamic(() => import('../dashboards/AIOperationsDashboard'), { ssr: false });
+const NavigationDashboard = dynamic(() => import('../dashboards/NavigationDashboard'), { ssr: false });
 const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
 const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
 const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
@@ -165,6 +167,14 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
        return <StadiumDashboard />;
     }
 
+    if (activeTab === 'AI Operations') {
+       return <AIOperationsDashboard />;
+    }
+
+    if (activeTab === 'Navigation') {
+       return <NavigationDashboard />;
+    }
+
     if (activeTab === 'Football Operations') {
        return <FootballOperationsDashboard />;
     }
@@ -279,6 +289,8 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
     'Washrooms',
     'Venue Operations',
     'Language Center',
+    'AI Operations',
+    'Navigation',
     'Data Center',
     'Digital Twin',
     'Platform Overview',

@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { LayoutDashboard, Users, DoorOpen, Utensils, Droplets, Activity, ShieldAlert, Train, Leaf, Navigation, Map, LineChart, FileText, Settings, HeartPulse, Building2, Languages, Network, Database, Car } from 'lucide-react';
+import { LayoutDashboard, Users, DoorOpen, Utensils, Droplets, Activity, ShieldAlert, Train, Leaf, Navigation, Map, LineChart, FileText, Settings, HeartPulse, Building2, Languages, Network, Database, Car, Brain } from 'lucide-react';
 import { useAppContext } from '@/context/AppContext';
 
 const MENU_ITEMS = [
@@ -22,7 +22,9 @@ const DOMAINS = [
   { id: 'Security', label: 'Security & Threat', icon: ShieldAlert },
   { id: 'Food', label: 'Food & Beverage', icon: Utensils },
   { id: 'Washrooms', label: 'Washroom Status', icon: Droplets },
-  { id: 'Stadium', label: 'Stadium Dashboard', icon: Navigation },
+  { id: 'Stadium', label: 'Stadium Dashboard', icon: Building2 },
+  { id: 'Navigation', label: 'Navigation Dashboard', icon: Navigation },
+  { id: 'AI Operations', label: 'AI Operations', icon: Brain },
   { id: 'Football Operations', label: 'Football Operations', icon: Activity },
   { id: 'Sustainability', label: 'Sustainability', icon: Leaf },
   { id: 'Accessibility', label: 'Accessibility', icon: Activity },
@@ -50,6 +52,8 @@ const SIDEBAR_TRANSLATIONS: Record<string, Record<string, string>> = {
     'Food & Beverage': 'Alimentos y Bebidas',
     'Washroom Status': 'Estado de Baños',
     'Stadium Dashboard': 'Estadio',
+    'Navigation Dashboard': 'Navegación',
+    'AI Operations': 'Operaciones de IA',
     'Football Operations': 'Operaciones de Fútbol',
     'Sustainability': 'Sostenibilidad',
     'Accessibility': 'Accesibilidad',
@@ -75,6 +79,8 @@ const SIDEBAR_TRANSLATIONS: Record<string, Record<string, string>> = {
     'Food & Beverage': 'भोजन और पेय',
     'Washroom Status': 'वाशरूम की स्थिति',
     'Stadium Dashboard': 'स्टेडियम',
+    'Navigation Dashboard': 'नेविगेशन',
+    'AI Operations': 'AI संचालन',
     'Football Operations': 'फुटबॉल संचालन',
     'Sustainability': 'स्थिरता',
     'Accessibility': 'पहुंच क्षमता',
