@@ -14,9 +14,19 @@ import { useAppContext } from '@/context/AppContext';
 import UniversalWorkflowModal, { WorkflowContext } from './UniversalWorkflowModal';
 
 export default function Header({ onOpenLogin }: { onOpenLogin?: () => void }) {
-  const { currentUser } = useAppContext();
+  const { currentUser, globalLang, setGlobalLang } = useAppContext();
   const [searchQuery, setSearchQuery] = useState('');
   const [workflowContext, setWorkflowContext] = useState<WorkflowContext | null>(null);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+
+  const LANGUAGES = [
+    { code: 'en', label: 'English' },
+    { code: 'es', label: 'Español' },
+    { code: 'fr', label: 'Français' },
+    { code: 'hi', label: 'हिन्दी' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'ja', label: '日本語' }
+  ];
 
   const handleSearchSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && searchQuery.trim()) {
@@ -48,10 +58,35 @@ export default function Header({ onOpenLogin }: { onOpenLogin?: () => void }) {
         {/* Toolbar Actions */}
         <div className="flex items-center space-x-4">
           {/* Language Profile */}
-          <button aria-label="Change language" className="glass-button p-2 rounded-full relative group">
-            <Globe size={20} className="text-slate-300 group-hover:text-white" />
-            <span className="absolute -top-1 -right-1 bg-indigo-500 text-[10px] font-bold px-1.5 rounded-full border border-slate-900">EN</span>
-          </button>
+          <div className="relative">
+            <button 
+              onClick={() => setShowLangMenu(!showLangMenu)}
+              aria-label="Change language" 
+              className="glass-button p-2 rounded-full relative group flex items-center justify-center"
+            >
+              <Globe size={20} className="text-slate-300 group-hover:text-white" />
+              <span className="absolute -top-1 -right-1 bg-indigo-500 text-[10px] font-bold px-1.5 rounded-full border border-slate-900 uppercase">
+                {globalLang}
+              </span>
+            </button>
+
+            {showLangMenu && (
+              <div className="absolute top-full right-0 mt-2 w-32 bg-slate-800 border border-slate-700 rounded-xl shadow-xl overflow-hidden z-50">
+                {LANGUAGES.map(lang => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      setGlobalLang(lang.code);
+                      setShowLangMenu(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-700 transition-colors ${globalLang === lang.code ? 'text-blue-400 font-bold bg-slate-900' : 'text-slate-300'}`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           
           {/* Notifications */}
           <button aria-label="Notifications" className="glass-button p-2 rounded-full relative group">

@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { LayoutDashboard, Users, DoorOpen, Utensils, Droplets, Activity, ShieldAlert, Train, Leaf, Navigation, Map, LineChart, FileText, Settings, HeartPulse, Building2, Languages, Network, Database, Car } from 'lucide-react';
+import { useAppContext } from '@/context/AppContext';
 
 const MENU_ITEMS = [
   { id: 'Home', label: 'Command Center', icon: LayoutDashboard },
@@ -31,12 +32,74 @@ const DOMAINS = [
   { id: 'Reports', label: 'AI Reports', icon: FileText },
 ];
 
+const SIDEBAR_TRANSLATIONS: Record<string, Record<string, string>> = {
+  es: {
+    'Command Center': 'Centro de Mando',
+    'Data Center': 'Centro de Datos',
+    'Digital Twin': 'Gemelo Digital',
+    'Platform Overview': 'Resumen de Plataforma',
+    'Ops Command': 'Comando de Operaciones',
+    'System Arch (Admin)': 'Arquitectura del Sistema',
+    'Identity (Super Admin)': 'Identidad y Seguridad',
+    'Crowd Intelligence': 'Inteligencia de Multitudes',
+    'Gate Analytics': 'Análisis de Puertas',
+    'Transit & Transport': 'Tránsito y Transporte',
+    'Parking Dashboard': 'Estacionamiento',
+    'Medical Operations': 'Operaciones Médicas',
+    'Security & Threat': 'Seguridad y Amenazas',
+    'Food & Beverage': 'Alimentos y Bebidas',
+    'Washroom Status': 'Estado de Baños',
+    'Stadium Dashboard': 'Estadio',
+    'Football Operations': 'Operaciones de Fútbol',
+    'Sustainability': 'Sostenibilidad',
+    'Accessibility': 'Accesibilidad',
+    'Volunteer Sync': 'Voluntarios',
+    'Venue Infrastructure': 'Infraestructura del Recinto',
+    'Language Center': 'Centro de Idiomas',
+    'AI Reports': 'Reportes de IA'
+  },
+  hi: {
+    'Command Center': 'कमांड सेंटर',
+    'Data Center': 'डेटा सेंटर',
+    'Digital Twin': 'डिजिटल ट्विन',
+    'Platform Overview': 'प्लेटफ़ॉर्म अवलोकन',
+    'Ops Command': 'संचालन कमांड',
+    'System Arch (Admin)': 'सिस्टम आर्किटेक्चर',
+    'Identity (Super Admin)': 'पहचान और सुरक्षा',
+    'Crowd Intelligence': 'भीड़ खुफिया',
+    'Gate Analytics': 'गेट एनालिटिक्स',
+    'Transit & Transport': 'यातायात और परिवहन',
+    'Parking Dashboard': 'पार्किंग',
+    'Medical Operations': 'चिकित्सा संचालन',
+    'Security & Threat': 'सुरक्षा और खतरे',
+    'Food & Beverage': 'भोजन और पेय',
+    'Washroom Status': 'वाशरूम की स्थिति',
+    'Stadium Dashboard': 'स्टेडियम',
+    'Football Operations': 'फुटबॉल संचालन',
+    'Sustainability': 'स्थिरता',
+    'Accessibility': 'पहुंच क्षमता',
+    'Volunteer Sync': 'स्वयंसेवक',
+    'Venue Infrastructure': 'स्थल का बुनियादी ढांचा',
+    'Language Center': 'भाषा केंद्र',
+    'AI Reports': 'AI रिपोर्ट'
+  }
+};
+
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
 
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
+  const { globalLang } = useAppContext();
+  
+  const t = (text: string) => {
+    if (globalLang === 'en') return text;
+    if (SIDEBAR_TRANSLATIONS[globalLang] && SIDEBAR_TRANSLATIONS[globalLang][text]) {
+      return SIDEBAR_TRANSLATIONS[globalLang][text];
+    }
+    return text; // fallback
+  };
   return (
     <aside className="w-64 glass-panel border-r border-slate-700/50 flex flex-col z-20 relative hidden lg:flex">
       <div className="h-16 flex items-center px-6 border-b border-slate-700/50">
@@ -50,7 +113,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
 
       <div className="flex-1 overflow-y-auto py-6 px-4 custom-scrollbar">
         <div className="space-y-1 mb-8" role="tablist" aria-label="Main Workspaces">
-          <div className="px-3 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Main Workspaces</div>
+          <div className="px-3 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('Main Workspaces')}</div>
           {MENU_ITEMS.map(item => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -69,14 +132,14 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                 }`}
               >
                 <Icon size={18} className={isActive ? 'animate-pulse' : ''} />
-                {item.label}
+                {t(item.label)}
               </button>
             );
           })}
         </div>
 
         <div className="space-y-1" role="tablist" aria-label="Domain Dashboards">
-          <div className="px-3 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Domain Dashboards</div>
+          <div className="px-3 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('Domain Dashboards')}</div>
           {DOMAINS.map(item => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -93,7 +156,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                 }`}
               >
                 <Icon size={16} className={`transition-transform group-hover:scale-110 ${isActive ? 'text-[#E20074]' : 'text-slate-500 group-hover:text-slate-300'}`} />
-                {item.label}
+                {t(item.label)}
               </button>
             );
           })}
@@ -107,10 +170,10 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
               <Settings size={14} className="text-slate-400 group-hover:rotate-90 transition-transform duration-500" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white">System Status</div>
+              <div className="text-xs font-bold text-white">{globalLang === 'es' ? 'Estado del Sistema' : globalLang === 'hi' ? 'सिस्टम की स्थिति' : 'System Status'}</div>
               <div className="text-[10px] text-green-400 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                All Systems Nominal
+                {globalLang === 'es' ? 'Sistemas Nominales' : globalLang === 'hi' ? 'सभी सिस्टम सामान्य' : 'All Systems Nominal'}
               </div>
             </div>
           </div>

@@ -1,8 +1,46 @@
 "use client";
 import React, { useState } from 'react';
 
+import React, { useState } from 'react';
+import { useAppContext } from '@/context/AppContext';
+
 export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const { globalLang } = useAppContext();
+
+  const getTranslation = (lang: string) => {
+    switch (lang) {
+      case 'es': return {
+        tagline: 'Plataforma de Inteligencia Artificial',
+        subtext: 'Una Plataforma Inteligente para Cada Aficionado, Voluntario y Organizador.',
+        enter: 'Entrar a la Plataforma',
+        status: 'Sistemas Activos',
+        activeWs: 'Espacios Activos',
+        pillars: 'Pilares de la Plataforma',
+        cta: 'Lanzar AI Stadium OS →'
+      };
+      case 'hi': return {
+        tagline: 'एआई प्लेटफॉर्म',
+        subtext: 'हर प्रशंसक, स्वयंसेवक और आयोजक के लिए एक इंटेलिजेंट प्लेटफॉर्म।',
+        enter: 'प्लेटफ़ॉर्म में प्रवेश करें',
+        status: 'सभी सिस्टम सक्रिय',
+        activeWs: 'सक्रिय कार्यस्थान',
+        pillars: 'प्लेटफ़ॉर्म के स्तंभ',
+        cta: 'AI स्टेडियम OS लॉन्च करें →'
+      };
+      default: return {
+        tagline: 'Enterprise AI Platform',
+        subtext: 'One Intelligent AI Platform for Every Fan, Every Volunteer, Every Organizer, Every Stadium Operation.',
+        enter: 'Enter the Platform',
+        status: 'All Systems Live',
+        activeWs: 'Active Workspaces',
+        pillars: 'Platform Pillars',
+        cta: 'Launch AI Stadium OS →'
+      };
+    }
+  };
+
+  const t = getTranslation(globalLang);
 
   const STATS = [
     { value: '10+', label: 'Workspaces Active', color: 'text-[#2B7CE4]' },
@@ -47,7 +85,7 @@ export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#E20074]/40 bg-[#E20074]/10 text-sm text-[#E20074] font-bold tracking-widest uppercase mb-8">
             <span className="w-2 h-2 rounded-full bg-[#E20074] animate-pulse"></span>
-            FIFA World Cup 2026 — Enterprise AI Platform
+            FIFA World Cup 2026 — {t.tagline}
           </div>
 
           <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-6 leading-none">
@@ -57,7 +95,7 @@ export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-3 leading-relaxed font-light">
-            One Intelligent AI Platform for Every Fan, Every Volunteer,<br className="hidden md:block" /> Every Organizer, Every Stadium Operation.
+            {t.subtext}
           </p>
           <p className="text-sm text-slate-500 mb-12">Built for 45,000+ fans · FIFA 26 Master Specification</p>
 
@@ -66,12 +104,12 @@ export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }
               onClick={onOpenLogin}
               className="group px-10 py-4 bg-gradient-to-r from-[#2B7CE4] to-[#1AA65D] rounded-2xl font-bold text-white text-lg shadow-[0_0_40px_rgba(43,124,228,0.35)] hover:shadow-[0_0_60px_rgba(43,124,228,0.55)] transition-all duration-300 hover:scale-105 flex items-center gap-3"
             >
-              🚀 Enter the Platform
+              🚀 {t.enter}
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <div className="flex items-center gap-2 text-sm text-slate-400">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              All Systems Live
+              {t.status}
             </div>
           </div>
         </div>
@@ -88,7 +126,7 @@ export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }
 
         {/* Active Workspaces */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold text-white text-center mb-2">Active Workspaces</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-2">{t.activeWs}</h2>
           <p className="text-slate-400 text-center mb-10">Login and navigate using the sidebar to explore each workspace</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {WORKSPACES.map((ws, i) => (
@@ -105,7 +143,7 @@ export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }
 
         {/* 6 Pillars */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold text-white text-center mb-2">Platform Pillars</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-2">{t.pillars}</h2>
           <p className="text-slate-400 text-center mb-10">Six foundational principles built into every layer</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {PILLARS.map((p, i) => (
@@ -129,7 +167,7 @@ export default function LandingPage({ onOpenLogin }: { onOpenLogin: () => void }
             onClick={onOpenLogin}
             className="group px-12 py-5 bg-gradient-to-r from-[#E20074] to-[#2B7CE4] rounded-2xl font-bold text-white text-xl shadow-[0_0_50px_rgba(226,0,116,0.25)] hover:shadow-[0_0_80px_rgba(226,0,116,0.45)] transition-all duration-300 hover:scale-105"
           >
-            Launch AI Stadium OS →
+            {t.cta}
           </button>
           <p className="text-slate-500 text-sm mt-4">FIFA World Cup 2026 · Enterprise Grade · Built for 45,000+ fans</p>
         </div>

@@ -52,11 +52,15 @@ type AppContextType = {
   // System Observability
   systemLogs: SystemLog[];
   addSystemLog: (log: SystemLog) => void;
+
+  globalLang: string;
+  setGlobalLang: (lang: string) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
+  const [globalLang, setGlobalLang] = useState('en');
   const [currentUser, setCurrentUser] = useState<UserData | null>({
     id: '1',
     name: 'Demo Organizer',
@@ -129,7 +133,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         emitGlobalEvent,
         clearEvent,
         systemLogs,
-        addSystemLog
+        addSystemLog,
+        globalLang,
+        setGlobalLang
       }}
     >
       {children}
