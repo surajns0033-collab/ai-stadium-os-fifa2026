@@ -116,7 +116,12 @@ export default function FoodDashboard() {
                 <path d="M 515 292.5 L 850 150" stroke="#a855f7" strokeWidth="2" strokeDasharray="10 5" fill="none" />
 
                 {/* To Hotdog Express (Red) - from HOT box (585, 292.5) to (150, 480) */}
-                <path d="M 585 292.5 L 150 480" stroke="#ef4444" strokeWidth="4" strokeDasharray="15 10" fill="none" className="animate-[dash_1s_linear_infinite]" filter="url(#glowRed)" />
+                <path id="hotdogRoute" d="M 585 292.5 L 150 480" stroke="#ef4444" strokeWidth="4" strokeDasharray="15 10" fill="none" className="animate-[dash_1s_linear_infinite]" filter="url(#glowRed)" />
+                
+                {/* Animated Autonomous Supply Cart */}
+                <rect x="-10" y="-8" width="20" height="16" rx="4" fill="#eab308" stroke="#fff" strokeWidth="2" filter="url(#glowGreen)">
+                  <animateMotion dur="3s" repeatCount="indefinite" path="M 585 292.5 L 150 480" />
+                </rect>
               </g>
 
               {/* --- HIGH Z-INDEX VENDOR BLOCKS (WITH TOOLTIPS) --- */}
@@ -133,7 +138,7 @@ export default function FoodDashboard() {
                 <text x="20" y="25" fill="#fff" fontSize="14" fontWeight="bold">Burger Station 1</text>
                 <rect x="20" y="45" width="160" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="45" width="130" height="8" rx="4" fill="#10b981" filter="url(#glowGreen)" />
-                <text x="20" y="75" fill="#a7f3d0" fontSize="11">Stock: 82% | Queue: Normal</text>
+                <text x="20" y="75" fill="#a7f3d0" fontSize="13" fontWeight="bold">Stock: 82% | Queue: Normal</text>
 
                 {hoveredVendor === 'vendorA' && (
                   <>
@@ -163,7 +168,7 @@ export default function FoodDashboard() {
                 <text x="20" y="25" fill="#fff" fontSize="14" fontWeight="bold">Woodfire Pizza</text>
                 <rect x="20" y="45" width="140" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="45" width="90" height="8" rx="4" fill="#3b82f6" filter="url(#glowBlue)" />
-                <text x="20" y="75" fill="#bfdbfe" fontSize="11">Stock: 65% | Prep time: 8m</text>
+                <text x="20" y="75" fill="#bfdbfe" fontSize="13" fontWeight="bold">Stock: 65% | Prep time: 8m</text>
 
                 {hoveredVendor === 'vendorD' && (
                   <>
@@ -193,7 +198,7 @@ export default function FoodDashboard() {
                 <text x="15" y="25" fill="#fff" fontSize="12" fontWeight="bold">Green Bowl Station</text>
                 <rect x="15" y="40" width="130" height="6" rx="3" fill="#0f172a" />
                 <rect x="15" y="40" width="110" height="6" rx="3" fill="#10b981" />
-                <text x="15" y="60" fill="#a7f3d0" fontSize="10">Stock: 85% | Queue: 0m</text>
+                <text x="15" y="60" fill="#a7f3d0" fontSize="12" fontWeight="bold">Stock: 85% | Queue: 0m</text>
 
                 {hoveredVendor === 'vendorE' && (
                   <>
@@ -220,8 +225,8 @@ export default function FoodDashboard() {
               >
                 {hoveredVendor === 'vip' && <rect x="0" y="-160" width="220" height="240" fill="transparent" />}
                 <rect x="0" y="0" width="220" height="80" rx="10" fill="#422006" stroke="#ca8a04" strokeWidth="2" strokeDasharray="5 5" className="group-hover:fill-opacity-80 transition-all" />
-                <text x="110" y="30" fill="#fef08a" fontSize="14" fontWeight="bold" textAnchor="middle" letterSpacing="1">VIP CLUB DINING</text>
-                <text x="110" y="55" fill="#fde047" fontSize="10" textAnchor="middle">Capacity: 92% | Service: Premium</text>
+                <text x="110" y="28" fill="#fef08a" fontSize="16" fontWeight="bold" textAnchor="middle" letterSpacing="1">VIP CLUB DINING</text>
+                <text x="110" y="55" fill="#fde047" fontSize="13" fontWeight="bold" textAnchor="middle">Capacity: 92% | Service: Premium</text>
                 <circle cx="20" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
                 <circle cx="200" cy="40" r="4" fill="#eab308" filter="url(#glowGreen)" className="animate-pulse" />
 
@@ -257,10 +262,7 @@ export default function FoodDashboard() {
                 <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Hotdog Express (South)</text>
                 <rect x="20" y="55" width="160" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="55" width="30" height="8" rx="4" fill="#ef4444" />
-                <text x="20" y="85" fill="#fca5a5" fontSize="12" fontWeight="bold" className="animate-pulse">STOCK CRITICAL: 12%</text>
-                
-                {/* Delivery cart moving to vendor B */}
-                <circle cx="150" cy="-30" r="6" fill="#eab308" filter="url(#glowGreen)" className="animate-ping" />
+                <text x="20" y="85" fill="#fca5a5" fontSize="14" fontWeight="bold" className="animate-pulse">STOCK CRITICAL: 12%</text>
 
                 {/* Tooltip for Vendor B: Opens BELOW the vendor to avoid VIP dining */}
                 {hoveredVendor === 'vendorB' && (
@@ -294,7 +296,7 @@ export default function FoodDashboard() {
                 <text x="20" y="30" fill="#fff" fontSize="16" fontWeight="bold">Neon Bar & Beverages</text>
                 <rect x="20" y="55" width="180" height="8" rx="4" fill="#0f172a" />
                 <rect x="20" y="55" width="160" height="8" rx="4" fill="#a855f7" filter="url(#glowPurple)" />
-                <text x="20" y="85" fill="#d8b4fe" fontSize="11">Stock: 90% | High Revenue</text>
+                <text x="20" y="85" fill="#d8b4fe" fontSize="13" fontWeight="bold">Stock: 90% | High Revenue</text>
 
                 {/* Tooltip for Beverage: Opens to the LEFT of the vendor */}
                 {hoveredVendor === 'beverage' && (
