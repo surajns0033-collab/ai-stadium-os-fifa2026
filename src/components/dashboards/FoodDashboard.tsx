@@ -72,42 +72,51 @@ export default function FoodDashboard() {
 
               {/* Warehouse Infrastructure */}
               <g transform="translate(400, 250)">
-                <rect x="-100" y="-80" width="200" height="160" rx="20" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="2" opacity="0.8" />
-                <circle cx="0" cy="0" r="140" fill="none" stroke="#3b82f6" strokeWidth="1" strokeDasharray="5 5" opacity="0.3" className="animate-[spin_60s_linear_infinite]" />
-                <text x="0" y="-30" fill="#fff" fontSize="18" fontWeight="bold" textAnchor="middle">CENTRAL LOGISTICS</text>
-                <text x="0" y="-10" fill="#93c5fd" fontSize="12" textAnchor="middle">Staging & Supply Hub</text>
+                <rect x="-140" y="-100" width="280" height="200" rx="20" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="2" opacity="0.9" />
+                <circle cx="0" cy="0" r="180" fill="none" stroke="#3b82f6" strokeWidth="1" strokeDasharray="5 5" opacity="0.3" className="animate-[spin_60s_linear_infinite]" />
+                <text x="0" y="-55" fill="#fff" fontSize="22" fontWeight="bold" textAnchor="middle" className="drop-shadow-md">CENTRAL LOGISTICS</text>
+                <text x="0" y="-35" fill="#93c5fd" fontSize="14" textAnchor="middle">Staging & Supply Hub</text>
                 
                 {/* Supply staging areas in warehouse */}
-                <g transform="translate(-80, 20)">
+                <g transform="translate(-120, -10)">
                   {/* Burgers / General (Green) */}
-                  <rect x="0" y="0" width="35" height="30" rx="4" fill="#10b981" fillOpacity="0.2" stroke="#10b981" strokeWidth="1" />
-                  <text x="17.5" y="14" fill="#10b981" fontSize="10" fontWeight="bold" textAnchor="middle">BRG</text>
-                  <text x="17.5" y="24" fill="#a7f3d0" fontSize="8" textAnchor="middle">82%</text>
+                  <rect x="0" y="0" width="50" height="45" rx="6" fill="#10b981" fillOpacity="0.2" stroke="#10b981" strokeWidth="2" />
+                  <text x="25" y="22" fill="#10b981" fontSize="14" fontWeight="bold" textAnchor="middle">BRG</text>
+                  <text x="25" y="38" fill="#a7f3d0" fontSize="12" fontWeight="bold" textAnchor="middle">82%</text>
 
                   {/* Pizza (Blue) */}
-                  <rect x="42.5" y="0" width="35" height="30" rx="4" fill="#3b82f6" fillOpacity="0.2" stroke="#3b82f6" strokeWidth="1" />
-                  <text x="60" y="14" fill="#3b82f6" fontSize="10" fontWeight="bold" textAnchor="middle">PIZ</text>
-                  <text x="60" y="24" fill="#bfdbfe" fontSize="8" textAnchor="middle">65%</text>
+                  <rect x="65" y="0" width="50" height="45" rx="6" fill="#3b82f6" fillOpacity="0.2" stroke="#3b82f6" strokeWidth="2" />
+                  <text x="90" y="22" fill="#3b82f6" fontSize="14" fontWeight="bold" textAnchor="middle">PIZ</text>
+                  <text x="90" y="38" fill="#bfdbfe" fontSize="12" fontWeight="bold" textAnchor="middle">65%</text>
 
                   {/* Beverages (Purple) */}
-                  <rect x="85" y="0" width="35" height="30" rx="4" fill="#a855f7" fillOpacity="0.2" stroke="#a855f7" strokeWidth="1" />
-                  <text x="102.5" y="14" fill="#a855f7" fontSize="10" fontWeight="bold" textAnchor="middle">BEV</text>
-                  <text x="102.5" y="24" fill="#e9d5ff" fontSize="8" textAnchor="middle">90%</text>
+                  <rect x="130" y="0" width="50" height="45" rx="6" fill="#a855f7" fillOpacity="0.2" stroke="#a855f7" strokeWidth="2" />
+                  <text x="155" y="22" fill="#a855f7" fontSize="14" fontWeight="bold" textAnchor="middle">BEV</text>
+                  <text x="155" y="38" fill="#e9d5ff" fontSize="12" fontWeight="bold" textAnchor="middle">90%</text>
 
                   {/* Hotdogs (Red - CRITICAL STAGING) */}
-                  <rect x="127.5" y="0" width="35" height="30" rx="4" fill="#ef4444" fillOpacity="0.2" stroke="#ef4444" strokeWidth="1" className="animate-pulse" filter="url(#glowRed)" />
-                  <text x="145" y="14" fill="#ef4444" fontSize="10" fontWeight="bold" textAnchor="middle">HOT</text>
-                  <text x="145" y="24" fill="#fecaca" fontSize="7" textAnchor="middle">STAGED</text>
+                  <rect x="195" y="0" width="50" height="45" rx="6" fill="#ef4444" fillOpacity="0.2" stroke="#ef4444" strokeWidth="2" className="animate-pulse" filter="url(#glowRed)" />
+                  <text x="220" y="22" fill="#ef4444" fontSize="14" fontWeight="bold" textAnchor="middle">HOT</text>
+                  <text x="220" y="38" fill="#fecaca" fontSize="10" fontWeight="bold" textAnchor="middle">STAGED</text>
                 </g>
               </g>
 
-              {/* Delivery Routes (from warehouse to vendors) */}
-              <g opacity="0.4">
-                <path d="M 400 250 L 150 120" stroke="#10b981" strokeWidth="2" strokeDasharray="10 5" fill="none" />
-                <path d="M 400 250 L 150 480" stroke="#ef4444" strokeWidth="4" strokeDasharray="15 10" fill="none" className="animate-[dash_1s_linear_infinite]" filter="url(#glowRed)" />
-                <path d="M 400 250 L 850 150" stroke="#a855f7" strokeWidth="2" strokeDasharray="10 5" fill="none" />
-                <path d="M 400 250 L 850 450" stroke="#3b82f6" strokeWidth="2" strokeDasharray="10 5" fill="none" />
-                <path d="M 400 250 L 500 50" stroke="#10b981" strokeWidth="2" strokeDasharray="10 5" fill="none" />
+              {/* Delivery Routes (from warehouse staging boxes to vendors) */}
+              <g opacity="0.6">
+                {/* To Burger Station 1 (Green) - from BRG box (305, 262.5) to (150, 120) */}
+                <path d="M 305 262.5 L 150 120" stroke="#10b981" strokeWidth="2" strokeDasharray="10 5" fill="none" />
+                
+                {/* To Green Bowl Station (Green) - from BRG box (305, 262.5) to (500, 50) */}
+                <path d="M 305 262.5 L 500 50" stroke="#10b981" strokeWidth="2" strokeDasharray="10 5" fill="none" />
+
+                {/* To Woodfire Pizza (Blue) - from PIZ box (370, 262.5) to (850, 450) */}
+                <path d="M 370 262.5 L 850 450" stroke="#3b82f6" strokeWidth="2" strokeDasharray="10 5" fill="none" />
+
+                {/* To Neon Bar (Purple) - from BEV box (435, 262.5) to (850, 150) */}
+                <path d="M 435 262.5 L 850 150" stroke="#a855f7" strokeWidth="2" strokeDasharray="10 5" fill="none" />
+
+                {/* To Hotdog Express (Red) - from HOT box (500, 262.5) to (150, 480) */}
+                <path d="M 500 262.5 L 150 480" stroke="#ef4444" strokeWidth="4" strokeDasharray="15 10" fill="none" className="animate-[dash_1s_linear_infinite]" filter="url(#glowRed)" />
               </g>
 
               {/* --- HIGH Z-INDEX VENDOR BLOCKS (WITH TOOLTIPS) --- */}
