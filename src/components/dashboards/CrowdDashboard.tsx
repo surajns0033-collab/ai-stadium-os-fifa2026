@@ -56,16 +56,6 @@ export default function CrowdDashboard() {
           <div className="flex-1 relative bg-[#05000a] overflow-hidden">
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#3b82f6 1px, transparent 1px), linear-gradient(90deg, #3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-            
-            {hoveredZone === 'east' && (
-              <div className="absolute top-[20%] right-[10%] z-20 w-48 bg-black/80 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-fade-in pointer-events-none">
-                <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/crowd-east.png')" }}></div>
-                <div className="p-2">
-                  <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
-                  <div className="text-xs text-white">Critical Density Alert</div>
-                </div>
-              </div>
-            )}
 
             <svg viewBox="0 0 1000 600" className="w-full h-full drop-shadow-2xl relative z-10">
               <defs>
@@ -124,12 +114,25 @@ export default function CrowdDashboard() {
                 <g 
                   onMouseEnter={() => { playHover(); setHoveredZone('east'); }} 
                   onMouseLeave={() => setHoveredZone(null)}
-                  className="cursor-crosshair"
+                  className="cursor-crosshair group"
                 >
-                  <path d="M 200 -120 A 200 120 0 0 1 200 120 L 280 170 A 280 170 0 0 0 280 -170 Z" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="2" filter="url(#glow)" className="hover:fill-opacity-40 transition-all" />
+                  <path d="M 200 -120 A 200 120 0 0 1 200 120 L 280 170 A 280 170 0 0 0 280 -170 Z" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="2" filter="url(#glow)" className="group-hover:fill-opacity-40 transition-all" />
                   <circle cx="240" cy="0" r="6" fill="#ef4444" filter="url(#heavy-glow)" className="animate-ping" />
                   <text x="250" y="-20" fill="#fca5a5" fontSize="10" textAnchor="middle" letterSpacing="2" transform="rotate(90 250 -20)">EAST GATES</text>
                   <text x="220" y="0" fill="#fff" fontSize="16" textAnchor="middle" fontWeight="bold">98%</text>
+
+                  {/* Hover Tooltip perfectly aligned next to East Gate */}
+                  {hoveredZone === 'east' && (
+                    <foreignObject x="300" y="-80" width="200" height="150" className="pointer-events-none animate-fade-in">
+                      <div className="w-full h-full bg-black/90 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                        <div className="h-24 w-full bg-cover bg-center" style={{ backgroundImage: "url('/natural-crowd-gate.png')" }}></div>
+                        <div className="p-2">
+                          <div className="text-[10px] font-bold text-red-400">EAST GATE CAMERA 4</div>
+                          <div className="text-xs text-white leading-tight">Critical Density Alert</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
                 </g>
                 
                 {/* Sector West (Empty/Spare) */}
