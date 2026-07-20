@@ -77,12 +77,27 @@ export default function FoodDashboard() {
                 <text x="0" y="-30" fill="#fff" fontSize="18" fontWeight="bold" textAnchor="middle">CENTRAL LOGISTICS</text>
                 <text x="0" y="-10" fill="#93c5fd" fontSize="12" textAnchor="middle">Staging & Supply Hub</text>
                 
-                {/* Supply boxes in warehouse */}
-                <g transform="translate(-60, 20)">
-                  <rect x="0" y="0" width="25" height="25" rx="4" fill="#3b82f6" opacity="0.8" />
-                  <rect x="35" y="0" width="25" height="25" rx="4" fill="#3b82f6" opacity="0.8" />
-                  <rect x="70" y="0" width="25" height="25" rx="4" fill="#10b981" opacity="0.8" />
-                  <rect x="105" y="0" width="25" height="25" rx="4" fill="#eab308" opacity="0.8" className="animate-pulse" />
+                {/* Supply staging areas in warehouse */}
+                <g transform="translate(-80, 20)">
+                  {/* Burgers / General (Green) */}
+                  <rect x="0" y="0" width="35" height="30" rx="4" fill="#10b981" fillOpacity="0.2" stroke="#10b981" strokeWidth="1" />
+                  <text x="17.5" y="14" fill="#10b981" fontSize="10" fontWeight="bold" textAnchor="middle">BRG</text>
+                  <text x="17.5" y="24" fill="#a7f3d0" fontSize="8" textAnchor="middle">82%</text>
+
+                  {/* Pizza (Blue) */}
+                  <rect x="42.5" y="0" width="35" height="30" rx="4" fill="#3b82f6" fillOpacity="0.2" stroke="#3b82f6" strokeWidth="1" />
+                  <text x="60" y="14" fill="#3b82f6" fontSize="10" fontWeight="bold" textAnchor="middle">PIZ</text>
+                  <text x="60" y="24" fill="#bfdbfe" fontSize="8" textAnchor="middle">65%</text>
+
+                  {/* Beverages (Purple) */}
+                  <rect x="85" y="0" width="35" height="30" rx="4" fill="#a855f7" fillOpacity="0.2" stroke="#a855f7" strokeWidth="1" />
+                  <text x="102.5" y="14" fill="#a855f7" fontSize="10" fontWeight="bold" textAnchor="middle">BEV</text>
+                  <text x="102.5" y="24" fill="#e9d5ff" fontSize="8" textAnchor="middle">90%</text>
+
+                  {/* Hotdogs (Red - CRITICAL STAGING) */}
+                  <rect x="127.5" y="0" width="35" height="30" rx="4" fill="#ef4444" fillOpacity="0.2" stroke="#ef4444" strokeWidth="1" className="animate-pulse" filter="url(#glowRed)" />
+                  <text x="145" y="14" fill="#ef4444" fontSize="10" fontWeight="bold" textAnchor="middle">HOT</text>
+                  <text x="145" y="24" fill="#fecaca" fontSize="7" textAnchor="middle">STAGED</text>
                 </g>
               </g>
 
