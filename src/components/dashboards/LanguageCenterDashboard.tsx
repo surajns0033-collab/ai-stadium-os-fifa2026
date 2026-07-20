@@ -113,7 +113,7 @@ export default function LanguageCenterDashboard() {
                  
                  {/* Translation Output Area */}
                  <foreignObject x="-45" y="-45" width="90" height="100">
-                    <div xmlns="http://www.w3.org/1999/xhtml" className="flex flex-col h-full justify-center items-center text-center">
+                    <div className="flex flex-col h-full justify-center items-center text-center">
                        <Mic2 size={24} color={activeTranslation.audioColor} className="animate-pulse mb-2" />
                        <p style={{ color: '#fff', fontSize: '11px', fontWeight: 'bold', lineHeight: '1.2' }}>
                          {activeTranslation.text}
