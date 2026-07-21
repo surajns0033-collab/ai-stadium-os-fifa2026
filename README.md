@@ -44,7 +44,7 @@ The FIFA World Cup 2026 will be the largest sporting event in history — **48 t
 └─────────────────────────────────────────────────────┘
 ```
 
-## ✨ Key Features (22 Modules)
+## ✨ Core Platform Modules
 
 | # | Module | Description |
 |---|--------|-------------|
