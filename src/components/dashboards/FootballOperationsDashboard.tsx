@@ -134,108 +134,14 @@ export default function FootballOperationsDashboard() {
 
       <div className="flex-1 p-6 pt-2 z-10 flex gap-6 min-h-0">
         
-        {/* SVG Football Pitch Map */}
-        <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 bg-[#0a111a]/90 backdrop-blur-xl relative overflow-hidden flex items-center justify-center shadow-2xl">
+        {/* Left Column (Legend + Pitch) */}
+        <div className="flex-[2] flex flex-col gap-4 min-h-0">
           
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
-
-          <div className="absolute top-4 right-4 z-30">
-            <button className="bg-black/60 backdrop-blur border border-white/10 hover:border-blue-500/50 rounded-lg p-2 text-slate-400 hover:text-white transition-colors" onClick={playClick} onMouseEnter={playHover}>
-              <Maximize size={16} />
-            </button>
-          </div>
-
-          <div className="relative w-full max-w-5xl aspect-[1.5/1]">
-            <svg viewBox="0 0 1000 660" className="w-full h-full drop-shadow-[0_0_40px_rgba(26,166,93,0.1)]">
-              
-              {/* Pitch Base */}
-              <rect x="50" y="50" width="900" height="560" fill="#1AA65D" fillOpacity="0.15" stroke="#1AA65D" strokeWidth="4" />
-              
-              {/* Pitch Markings */}
-              <path d="M 500 50 L 500 610" stroke="#1AA65D" strokeWidth="4" />
-              <circle cx="500" cy="330" r="80" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <circle cx="500" cy="330" r="4" fill="#1AA65D" />
-              
-              {/* Left Penalty Area */}
-              <rect x="50" y="160" width="150" height="340" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <rect x="50" y="240" width="50" height="180" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <path d="M 200 270 Q 250 330 200 390" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <circle cx="150" cy="330" r="3" fill="#1AA65D" />
-
-              {/* Right Penalty Area */}
-              <rect x="800" y="160" width="150" height="340" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <rect x="900" y="240" width="50" height="180" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <path d="M 800 270 Q 750 330 800 390" fill="none" stroke="#1AA65D" strokeWidth="4" />
-              <circle cx="850" cy="330" r="3" fill="#1AA65D" />
-
-              {/* TACTICAL VISUALIZATIONS */}
-
-              {/* Pressure Visualization Heatmap - Dynamically Animating */}
-              <defs>
-                <radialGradient id="pressureHeat" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor={currentScenario.pressure.color} stopOpacity="0.6" />
-                  <stop offset="50%" stopColor={currentScenario.pressure.color} stopOpacity="0.2" />
-                  <stop offset="100%" stopColor={currentScenario.pressure.color} stopOpacity="0" />
-                </radialGradient>
-              </defs>
-              
-              <circle 
-                cx={currentScenario.pressure.x} 
-                cy={currentScenario.pressure.y} 
-                r={currentScenario.pressure.r} 
-                fill="url(#pressureHeat)" 
-                className="transition-all duration-[3000ms] ease-in-out animate-pulse" 
-              />
-
-              {/* Player Movements (Home Team - Blue) */}
-              <g fill="#2B7CE4" stroke="#fff" strokeWidth="2">
-                {currentScenario.home.map((pos, i) => (
-                  <circle 
-                    key={`home-${i}`} 
-                    cx={pos.x} 
-                    cy={pos.y} 
-                    r="9" 
-                    className="transition-all duration-[3000ms] ease-in-out" 
-                  />
-                ))}
-              </g>
-
-              {/* Player Movements (Away Team - Yellow) */}
-              <g fill="#eab308" stroke="#fff" strokeWidth="2">
-                {currentScenario.away.map((pos, i) => (
-                  <circle 
-                    key={`away-${i}`} 
-                    cx={pos.x} 
-                    cy={pos.y} 
-                    r="9" 
-                    className="transition-all duration-[3000ms] ease-in-out" 
-                  />
-                ))}
-              </g>
-
-              {/* Ball */}
-              <circle 
-                cx={currentScenario.ball.x} 
-                cy={currentScenario.ball.y} 
-                r="6" 
-                fill="#fff" 
-                className="transition-all duration-[3000ms] ease-in-out" 
-                stroke="#000"
-                strokeWidth="1"
-              />
-
-              {/* Attack Direction Indicator */}
-              <path d="M 400 640 L 600 640 L 580 630 M 600 640 L 580 650" fill="none" stroke="#2B7CE4" strokeWidth="4" opacity="0.6" />
-              <text x="430" y="630" fill="#2B7CE4" fontSize="12" fontWeight="bold" opacity="0.8">HOME ATTACK DIRECTION</text>
-
-            </svg>
-          </div>
-
           {/* Top Status Bar (Legend + Live Situation) */}
-          <div className="absolute top-4 left-4 z-20 flex gap-4 items-center">
+          <div className="flex gap-4 items-center w-full">
             
             {/* Horizontal Tactical Legend */}
-            <div className="bg-black/80 backdrop-blur-xl border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-5 shadow-2xl">
+            <div className="glass-panel bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 flex items-center gap-5 shadow-lg shrink-0">
               <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-r border-slate-700 pr-4">Legend</div>
               <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#2B7CE4] border border-white rounded-full shadow-[0_0_8px_#2B7CE4]"></div> Home</div>
               <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#eab308] border border-white rounded-full shadow-[0_0_8px_#eab308]"></div> Away</div>
@@ -243,27 +149,125 @@ export default function FootballOperationsDashboard() {
             </div>
 
             {/* Live Situation */}
-            <div className="bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.3)] transition-all duration-500 flex items-center gap-4">
+            <div className="glass-panel bg-blue-900/10 border border-blue-500/30 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.15)] flex items-center gap-4 flex-1 overflow-hidden transition-all duration-500">
               <style jsx>{`
                 @keyframes slide-left {
                   from { left: 100%; }
                   to { left: -150%; }
                 }
                 .animate-slide {
-                  animation: slide-left 12s linear infinite;
+                  animation: slide-left 15s linear infinite;
                 }
               `}</style>
               <div className="flex items-center gap-2 border-r border-blue-500/30 pr-4 shrink-0 w-48">
                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
                 <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest whitespace-nowrap truncate">LIVE: {currentScenario.phase}</div>
               </div>
-              <div className="overflow-hidden relative w-72 h-4 flex items-center shrink-0">
+              <div className="overflow-hidden relative flex-1 h-4 flex items-center shrink-0">
                 <p className="text-xs text-slate-200 whitespace-nowrap absolute animate-slide">
                   {currentScenario.desc}
                 </p>
               </div>
             </div>
 
+          </div>
+
+          {/* SVG Football Pitch Map */}
+          <div className="flex-1 glass-panel rounded-3xl border border-slate-700/50 bg-[#0a111a]/90 backdrop-blur-xl relative overflow-hidden flex items-center justify-center shadow-2xl">
+            
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+
+            <div className="absolute top-4 right-4 z-30">
+              <button className="bg-black/60 backdrop-blur border border-white/10 hover:border-blue-500/50 rounded-lg p-2 text-slate-400 hover:text-white transition-colors" onClick={playClick} onMouseEnter={playHover}>
+                <Maximize size={16} />
+              </button>
+            </div>
+
+            <div className="relative w-full max-w-5xl aspect-[1.5/1]">
+              <svg viewBox="0 0 1000 660" className="w-full h-full drop-shadow-[0_0_40px_rgba(26,166,93,0.1)]">
+                
+                {/* Pitch Base */}
+                <rect x="50" y="50" width="900" height="560" fill="#1AA65D" fillOpacity="0.15" stroke="#1AA65D" strokeWidth="4" />
+                
+                {/* Pitch Markings */}
+                <path d="M 500 50 L 500 610" stroke="#1AA65D" strokeWidth="4" />
+                <circle cx="500" cy="330" r="80" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <circle cx="500" cy="330" r="4" fill="#1AA65D" />
+                
+                {/* Left Penalty Area */}
+                <rect x="50" y="160" width="150" height="340" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <rect x="50" y="240" width="50" height="180" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <path d="M 200 270 Q 250 330 200 390" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <circle cx="150" cy="330" r="3" fill="#1AA65D" />
+
+                {/* Right Penalty Area */}
+                <rect x="800" y="160" width="150" height="340" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <rect x="900" y="240" width="50" height="180" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <path d="M 800 270 Q 750 330 800 390" fill="none" stroke="#1AA65D" strokeWidth="4" />
+                <circle cx="850" cy="330" r="3" fill="#1AA65D" />
+
+                {/* TACTICAL VISUALIZATIONS */}
+
+                {/* Pressure Visualization Heatmap - Dynamically Animating */}
+                <defs>
+                  <radialGradient id="pressureHeat" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor={currentScenario.pressure.color} stopOpacity="0.6" />
+                    <stop offset="50%" stopColor={currentScenario.pressure.color} stopOpacity="0.2" />
+                    <stop offset="100%" stopColor={currentScenario.pressure.color} stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                
+                <circle 
+                  cx={currentScenario.pressure.x} 
+                  cy={currentScenario.pressure.y} 
+                  r={currentScenario.pressure.r} 
+                  fill="url(#pressureHeat)" 
+                  className="transition-all duration-[3000ms] ease-in-out animate-pulse" 
+                />
+
+                {/* Player Movements (Home Team - Blue) */}
+                <g fill="#2B7CE4" stroke="#fff" strokeWidth="2">
+                  {currentScenario.home.map((pos, i) => (
+                    <circle 
+                      key={`home-${i}`} 
+                      cx={pos.x} 
+                      cy={pos.y} 
+                      r="9" 
+                      className="transition-all duration-[3000ms] ease-in-out" 
+                    />
+                  ))}
+                </g>
+
+                {/* Player Movements (Away Team - Yellow) */}
+                <g fill="#eab308" stroke="#fff" strokeWidth="2">
+                  {currentScenario.away.map((pos, i) => (
+                    <circle 
+                      key={`away-${i}`} 
+                      cx={pos.x} 
+                      cy={pos.y} 
+                      r="9" 
+                      className="transition-all duration-[3000ms] ease-in-out" 
+                    />
+                  ))}
+                </g>
+
+                {/* Ball */}
+                <circle 
+                  cx={currentScenario.ball.x} 
+                  cy={currentScenario.ball.y} 
+                  r="6" 
+                  fill="#fff" 
+                  className="transition-all duration-[3000ms] ease-in-out" 
+                  stroke="#000"
+                  strokeWidth="1"
+                />
+
+                {/* Attack Direction Indicator */}
+                <path d="M 400 640 L 600 640 L 580 630 M 600 640 L 580 650" fill="none" stroke="#2B7CE4" strokeWidth="4" opacity="0.6" />
+                <text x="430" y="630" fill="#2B7CE4" fontSize="12" fontWeight="bold" opacity="0.8">HOME ATTACK DIRECTION</text>
+
+              </svg>
+            </div>
           </div>
         </div>
 
