@@ -243,14 +243,25 @@ export default function FootballOperationsDashboard() {
             </div>
 
             {/* Live Situation */}
-            <div className="bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.3)] transition-all duration-500 flex items-center gap-4 max-w-lg">
+            <div className="bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.3)] transition-all duration-500 flex items-center gap-4 max-w-2xl">
+              <style jsx>{`
+                @keyframes slide-left {
+                  from { left: 100%; }
+                  to { left: -150%; }
+                }
+                .animate-slide {
+                  animation: slide-left 12s linear infinite;
+                }
+              `}</style>
               <div className="flex items-center gap-2 border-r border-blue-500/30 pr-4 shrink-0">
                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
                 <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest whitespace-nowrap">LIVE: {currentScenario.phase}</div>
               </div>
-              <p className="text-xs text-slate-200 truncate">
-                {currentScenario.desc}
-              </p>
+              <div className="overflow-hidden relative w-72 h-4 flex items-center shrink-0">
+                <p className="text-xs text-slate-200 whitespace-nowrap absolute animate-slide">
+                  {currentScenario.desc}
+                </p>
+              </div>
             </div>
 
           </div>
