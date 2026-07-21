@@ -2,7 +2,7 @@
 
 > **Enterprise-Grade Digital Twin & AI Orchestration Platform for FIFA World Cup 2026 Stadium Operations**
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://ai-stadium-os.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://ai-stadium-os-fifa2026.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)](https://typescriptlang.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
