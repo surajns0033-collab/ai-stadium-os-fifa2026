@@ -137,16 +137,7 @@ export default function GatesDashboard() {
                  ))}
               </g>
 
-              <style jsx>{`
-                @keyframes dash {
-                  to { stroke-dashoffset: -30; }
-                }
-                @keyframes scan {
-                  0% { transform: translateY(-5px); opacity: 0; }
-                  50% { opacity: 1; }
-                  100% { transform: translateY(15px); opacity: 0; }
-                }
-              `}</style>
+
             </svg>
           </div>
         </div>
@@ -210,7 +201,15 @@ export default function GatesDashboard() {
         </div>
       </div>
       
-      <style jsx global>{`
+      <style>{`
+        @keyframes dash {
+          to { stroke-dashoffset: -30; }
+        }
+        @keyframes scan {
+          0% { transform: translateY(-5px); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateY(15px); opacity: 0; }
+        }
         @keyframes slideIn {
           from { transform: translateX(20px); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
