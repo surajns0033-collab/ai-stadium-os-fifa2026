@@ -89,7 +89,7 @@ export default function AccessibilityDashboard() {
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
             
             <div className="absolute top-4 right-4 z-30">
-              <button className="bg-black/60 backdrop-blur border border-white/10 hover:border-blue-500/50 rounded-lg p-2 text-slate-400 hover:text-white transition-colors" onClick={playClick} onMouseEnter={playHover}>
+              <button className="bg-black/60 backdrop-blur border border-white/10 hover:border-blue-500/50 rounded-lg p-2 text-slate-400 hover:text-white transition-colors cursor-pointer" onClick={playClick} onMouseEnter={playHover}>
                 <Maximize size={16} />
               </button>
             </div>
@@ -104,23 +104,23 @@ export default function AccessibilityDashboard() {
                 <path d="M 500 80 L 500 180 M 500 480 L 500 580 M 100 330 L 200 330 M 800 330 L 900 330" stroke="#1e293b" strokeWidth="10" />
 
                 {/* Sensory Rooms */}
-                <g transform="translate(250, 150)">
+                <g transform="translate(250, 150)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
                   <rect x="-40" y="-30" width="80" height="60" rx="10" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" />
                   <circle cx="0" cy="0" r="10" fill="#ec4899" className="animate-pulse" />
                   <text x="0" y="22" textAnchor="middle" fill="#ec4899" fontSize="10" fontWeight="bold">SENSORY A</text>
                 </g>
-                <g transform="translate(750, 510)">
+                <g transform="translate(750, 510)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
                   <rect x="-40" y="-30" width="80" height="60" rx="10" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" />
                   <circle cx="0" cy="0" r="10" fill="#ec4899" className="animate-pulse" />
                   <text x="0" y="22" textAnchor="middle" fill="#ec4899" fontSize="10" fontWeight="bold">SENSORY B</text>
                 </g>
 
                 {/* Elevators */}
-                <g transform="translate(500, 130)">
+                <g transform="translate(500, 130)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
                   <rect x="-15" y="-15" width="30" height="30" rx="4" fill="#eab308" />
                   <text x="0" y="30" textAnchor="middle" fill="#eab308" fontSize="10" fontWeight="bold">ELEV 1</text>
                 </g>
-                <g transform="translate(500, 530)">
+                <g transform="translate(500, 530)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
                   <rect x="-15" y="-15" width="30" height="30" rx="4" fill="#eab308" />
                   <text x="0" y="30" textAnchor="middle" fill="#eab308" fontSize="10" fontWeight="bold">ELEV 2</text>
                 </g>
