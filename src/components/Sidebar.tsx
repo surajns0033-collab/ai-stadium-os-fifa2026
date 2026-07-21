@@ -115,7 +115,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           <img 
             src="/golden_football_trophy.png" 
             alt="FIFA Trophy" 
-            className="w-12 h-12 object-contain" 
+            className="w-12 h-12 object-contain scale-x-[1.3] ml-1 mr-2" 
             style={{ mixBlendMode: 'screen' }} 
           />
           <span className="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">STADIUM OS</span>
