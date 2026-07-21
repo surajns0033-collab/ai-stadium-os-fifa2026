@@ -110,15 +110,15 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   };
   return (
     <aside className="w-64 glass-panel border-r border-slate-700/50 flex flex-col z-20 relative hidden lg:flex">
-      <div className="h-16 flex items-center px-4 border-b border-slate-700/50">
-        <div className="flex items-center gap-1">
+      <div className="h-16 flex items-center px-3 border-b border-slate-700/50">
+        <div className="flex items-center gap-0">
           <img 
             src="/golden_football_trophy.png" 
             alt="FIFA Trophy" 
-            className="w-12 h-12 object-contain scale-x-[1.3] ml-1 mr-2" 
+            className="w-14 h-14 object-contain scale-125 -mr-3 -ml-1" 
             style={{ mixBlendMode: 'screen' }} 
           />
-          <span className="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">STADIUM OS</span>
+          <span className="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 relative z-10">STADIUM OS</span>
         </div>
       </div>
 
