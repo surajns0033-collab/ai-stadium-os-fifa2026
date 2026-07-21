@@ -202,9 +202,28 @@ export default function AccessibilityDashboard() {
                 </g>
 
                 {/* Crowd Density (Obstacles) */}
-                <circle cx="700" cy="330" r="80" fill="#ef4444" fillOpacity="0.1" className="animate-pulse" />
-                <circle cx="700" cy="330" r="40" fill="#ef4444" fillOpacity="0.2" className="animate-pulse" />
-                <text x="700" y="335" textAnchor="middle" fill="#ef4444" fontSize="10" fontWeight="bold">CROWD SURGE</text>
+                <g 
+                  className="cursor-pointer transition-opacity group" 
+                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/crowd_surge.png'); }} 
+                  onMouseEnter={() => { playHover(); setHoveredIcon('crowdSurge'); }}
+                  onMouseLeave={() => setHoveredIcon(null)}
+                >
+                  <circle cx="700" cy="330" r="80" fill="#ef4444" fillOpacity="0.1" className="animate-pulse" />
+                  <circle cx="700" cy="330" r="40" fill="#ef4444" fillOpacity={hoveredIcon === 'crowdSurge' ? 0.4 : 0.2} className="animate-pulse transition-all" />
+                  <text x="700" y="335" textAnchor="middle" fill="#ef4444" fontSize="10" fontWeight="bold">CROWD SURGE</text>
+                  
+                  {hoveredIcon === 'crowdSurge' && (
+                    <foreignObject x="625" y="200" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
+                      <div className="w-full h-full bg-black/95 border border-red-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/crowd_surge.png')" }}></div>
+                        <div className="p-2 bg-slate-900/90">
+                          <div className="text-[9px] font-bold text-red-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> CONCOURSE D CAM</div>
+                          <div className="text-[10px] text-white leading-tight underline">Click to expand</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
+                </g>
 
                 {/* Wheelchair Accessible Routes (Animated) */}
                 <path id="route1" d="M 150 330 Q 300 330 500 130" fill="none" stroke="#3b82f6" strokeWidth="4" strokeDasharray="10 10" className="animate-[dash_2s_linear_infinite]" />
