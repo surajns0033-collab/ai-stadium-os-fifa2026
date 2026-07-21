@@ -143,9 +143,16 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
 
       // Wait minimum time to show the cool cascade animation before replacing with actual response
       setTimeout(() => {
-        setMessages(prev => prev.map(msg => 
-          msg.id === aiMsgId ? { id: aiMsgId, sender: 'ai', responseData: finalResponse } : msg
-        ));
+        setMessages(prev => prev.map(msg => {
+          if (msg.id === aiMsgId) {
+            if (finalResponse.type === 'chat') {
+              return { id: aiMsgId, sender: 'ai', text: finalResponse.text };
+            } else {
+              return { id: aiMsgId, sender: 'ai', responseData: finalResponse.cardData || finalResponse };
+            }
+          }
+          return msg;
+        }));
       }, 3500);
 
     } catch (error) {
