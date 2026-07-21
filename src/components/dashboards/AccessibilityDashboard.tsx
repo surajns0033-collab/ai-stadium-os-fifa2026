@@ -151,8 +151,8 @@ export default function AccessibilityDashboard() {
           </div>
         </div>
 
-        <div className="w-80 flex flex-col gap-4">
-          <div className="glass-panel p-5 rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl flex flex-col">
+        <div className="w-80 flex flex-col gap-4 min-h-0">
+          <div className="glass-panel p-5 rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl flex flex-col shrink-0">
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
               <Zap size={14} className="text-blue-400 animate-pulse"/> Dynamic Route Optimization
             </h3>
@@ -170,8 +170,8 @@ export default function AccessibilityDashboard() {
             </div>
           </div>
 
-          <div className="glass-panel p-5 rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl flex-1 overflow-y-auto custom-scrollbar">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+          <div className="glass-panel p-5 rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl flex-1 overflow-y-auto custom-scrollbar min-h-0">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2 shrink-0">
               <Brain size={14} className="text-purple-400"/> Specialized Services
             </h3>
             
