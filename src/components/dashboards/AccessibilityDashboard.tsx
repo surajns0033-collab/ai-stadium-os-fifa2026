@@ -157,7 +157,7 @@ export default function AccessibilityDashboard() {
               <Zap size={14} className="text-blue-400 animate-pulse"/> Dynamic Route Optimization
             </h3>
             
-            <div className="bg-black/60 rounded-xl border border-slate-700 overflow-hidden relative">
+            <div className="bg-black/60 rounded-xl border border-slate-700 overflow-hidden relative cursor-pointer hover:border-blue-500/50 transition-colors group" onMouseEnter={playHover} onClick={playClick}>
               <div className="absolute top-0 left-0 w-full h-1 bg-blue-500 transition-colors duration-1000"></div>
               <div className="p-4">
                 <div className="text-[10px] font-bold text-blue-400 mb-1 tracking-widest">
@@ -183,7 +183,7 @@ export default function AccessibilityDashboard() {
             </h3>
             
             <div className="space-y-4">
-              <div className="bg-slate-800/60 border border-slate-700 p-3 rounded-xl relative overflow-hidden transition-all duration-300 hover:border-pink-500/50" onMouseEnter={playHover}>
+              <div className="bg-slate-800/60 border border-slate-700 p-3 rounded-xl relative overflow-hidden transition-all duration-300 hover:border-pink-500/50 cursor-pointer" onMouseEnter={playHover} onClick={playClick}>
                 <div className="absolute left-0 top-0 w-1 h-full bg-pink-500"></div>
                 <div className="text-xs font-bold text-pink-400 mb-1 flex items-center gap-2"><Heart size={12}/> SENSORY ROOM A</div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-3">
@@ -201,7 +201,7 @@ export default function AccessibilityDashboard() {
                 </div>
               </div>
 
-              <div className="bg-slate-800/60 border border-slate-700 p-3 rounded-xl relative overflow-hidden transition-all duration-300 hover:border-blue-500/50" onMouseEnter={playHover}>
+              <div className="bg-slate-800/60 border border-slate-700 p-3 rounded-xl relative overflow-hidden transition-all duration-300 hover:border-blue-500/50 cursor-pointer" onMouseEnter={playHover} onClick={playClick}>
                 <div className="absolute left-0 top-0 w-1 h-full bg-blue-500"></div>
                 <div className="text-xs font-bold text-blue-400 mb-1 flex items-center gap-2"><Eye size={12}/> AUDIO DESCRIPTION</div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-2">
