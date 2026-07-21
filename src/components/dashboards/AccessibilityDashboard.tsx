@@ -163,9 +163,16 @@ export default function AccessibilityDashboard() {
                 <div className="text-[10px] font-bold text-blue-400 mb-1 tracking-widest">
                   ROUTE DIVERTED
                 </div>
-                <p className="text-sm text-white leading-relaxed font-medium">
+                <p className="text-sm text-white leading-relaxed font-medium mb-3">
                   AI detected high crowd density near East Concourse. Wheelchair route automatically diverted via Elevator 2.
                 </p>
+                <div className="relative w-full h-24 rounded-lg overflow-hidden border border-slate-700/50">
+                  <img src="/accessibility/wheelchair_route.png" alt="Accessible Route" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-2 left-2 text-[9px] font-bold text-white flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span> LIVE CAM
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -179,9 +186,16 @@ export default function AccessibilityDashboard() {
               <div className="bg-slate-800/60 border border-slate-700 p-3 rounded-xl relative overflow-hidden transition-all duration-300 hover:border-pink-500/50" onMouseEnter={playHover}>
                 <div className="absolute left-0 top-0 w-1 h-full bg-pink-500"></div>
                 <div className="text-xs font-bold text-pink-400 mb-1 flex items-center gap-2"><Heart size={12}/> SENSORY ROOM A</div>
-                <p className="text-xs text-slate-300 leading-relaxed mb-2">
+                <p className="text-xs text-slate-300 leading-relaxed mb-3">
                   Lighting and sound levels dynamically adjusted for calming environment. 4 families currently inside.
                 </p>
+                <div className="relative w-full h-20 rounded-lg overflow-hidden border border-slate-700/50 mb-2">
+                  <img src="/accessibility/sensory_room.png" alt="Sensory Room" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-1 left-2 text-[9px] font-bold text-white flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span> LIVE CAM
+                  </div>
+                </div>
                 <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400">
                   Capacity at 80% - Routing to Room B
                 </div>
