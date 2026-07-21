@@ -139,7 +139,7 @@ export default function FootballOperationsDashboard() {
           
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
 
-          <div className="absolute top-4 right-4 z-10">
+          <div className="absolute top-4 right-4 z-30">
             <button className="bg-black/60 backdrop-blur border border-white/10 hover:border-blue-500/50 rounded-lg p-2 text-slate-400 hover:text-white transition-colors" onClick={playClick} onMouseEnter={playHover}>
               <Maximize size={16} />
             </button>
@@ -243,7 +243,7 @@ export default function FootballOperationsDashboard() {
             </div>
 
             {/* Live Situation */}
-            <div className="bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.3)] transition-all duration-500 flex items-center gap-4 max-w-2xl">
+            <div className="bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.3)] transition-all duration-500 flex items-center gap-4">
               <style jsx>{`
                 @keyframes slide-left {
                   from { left: 100%; }
@@ -253,9 +253,9 @@ export default function FootballOperationsDashboard() {
                   animation: slide-left 12s linear infinite;
                 }
               `}</style>
-              <div className="flex items-center gap-2 border-r border-blue-500/30 pr-4 shrink-0">
+              <div className="flex items-center gap-2 border-r border-blue-500/30 pr-4 shrink-0 w-48">
                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
-                <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest whitespace-nowrap">LIVE: {currentScenario.phase}</div>
+                <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest whitespace-nowrap truncate">LIVE: {currentScenario.phase}</div>
               </div>
               <div className="overflow-hidden relative w-72 h-4 flex items-center shrink-0">
                 <p className="text-xs text-slate-200 whitespace-nowrap absolute animate-slide">
