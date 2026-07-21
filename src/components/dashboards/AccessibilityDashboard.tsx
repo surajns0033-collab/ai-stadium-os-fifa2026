@@ -133,7 +133,7 @@ export default function AccessibilityDashboard() {
                 <g 
                   transform="translate(750, 510)" 
                   className="cursor-pointer transition-opacity group" 
-                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/sensory_room.png'); }} 
+                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/sensory_room_b.png'); }} 
                   onMouseEnter={() => { playHover(); setHoveredIcon('sensoryB'); }}
                   onMouseLeave={() => setHoveredIcon(null)}
                 >
@@ -144,7 +144,7 @@ export default function AccessibilityDashboard() {
                   {hoveredIcon === 'sensoryB' && (
                     <foreignObject x="-75" y="-130" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
                       <div className="w-full h-full bg-black/95 border border-pink-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(236,72,153,0.5)]">
-                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/sensory_room.png')" }}></div>
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/sensory_room_b.png')" }}></div>
                         <div className="p-2 bg-slate-900/90">
                           <div className="text-[9px] font-bold text-pink-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span> SENSORY B LIVE</div>
                           <div className="text-[10px] text-white leading-tight underline">Click to expand</div>
@@ -158,7 +158,7 @@ export default function AccessibilityDashboard() {
                 <g 
                   transform="translate(500, 130)" 
                   className="cursor-pointer transition-opacity group" 
-                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/wheelchair_route.png'); }} 
+                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/elevator_1.png'); }} 
                   onMouseEnter={() => { playHover(); setHoveredIcon('elev1'); }}
                   onMouseLeave={() => setHoveredIcon(null)}
                 >
@@ -168,7 +168,7 @@ export default function AccessibilityDashboard() {
                   {hoveredIcon === 'elev1' && (
                     <foreignObject x="-75" y="40" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
                       <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
-                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/wheelchair_route.png')" }}></div>
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/elevator_1.png')" }}></div>
                         <div className="p-2 bg-slate-900/90">
                           <div className="text-[9px] font-bold text-yellow-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span> ELEVATOR 1 CAM</div>
                           <div className="text-[10px] text-white leading-tight underline">Click to expand</div>
@@ -181,7 +181,7 @@ export default function AccessibilityDashboard() {
                 <g 
                   transform="translate(500, 530)" 
                   className="cursor-pointer transition-opacity group" 
-                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/wheelchair_route.png'); }} 
+                  onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/elevator_2.png'); }} 
                   onMouseEnter={() => { playHover(); setHoveredIcon('elev2'); }}
                   onMouseLeave={() => setHoveredIcon(null)}
                 >
@@ -191,7 +191,7 @@ export default function AccessibilityDashboard() {
                   {hoveredIcon === 'elev2' && (
                     <foreignObject x="-75" y="-130" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
                       <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
-                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/wheelchair_route.png')" }}></div>
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/elevator_2.png')" }}></div>
                         <div className="p-2 bg-slate-900/90">
                           <div className="text-[9px] font-bold text-yellow-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span> ELEVATOR 2 CAM</div>
                           <div className="text-[10px] text-white leading-tight underline">Click to expand</div>
@@ -242,8 +242,8 @@ export default function AccessibilityDashboard() {
                 <p className="text-sm text-white leading-relaxed font-medium mb-3">
                   AI detected high crowd density near East Concourse. Wheelchair route automatically diverted via Elevator 2.
                 </p>
-                <div className="relative w-full h-24 rounded-lg overflow-hidden border border-slate-700/50 cursor-pointer group-hover:border-blue-400/50" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/wheelchair_route.png'); }}>
-                  <img src="/accessibility/wheelchair_route.png" alt="Accessible Route" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative w-full h-24 rounded-lg overflow-hidden border border-slate-700/50 cursor-pointer group-hover:border-blue-400/50" onClick={(e) => { e.stopPropagation(); playClick(); setSelectedImage('/accessibility/wheelchair_route_diverted.png'); }}>
+                  <img src="/accessibility/wheelchair_route_diverted.png" alt="Accessible Route" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                   <div className="absolute bottom-2 left-2 text-[9px] font-bold text-white flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span> LIVE CAM
