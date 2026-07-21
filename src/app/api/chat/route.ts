@@ -39,7 +39,7 @@ The user query is: "${message}"
 `;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       contents: systemInstruction,
       config: {
         responseMimeType: "application/json",
@@ -47,10 +47,13 @@ The user query is: "${message}"
       }
     });
 
-    const responseText = response.text;
+    let responseText = response.text;
     if (!responseText) {
       throw new Error("No text returned from Gemini");
     }
+
+    // Strip markdown codeblocks if Gemini added them
+    responseText = responseText.replace(/^```json/i, '').replace(/^```/, '').replace(/```$/, '').trim();
 
     const data = JSON.parse(responseText);
     
