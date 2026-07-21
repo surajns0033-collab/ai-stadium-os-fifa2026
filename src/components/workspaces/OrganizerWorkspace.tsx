@@ -283,6 +283,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
     'Crowd',
     'Stadium',
     'Football Operations',
+    'Accessibility',
     'Parking',
     'Food',
     'Transportation',
