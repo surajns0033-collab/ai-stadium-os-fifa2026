@@ -85,7 +85,7 @@ export default function AccessibilityDashboard() {
             </div>
           </div>
 
-          <div className="flex-1 glass-panel rounded-3xl border border-slate-700/50 bg-[#0a111a]/90 backdrop-blur-xl relative overflow-hidden flex items-center justify-center shadow-2xl">
+          <div className="flex-1 glass-panel rounded-3xl border border-slate-700/50 bg-[#0a111a]/90 backdrop-blur-xl relative overflow-hidden flex flex-col items-center justify-center shadow-2xl min-h-0">
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
             
             <div className="absolute top-4 right-4 z-30">
@@ -94,8 +94,8 @@ export default function AccessibilityDashboard() {
               </button>
             </div>
 
-            <div className="relative w-full max-w-5xl aspect-[1.5/1]">
-              <svg viewBox="0 0 1000 660" className="w-full h-full drop-shadow-[0_0_40px_rgba(59,130,246,0.1)]">
+            <div className="relative w-full h-full min-h-0 flex items-center justify-center p-4">
+              <svg viewBox="0 0 1000 660" className="w-full h-full max-h-full drop-shadow-[0_0_40px_rgba(59,130,246,0.1)]">
                 {/* Stadium Base Layout */}
                 <rect x="100" y="80" width="800" height="500" rx="250" fill="none" stroke="#1e293b" strokeWidth="10" />
                 <rect x="200" y="180" width="600" height="300" rx="150" fill="none" stroke="#1e293b" strokeWidth="8" />
