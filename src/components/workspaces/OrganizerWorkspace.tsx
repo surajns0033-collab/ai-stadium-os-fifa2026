@@ -27,6 +27,7 @@ const VenueOperationsDashboard = dynamic(() => import('../dashboards/VenueOperat
 const LanguageCenterDashboard = dynamic(() => import('../dashboards/LanguageCenterDashboard'), { ssr: false });
 const AIOperationsDashboard = dynamic(() => import('../dashboards/AIOperationsDashboard'), { ssr: false });
 const NavigationDashboard = dynamic(() => import('../dashboards/NavigationDashboard'), { ssr: false });
+const AccessibilityDashboard = dynamic(() => import('../dashboards/AccessibilityDashboard'), { ssr: false });
 const DataCenterWorkspace = dynamic(() => import('./DataCenterWorkspace'), { ssr: false });
 const SystemArchitectureWorkspace = dynamic(() => import('./SystemArchitectureWorkspace'), { ssr: false });
 const IdentitySecurityWorkspace = dynamic(() => import('./IdentitySecurityWorkspace'), { ssr: false });
@@ -221,6 +222,10 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
 
     if (activeTab === 'Language Center') {
        return <LanguageCenterDashboard />;
+    }
+
+    if (activeTab === 'Accessibility') {
+       return <AccessibilityDashboard />;
     }
 
     if (activeTab === 'Data Center') {
