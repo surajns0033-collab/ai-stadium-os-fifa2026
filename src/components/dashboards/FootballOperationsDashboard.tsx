@@ -239,16 +239,37 @@ export default function FootballOperationsDashboard() {
             <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-4 h-1 bg-[#E20074]"></div> Active Pressure Zone</div>
           </div>
 
-          {/* Live Situation Bubble */}
-          <div className="absolute bottom-4 left-4 bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl p-4 shadow-[0_0_30px_rgba(43,124,228,0.3)] max-w-sm transition-all duration-500 z-20">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
-              <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">LIVE SITUATION</div>
+          {/* Live Situation Ticker (News Style) */}
+          <div className="absolute bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-blue-500/30 overflow-hidden flex items-center h-12 z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+            <style jsx>{`
+              @keyframes marquee {
+                0% { transform: translateX(100vw); }
+                100% { transform: translateX(-100vw); }
+              }
+              .animate-marquee {
+                animation: marquee 20s linear infinite;
+              }
+            `}</style>
+            
+            {/* Ticker Title/Badge */}
+            <div className="h-full bg-blue-600 px-6 flex items-center justify-center gap-3 z-10 shrink-0 shadow-[10px_0_20px_rgba(0,0,0,0.8)] relative">
+              <div className="w-2 h-2 rounded-full bg-white animate-ping absolute left-3"></div>
+              <div className="w-2 h-2 rounded-full bg-white absolute left-3"></div>
+              <div className="text-[11px] font-black text-white uppercase tracking-widest whitespace-nowrap pl-4">LIVE TACTICS</div>
             </div>
-            <h3 className="text-lg font-bold text-white mb-1 leading-tight">{currentScenario.phase}</h3>
-            <p className="text-sm text-slate-300 leading-relaxed">
-              {currentScenario.desc}
-            </p>
+            
+            {/* Scrolling Text */}
+            <div className="flex-1 overflow-hidden relative h-full flex items-center">
+              <div className="whitespace-nowrap animate-marquee flex items-center gap-6">
+                <span className="text-sm font-bold text-blue-400 uppercase tracking-wider">PHASE: {currentScenario.phase}</span>
+                <span className="text-blue-500/50">•</span>
+                <span className="text-sm text-white font-medium uppercase tracking-wide">{currentScenario.desc}</span>
+                <span className="text-blue-500/50">•</span>
+                <span className="text-sm font-bold text-blue-400 uppercase tracking-wider">PHASE: {currentScenario.phase}</span>
+                <span className="text-blue-500/50">•</span>
+                <span className="text-sm text-white font-medium uppercase tracking-wide">{currentScenario.desc}</span>
+              </div>
+            </div>
           </div>
         </div>
 
