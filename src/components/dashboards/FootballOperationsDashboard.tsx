@@ -231,45 +231,28 @@ export default function FootballOperationsDashboard() {
             </svg>
           </div>
 
-          {/* Tactical Legend overlay */}
-          <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-xl border border-slate-700 rounded-xl p-3 flex flex-col gap-2 shadow-2xl z-20">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Tactical Legend</div>
-            <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#2B7CE4] border border-white rounded-full"></div> Home (4-2-3-1)</div>
-            <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#eab308] border border-white rounded-full"></div> Away (4-3-3)</div>
-            <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-4 h-1 bg-[#E20074]"></div> Active Pressure Zone</div>
-          </div>
+          {/* Top Status Bar (Legend + Live Situation) */}
+          <div className="absolute top-4 left-4 z-20 flex gap-4 items-center">
+            
+            {/* Horizontal Tactical Legend */}
+            <div className="bg-black/80 backdrop-blur-xl border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-5 shadow-2xl">
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-r border-slate-700 pr-4">Legend</div>
+              <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#2B7CE4] border border-white rounded-full shadow-[0_0_8px_#2B7CE4]"></div> Home</div>
+              <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#eab308] border border-white rounded-full shadow-[0_0_8px_#eab308]"></div> Away</div>
+              <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-4 h-1.5 bg-[#E20074] shadow-[0_0_8px_#E20074]"></div> Pressure</div>
+            </div>
 
-          {/* Live Situation Ticker (News Style) */}
-          <div className="absolute bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-blue-500/30 overflow-hidden flex items-center h-12 z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-            <style jsx>{`
-              @keyframes marquee {
-                0% { transform: translateX(100vw); }
-                100% { transform: translateX(-100vw); }
-              }
-              .animate-marquee {
-                animation: marquee 20s linear infinite;
-              }
-            `}</style>
-            
-            {/* Ticker Title/Badge */}
-            <div className="h-full bg-blue-600 px-6 flex items-center justify-center gap-3 z-10 shrink-0 shadow-[10px_0_20px_rgba(0,0,0,0.8)] relative">
-              <div className="w-2 h-2 rounded-full bg-white animate-ping absolute left-3"></div>
-              <div className="w-2 h-2 rounded-full bg-white absolute left-3"></div>
-              <div className="text-[11px] font-black text-white uppercase tracking-widest whitespace-nowrap pl-4">LIVE TACTICS</div>
-            </div>
-            
-            {/* Scrolling Text */}
-            <div className="flex-1 overflow-hidden relative h-full flex items-center">
-              <div className="whitespace-nowrap animate-marquee flex items-center gap-6">
-                <span className="text-sm font-bold text-blue-400 uppercase tracking-wider">PHASE: {currentScenario.phase}</span>
-                <span className="text-blue-500/50">•</span>
-                <span className="text-sm text-white font-medium uppercase tracking-wide">{currentScenario.desc}</span>
-                <span className="text-blue-500/50">•</span>
-                <span className="text-sm font-bold text-blue-400 uppercase tracking-wider">PHASE: {currentScenario.phase}</span>
-                <span className="text-blue-500/50">•</span>
-                <span className="text-sm text-white font-medium uppercase tracking-wide">{currentScenario.desc}</span>
+            {/* Live Situation */}
+            <div className="bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-4 py-3 shadow-[0_0_30px_rgba(43,124,228,0.3)] transition-all duration-500 flex items-center gap-4 max-w-lg">
+              <div className="flex items-center gap-2 border-r border-blue-500/30 pr-4 shrink-0">
+                <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
+                <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest whitespace-nowrap">LIVE: {currentScenario.phase}</div>
               </div>
+              <p className="text-xs text-slate-200 truncate">
+                {currentScenario.desc}
+              </p>
             </div>
+
           </div>
         </div>
 
