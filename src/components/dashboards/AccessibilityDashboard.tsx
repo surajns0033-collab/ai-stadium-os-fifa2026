@@ -6,6 +6,7 @@ import { useUISounds } from '@/hooks/useUISounds';
 export default function AccessibilityDashboard() {
   const { playHover, playClick } = useUISounds();
   const [activeRoute, setActiveRoute] = useState('gate-a');
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
   // Animation ticks
   const [tick, setTick] = useState(0);
@@ -104,25 +105,99 @@ export default function AccessibilityDashboard() {
                 <path d="M 500 80 L 500 180 M 500 480 L 500 580 M 100 330 L 200 330 M 800 330 L 900 330" stroke="#1e293b" strokeWidth="10" />
 
                 {/* Sensory Rooms */}
-                <g transform="translate(250, 150)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
-                  <rect x="-40" y="-30" width="80" height="60" rx="10" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" />
+                <g 
+                  transform="translate(250, 150)" 
+                  className="cursor-pointer transition-opacity group" 
+                  onClick={playClick} 
+                  onMouseEnter={() => { playHover(); setHoveredIcon('sensoryA'); }}
+                  onMouseLeave={() => setHoveredIcon(null)}
+                >
+                  <rect x="-40" y="-30" width="80" height="60" rx="10" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" className={hoveredIcon === 'sensoryA' ? "opacity-100" : "opacity-80"} />
                   <circle cx="0" cy="0" r="10" fill="#ec4899" className="animate-pulse" />
                   <text x="0" y="22" textAnchor="middle" fill="#ec4899" fontSize="10" fontWeight="bold">SENSORY A</text>
+                  
+                  {hoveredIcon === 'sensoryA' && (
+                    <foreignObject x="-75" y="30" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
+                      <div className="w-full h-full bg-black/95 border border-pink-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(236,72,153,0.5)]">
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/sensory_room.png')" }}></div>
+                        <div className="p-2 bg-slate-900/90">
+                          <div className="text-[9px] font-bold text-pink-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span> SENSORY A LIVE</div>
+                          <div className="text-[10px] text-white">Capacity: 4 Families</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
                 </g>
-                <g transform="translate(750, 510)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
-                  <rect x="-40" y="-30" width="80" height="60" rx="10" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" />
+
+                <g 
+                  transform="translate(750, 510)" 
+                  className="cursor-pointer transition-opacity group" 
+                  onClick={playClick} 
+                  onMouseEnter={() => { playHover(); setHoveredIcon('sensoryB'); }}
+                  onMouseLeave={() => setHoveredIcon(null)}
+                >
+                  <rect x="-40" y="-30" width="80" height="60" rx="10" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" className={hoveredIcon === 'sensoryB' ? "opacity-100" : "opacity-80"} />
                   <circle cx="0" cy="0" r="10" fill="#ec4899" className="animate-pulse" />
                   <text x="0" y="22" textAnchor="middle" fill="#ec4899" fontSize="10" fontWeight="bold">SENSORY B</text>
+
+                  {hoveredIcon === 'sensoryB' && (
+                    <foreignObject x="-75" y="-130" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
+                      <div className="w-full h-full bg-black/95 border border-pink-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(236,72,153,0.5)]">
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/sensory_room.png')" }}></div>
+                        <div className="p-2 bg-slate-900/90">
+                          <div className="text-[9px] font-bold text-pink-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span> SENSORY B LIVE</div>
+                          <div className="text-[10px] text-white">Capacity: Empty</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
                 </g>
 
                 {/* Elevators */}
-                <g transform="translate(500, 130)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
-                  <rect x="-15" y="-15" width="30" height="30" rx="4" fill="#eab308" />
+                <g 
+                  transform="translate(500, 130)" 
+                  className="cursor-pointer transition-opacity group" 
+                  onClick={playClick} 
+                  onMouseEnter={() => { playHover(); setHoveredIcon('elev1'); }}
+                  onMouseLeave={() => setHoveredIcon(null)}
+                >
+                  <rect x="-15" y="-15" width="30" height="30" rx="4" fill="#eab308" className={hoveredIcon === 'elev1' ? "opacity-100 scale-110" : "opacity-80"} style={{ transformOrigin: 'center' }} />
                   <text x="0" y="30" textAnchor="middle" fill="#eab308" fontSize="10" fontWeight="bold">ELEV 1</text>
+
+                  {hoveredIcon === 'elev1' && (
+                    <foreignObject x="-75" y="40" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
+                      <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/wheelchair_route.png')" }}></div>
+                        <div className="p-2 bg-slate-900/90">
+                          <div className="text-[9px] font-bold text-yellow-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span> ELEVATOR 1 CAM</div>
+                          <div className="text-[10px] text-white">Status: Operational</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
                 </g>
-                <g transform="translate(500, 530)" className="cursor-pointer hover:opacity-80 transition-opacity" onClick={playClick} onMouseEnter={playHover}>
-                  <rect x="-15" y="-15" width="30" height="30" rx="4" fill="#eab308" />
+
+                <g 
+                  transform="translate(500, 530)" 
+                  className="cursor-pointer transition-opacity group" 
+                  onClick={playClick} 
+                  onMouseEnter={() => { playHover(); setHoveredIcon('elev2'); }}
+                  onMouseLeave={() => setHoveredIcon(null)}
+                >
+                  <rect x="-15" y="-15" width="30" height="30" rx="4" fill="#eab308" className={hoveredIcon === 'elev2' ? "opacity-100 scale-110" : "opacity-80"} style={{ transformOrigin: 'center' }} />
                   <text x="0" y="30" textAnchor="middle" fill="#eab308" fontSize="10" fontWeight="bold">ELEV 2</text>
+
+                  {hoveredIcon === 'elev2' && (
+                    <foreignObject x="-75" y="-130" width="150" height="120" className="animate-fade-in pointer-events-none z-50">
+                      <div className="w-full h-full bg-black/95 border border-yellow-500/50 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.5)]">
+                        <div className="h-20 w-full bg-cover bg-center" style={{ backgroundImage: "url('/accessibility/wheelchair_route.png')" }}></div>
+                        <div className="p-2 bg-slate-900/90">
+                          <div className="text-[9px] font-bold text-yellow-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span> ELEVATOR 2 CAM</div>
+                          <div className="text-[10px] text-white">Status: Priority Route</div>
+                        </div>
+                      </div>
+                    </foreignObject>
+                  )}
                 </g>
 
                 {/* Crowd Density (Obstacles) */}
