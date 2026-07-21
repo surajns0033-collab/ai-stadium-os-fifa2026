@@ -106,7 +106,7 @@ npm run dev
 npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open the **Live Production Platform** directly at: [https://ai-stadium-os-fifa2026.vercel.app](https://ai-stadium-os-fifa2026.vercel.app)
 
 ## 📄 License
 
