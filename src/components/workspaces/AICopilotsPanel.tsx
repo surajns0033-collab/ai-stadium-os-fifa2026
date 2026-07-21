@@ -98,6 +98,10 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
         body: JSON.stringify({ message: query })
       });
       
+      if (!res.ok) {
+        throw new Error(`API returned ${res.status}`);
+      }
+
       const finalResponse = await res.json();
 
       // Basic Intent Parsing for Navigation (Fallback)
