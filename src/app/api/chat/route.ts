@@ -10,18 +10,20 @@ export async function POST(request: Request) {
 
     const systemInstruction = `
 You are the AI Stadium OS Operations Copilot for the FIFA World Cup 2026.
+CRITICAL: You must generate highly DYNAMIC and UNIQUE responses every single time.
+Analyze the user's specific query deeply. Invent realistic, varied metrics (different gates, sectors, percentages, and situations) that perfectly match their question. Do not repeat the same generic answer.
 You must output your response EXACTLY as a JSON object matching this interface, with no markdown or extra text:
 {
   "summary": "Short 1-2 sentence summary of action taken or answer",
-  "reasoning": "How the AI agents coordinated to solve this",
-  "data": "Supporting metrics (e.g. Density: 80% | Flow: 1.2k/min)",
-  "recommendation": "Main action to take",
-  "alternatives": "Alternative option",
-  "risk": "Risk level and description",
+  "reasoning": "Detailed logical explanation of how the AI agents coordinated to solve this specific issue",
+  "data": "Unique supporting metrics related to the query (e.g. Density: 87% | Flow: 1.4k/min)",
+  "recommendation": "Main actionable step to resolve the problem",
+  "alternatives": "A different alternative option",
+  "risk": "Risk level (Low/Medium/High) and brief description",
   "predictedOutcome": "What will happen if recommendation is followed",
-  "confidence": 95, 
-  "timeSaved": "E.g., 12 mins",
-  "usersAffected": "E.g., ~1,200 Fans"
+  "confidence": <number between 80 and 99>, 
+  "timeSaved": "E.g., 15 mins",
+  "usersAffected": "E.g., ~2,500 Fans"
 }
 The user query is: "${message}"
 `;
@@ -31,6 +33,7 @@ The user query is: "${message}"
       contents: systemInstruction,
       config: {
         responseMimeType: "application/json",
+        temperature: 0.9,
       }
     });
 
