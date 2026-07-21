@@ -229,27 +229,26 @@ export default function FootballOperationsDashboard() {
               <text x="430" y="630" fill="#2B7CE4" fontSize="12" fontWeight="bold" opacity="0.8">HOME ATTACK DIRECTION</text>
 
             </svg>
-            
-            {/* Tactical Legend overlay */}
-            <div className="absolute top-6 left-6 bg-black/80 backdrop-blur-xl border border-slate-700 rounded-xl p-3 flex flex-col gap-2 shadow-2xl">
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Tactical Legend</div>
-              <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#2B7CE4] border border-white rounded-full"></div> Home (4-2-3-1)</div>
-              <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#eab308] border border-white rounded-full"></div> Away (4-3-3)</div>
-              <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-4 h-1 bg-[#E20074]"></div> Active Pressure Zone</div>
-            </div>
+          </div>
 
-            {/* Live Situation Bubble */}
-            <div className="absolute bottom-10 left-10 bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl p-4 shadow-[0_0_30px_rgba(43,124,228,0.3)] max-w-sm transition-all duration-500">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
-                <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">LIVE SITUATION</div>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-1 leading-tight">{currentScenario.phase}</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                {currentScenario.desc}
-              </p>
-            </div>
+          {/* Tactical Legend overlay */}
+          <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-xl border border-slate-700 rounded-xl p-3 flex flex-col gap-2 shadow-2xl z-20">
+            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Tactical Legend</div>
+            <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#2B7CE4] border border-white rounded-full"></div> Home (4-2-3-1)</div>
+            <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-3 h-3 bg-[#eab308] border border-white rounded-full"></div> Away (4-3-3)</div>
+            <div className="flex items-center gap-2 text-xs text-white font-medium"><div className="w-4 h-1 bg-[#E20074]"></div> Active Pressure Zone</div>
+          </div>
 
+          {/* Live Situation Bubble */}
+          <div className="absolute bottom-4 left-4 bg-black/90 backdrop-blur-xl border border-blue-500/50 rounded-xl p-4 shadow-[0_0_30px_rgba(43,124,228,0.3)] max-w-sm transition-all duration-500 z-20">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
+              <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">LIVE SITUATION</div>
+            </div>
+            <h3 className="text-lg font-bold text-white mb-1 leading-tight">{currentScenario.phase}</h3>
+            <p className="text-sm text-slate-300 leading-relaxed">
+              {currentScenario.desc}
+            </p>
           </div>
         </div>
 
