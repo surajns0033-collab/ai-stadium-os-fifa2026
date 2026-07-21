@@ -46,7 +46,7 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const simulateAgentCollaboration = (query: string) => {
+  const simulateAgentCollaboration = async (query: string) => {
     // 1. Add user message
     const userMsgId = Date.now().toString();
     setMessages(prev => [...prev, { id: userMsgId, sender: 'user', text: query }]);
@@ -85,69 +85,76 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
 
       stepIndex++;
 
-      // Finish simulation
       if (stepIndex > cascade.length) {
         clearInterval(interval);
-        
-        // Basic Intent Parsing for Navigation
-        const lowercaseQuery = query.toLowerCase();
-        const isNavigation = lowercaseQuery.includes('navigate') || lowercaseQuery.includes('go to') || lowercaseQuery.includes('show me');
-        
-        if (isNavigation && onNavigate) {
-           const lowerIntent = lowercaseQuery.replace(/(navigate|go to|show me)/g, '').trim();
-           let targetTab = 'Home';
+      }
+    }, 800); // Faster animation
 
-           if (['tickets', 'ticketing'].some(k => lowerIntent.includes(k))) targetTab = 'Home';
-           else if (['crowd', 'flow'].some(k => lowerIntent.includes(k))) targetTab = 'Crowd';
-           else if (['gates', 'door'].some(k => lowerIntent.includes(k))) targetTab = 'Gates';
-           else if (['transport', 'train', 'metro', 'bus', 'shuttle'].some(k => lowerIntent.includes(k))) targetTab = 'Transportation';
-           else if (['parking', 'car', 'ev'].some(k => lowerIntent.includes(k))) targetTab = 'Parking';
-           else if (['medical', 'health', 'ambulance'].some(k => lowerIntent.includes(k))) targetTab = 'Medical';
-           else if (['security', 'threat', 'police'].some(k => lowerIntent.includes(k))) targetTab = 'Security';
-           else if (['food', 'f&b', 'inventory'].some(k => lowerIntent.includes(k))) targetTab = 'Food';
-           else if (['washroom', 'toilet', 'restroom'].some(k => lowerIntent.includes(k))) targetTab = 'Washrooms';
-           else if (['stadium', 'seats', 'seating', 'capacity'].some(k => lowerIntent.includes(k))) targetTab = 'Stadium';
-           else if (['football', 'match', 'pitch', 'tactics', 'players'].some(k => lowerIntent.includes(k))) targetTab = 'Football Operations';
-           else if (['sustainability', 'energy', 'power'].some(k => lowerIntent.includes(k))) targetTab = 'Sustainability';
-           else if (['accessibility', 'wheelchair'].some(k => lowerIntent.includes(k))) targetTab = 'Accessibility';
-           else if (['volunteer', 'staff'].some(k => lowerIntent.includes(k))) targetTab = 'Volunteers';
-           else if (['infrastructure', 'venue', 'building'].some(k => lowerIntent.includes(k))) targetTab = 'Venue Operations';
-           else if (['language', 'translate'].some(k => lowerIntent.includes(k))) targetTab = 'Language Center';
-           else if (['report', 'analytics'].some(k => lowerIntent.includes(k))) targetTab = 'Reports';
-           else if (['twin', 'map', 'simulation'].some(k => lowerIntent.includes(k))) targetTab = 'Digital Twin';
-           else if (lowercaseQuery.includes('data') || lowercaseQuery.includes('ticket') || lowercaseQuery.includes('marketplace') || lowercaseQuery.includes('weather')) targetTab = 'Data Center';
-           else if (lowercaseQuery.includes('ops') || lowercaseQuery.includes('operations')) targetTab = 'Operations Command';
-           else if (lowercaseQuery.includes('infrastructure')) targetTab = 'Venue Operations';
-           else if (lowercaseQuery.includes('analytics')) targetTab = 'Platform Overview';
-           else if (lowercaseQuery.includes('admin')) targetTab = 'System Architecture';
+    // 3. Call Real Gemini API in background
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: query })
+      });
+      
+      const finalResponse = await res.json();
 
+      // Basic Intent Parsing for Navigation (Fallback)
+      const lowercaseQuery = query.toLowerCase();
+      const isNavigation = lowercaseQuery.includes('navigate') || lowercaseQuery.includes('go to') || lowercaseQuery.includes('show me');
+      
+      if (isNavigation && onNavigate) {
+         const lowerIntent = lowercaseQuery.replace(/(navigate|go to|show me)/g, '').trim();
+         let targetTab = 'Home';
+
+         if (['tickets', 'ticketing'].some(k => lowerIntent.includes(k))) targetTab = 'Home';
+         else if (['crowd', 'flow'].some(k => lowerIntent.includes(k))) targetTab = 'Crowd';
+         else if (['gates', 'door'].some(k => lowerIntent.includes(k))) targetTab = 'Gates';
+         else if (['transport', 'train', 'metro', 'bus', 'shuttle'].some(k => lowerIntent.includes(k))) targetTab = 'Transportation';
+         else if (['parking', 'car', 'ev'].some(k => lowerIntent.includes(k))) targetTab = 'Parking';
+         else if (['medical', 'health', 'ambulance'].some(k => lowerIntent.includes(k))) targetTab = 'Medical';
+         else if (['security', 'threat', 'police'].some(k => lowerIntent.includes(k))) targetTab = 'Security';
+         else if (['food', 'f&b', 'inventory'].some(k => lowerIntent.includes(k))) targetTab = 'Food';
+         else if (['washroom', 'toilet', 'restroom'].some(k => lowerIntent.includes(k))) targetTab = 'Washrooms';
+         else if (['stadium', 'seats', 'seating', 'capacity'].some(k => lowerIntent.includes(k))) targetTab = 'Stadium';
+         else if (['football', 'match', 'pitch', 'tactics', 'players'].some(k => lowerIntent.includes(k))) targetTab = 'Football Operations';
+         else if (['sustainability', 'energy', 'power'].some(k => lowerIntent.includes(k))) targetTab = 'Sustainability';
+         else if (['accessibility', 'wheelchair'].some(k => lowerIntent.includes(k))) targetTab = 'Accessibility';
+         else if (['volunteer', 'staff'].some(k => lowerIntent.includes(k))) targetTab = 'Volunteers';
+         else if (['infrastructure', 'venue', 'building'].some(k => lowerIntent.includes(k))) targetTab = 'Venue Operations';
+         else if (['language', 'translate'].some(k => lowerIntent.includes(k))) targetTab = 'Language Center';
+         else if (['report', 'analytics'].some(k => lowerIntent.includes(k))) targetTab = 'Reports';
+         else if (['twin', 'map', 'simulation'].some(k => lowerIntent.includes(k))) targetTab = 'Digital Twin';
+         else if (lowercaseQuery.includes('data') || lowercaseQuery.includes('ticket') || lowercaseQuery.includes('marketplace') || lowercaseQuery.includes('weather')) targetTab = 'Data Center';
+         else if (lowercaseQuery.includes('ops') || lowercaseQuery.includes('operations')) targetTab = 'Operations Command';
+         else if (lowercaseQuery.includes('infrastructure')) targetTab = 'Venue Operations';
+         else if (lowercaseQuery.includes('analytics')) targetTab = 'Platform Overview';
+         else if (lowercaseQuery.includes('admin')) targetTab = 'System Architecture';
+
+         setTimeout(() => {
            onNavigate(targetTab);
-
            setMessages(prev => prev.map(msg => 
-             msg.id === aiMsgId ? { id: aiMsgId, sender: 'ai', text: `Navigated to ${targetTab}.` } : msg
+             msg.id === aiMsgId ? { id: aiMsgId, sender: 'ai', text: \`Navigated to \${targetTab}.\` } : msg
            ));
-           return;
-        }
+         }, 3500);
+         return;
+      }
 
-        // Replace simulation with Universal Response for non-navigation queries
-        const finalResponse: AIResponseData = {
-          summary: `Resolved issue at ${memory.currentGate || 'Sector 4'}. Redirected flow.`,
-          reasoning: `Crowd AI detected 82% density at ${memory.currentGate || 'Sector 4'}. Transport AI confirmed Metro Line 2 surge. Navigation AI calculated alternate route via Gate C.`,
-          data: `Density: 82% | Flow: 1.2k/min | Wait: 12m`,
-          recommendation: `Deploy 5 volunteers to ${memory.currentGate || 'Sector 4'} and open overflow Gate C.`,
-          alternatives: `Hold metro egress by 3 minutes to clear existing queue.`,
-          risk: `Low. 5% chance of minor bottleneck at Gate C.`,
-          predictedOutcome: `Queue clears in 4 minutes. Flow normalizes.`,
-          confidence: 94,
-          timeSaved: `8 mins`,
-          usersAffected: `~1,200 Fans`,
-        };
-
+      // Wait minimum time to show the cool cascade animation before replacing with actual response
+      setTimeout(() => {
         setMessages(prev => prev.map(msg => 
           msg.id === aiMsgId ? { id: aiMsgId, sender: 'ai', responseData: finalResponse } : msg
         ));
-      }
-    }, 1200); // 1.2 seconds per agent step
+      }, 3500);
+
+    } catch (error) {
+      setTimeout(() => {
+        setMessages(prev => prev.map(msg => 
+          msg.id === aiMsgId ? { id: aiMsgId, sender: 'ai', text: "Error connecting to AI Backend. Please check API Key." } : msg
+        ));
+      }, 3500);
+    }
   };
 
   const handleSend = (e: React.FormEvent) => {
