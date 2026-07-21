@@ -7,16 +7,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)](https://typescriptlang.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
----
-
-## 🏆 Hackathon Submission Highlight
-**AI Stadium OS** is built with modern web technologies and a focus on **premium aesthetics, dynamic micro-animations, and real-time data visualization**. The interface uses glassmorphism, glowing accents, and high-performance SVG animations to create an immersive "Command Center" experience.
-
-![Gates Dashboard Preview](./public/screenshots/gates_dashboard.png)
-
 ## 🎯 Problem Statement Alignment
 
-The FIFA World Cup 2026 will be the largest sporting event in history — **48 teams, 104 matches, 16 venues across 3 countries**. Managing crowd safety, real-time logistics, security, and fan experience at this scale demands an **AI-first, event-driven operating system** — not a collection of siloed static dashboards.
+The FIFA World Cup 2026 will be the largest sporting event in history — **48 teams, 104 matches, 16 venues across 3 countries**. Managing crowd safety, real-time logistics, security, and fan experience at this scale demands an **AI-first, event-driven operating system** — not a collection of siloed dashboards.
 
 **AI Stadium OS** solves this by providing a **unified command-and-control platform** that:
 
