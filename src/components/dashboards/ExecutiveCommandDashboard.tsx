@@ -10,7 +10,7 @@ export default function ExecutiveCommandDashboard() {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-y-auto p-4 lg:p-6 gap-6 relative">
+    <div className="h-auto lg:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible lg:overflow-hidden p-4 lg:p-6 gap-6 relative">
       <div className="flex justify-between items-end shrink-0 z-10">
         <div>
           <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3">
