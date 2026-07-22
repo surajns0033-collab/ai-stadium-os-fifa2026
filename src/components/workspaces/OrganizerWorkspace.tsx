@@ -312,7 +312,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   const isFullBleedWorkspace = fullBleedTabs.includes(activeTab);
 
   return (
-    <div className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0">
+    <div className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0">
       
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -381,10 +381,8 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       <MobileBottomNav
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onToggleMenu={() => setIsMobileDrawerOpen(true)}
         onToggleChat={() => setIsMobileChatOpen(!isMobileChatOpen)}
         isChatOpen={isMobileChatOpen}
-        isDrawerOpen={isMobileDrawerOpen}
       />
 
       {/* Slide-Up Mobile AI Chat Modal */}

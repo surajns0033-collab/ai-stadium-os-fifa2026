@@ -1,24 +1,19 @@
 "use client";
 import React from 'react';
-import { LayoutDashboard, Map, Bot, Bell, Menu, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Map, Bot } from 'lucide-react';
 
 interface MobileBottomNavProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  onToggleMenu: () => void;
   onToggleChat: () => void;
-  onToggleAlerts?: () => void;
   isChatOpen: boolean;
-  isDrawerOpen: boolean;
 }
 
 export default function MobileBottomNav({
   activeTab,
   setActiveTab,
-  onToggleMenu,
   onToggleChat,
-  isChatOpen,
-  isDrawerOpen
+  isChatOpen
 }: MobileBottomNavProps) {
 
   const TABS = [
@@ -26,15 +21,21 @@ export default function MobileBottomNav({
       id: 'Home', 
       label: 'Home', 
       icon: LayoutDashboard,
-      action: () => setActiveTab('Home'),
-      isActive: activeTab === 'Home' && !isChatOpen && !isDrawerOpen
+      action: () => {
+        setActiveTab('Home');
+        if (isChatOpen) onToggleChat();
+      },
+      isActive: activeTab === 'Home' && !isChatOpen
     },
     { 
       id: 'Digital Twin', 
       label: 'Map', 
       icon: Map,
-      action: () => setActiveTab('Digital Twin'),
-      isActive: activeTab === 'Digital Twin' && !isChatOpen && !isDrawerOpen
+      action: () => {
+        setActiveTab('Digital Twin');
+        if (isChatOpen) onToggleChat();
+      },
+      isActive: activeTab === 'Digital Twin' && !isChatOpen
     },
     { 
       id: 'Ask AI', 
@@ -42,19 +43,12 @@ export default function MobileBottomNav({
       icon: Bot,
       action: onToggleChat,
       isActive: isChatOpen,
-      badge: true
-    },
-    { 
-      id: 'Menu', 
-      label: 'All Apps', 
-      icon: Menu,
-      action: onToggleMenu,
-      isActive: isDrawerOpen
+      isSpecial: true
     }
   ];
 
   return (
-    <nav className="lg:hidden fixed bottom-0 inset-x-0 h-16 bg-[#05000A]/95 backdrop-blur-xl border-t border-slate-800/80 z-40 flex items-center justify-around px-3 shadow-[0_-10px_25px_rgba(0,0,0,0.5)]">
+    <nav className="lg:hidden fixed bottom-0 inset-x-0 h-16 bg-[#05000A]/95 backdrop-blur-xl border-t border-slate-800/80 z-40 flex items-center justify-around px-4 shadow-[0_-10px_25px_rgba(0,0,0,0.5)]">
       {TABS.map((tab) => {
         const Icon = tab.icon;
         const isActive = tab.isActive;
@@ -69,15 +63,15 @@ export default function MobileBottomNav({
           >
             {/* Top Active Indicator Glow */}
             {isActive && (
-              <span className="absolute top-0 inset-x-4 h-0.5 bg-gradient-to-r from-blue-500 to-[#E20074] rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
+              <span className="absolute top-0 inset-x-6 h-0.5 bg-gradient-to-r from-blue-500 to-[#E20074] rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
             )}
 
             <div className="relative">
-              {tab.id === 'Ask AI' ? (
+              {tab.isSpecial ? (
                 <div className={`p-1.5 rounded-full transition-all ${
                   isChatOpen 
                     ? 'bg-gradient-to-r from-blue-600 to-[#E20074] text-white shadow-[0_0_15px_rgba(226,0,116,0.6)]' 
-                    : 'bg-slate-800/80 text-blue-400 border border-slate-700'
+                    : 'bg-slate-800/90 text-blue-400 border border-slate-700'
                 }`}>
                   <Bot size={18} className={isChatOpen ? 'animate-bounce' : ''} />
                   <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 border border-black animate-ping" />
