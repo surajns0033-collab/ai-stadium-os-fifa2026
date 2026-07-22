@@ -63,7 +63,7 @@ export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab 
       />
 
       {/* Slide-out Panel */}
-      <div className="relative w-[85%] max-w-[320px] bg-[#05000A] border-r border-slate-700/60 h-full flex flex-col z-10 shadow-2xl animate-slide-right overflow-hidden">
+      <div className="relative w-full h-full bg-[#05000A] flex flex-col z-10 shadow-2xl animate-fade-in overflow-hidden">
         
         {/* Header */}
         <div className="p-4 border-b border-slate-700/50 flex items-center justify-between bg-slate-900/60 shrink-0">
