@@ -14,7 +14,7 @@ export default function CrowdDashboard() {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+    <div className="h-auto xl:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible xl:overflow-hidden p-4 xl:p-6 gap-6 relative">
       
       {/* Header */}
       <div className="flex justify-between items-end shrink-0 z-10">
@@ -37,7 +37,7 @@ export default function CrowdDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 flex gap-6 min-h-0 z-10">
+      <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         
         {/* Main Operational Visualization (Advanced Professional SVG Map) */}
         <div className="flex-[2] glass-panel rounded-3xl p-0 flex flex-col relative overflow-hidden group border border-slate-700/50">

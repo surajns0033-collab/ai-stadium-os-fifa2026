@@ -36,7 +36,7 @@ export default function GatesDashboard() {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+    <div className="h-auto xl:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible xl:overflow-hidden p-4 xl:p-6 gap-6 relative">
       <div className="flex justify-between items-end shrink-0 z-10">
         <div>
           <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3">
@@ -57,7 +57,7 @@ export default function GatesDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 flex gap-6 min-h-0 z-10">
+      <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
           <div className="flex justify-between items-start mb-4 relative z-10">
             <h3 className="font-bold text-lg flex items-center gap-2"><DoorOpen size={18} className="text-purple-400"/> Turnstile Flow Simulation</h3>

@@ -48,7 +48,7 @@ export default function DashboardWrapper({ title, subtitle, insights, children }
   return (
     <>
       {/* Full-height flex column — header fixed, body scrolls */}
-      <div className="w-full h-full flex flex-col bg-[#0A0015] animate-fade-in overflow-hidden">
+      <div className="w-full h-auto lg:h-full flex flex-col bg-[#0A0015] animate-fade-in overflow-visible lg:overflow-hidden">
 
         {/* ── Fixed Header ── */}
         <div className="shrink-0 flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-800/60">
@@ -76,7 +76,7 @@ export default function DashboardWrapper({ title, subtitle, insights, children }
         </div>
 
         {/* ── Body: left main + right AI feed ── */}
-        <div className="flex-1 flex min-h-0 gap-0">
+        <div className="flex-1 flex flex-col lg:flex-row min-h-0 gap-0">
 
           {/* Main content — scrollable independently */}
           <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-5">
@@ -86,7 +86,7 @@ export default function DashboardWrapper({ title, subtitle, insights, children }
           </div>
 
           {/* AI Insight Feed sidebar — scrollable independently */}
-          <div className="w-72 shrink-0 border-l border-slate-800/60 flex flex-col overflow-hidden">
+          <div className="w-full lg:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-slate-800/60 flex flex-col overflow-hidden">
             <div className="shrink-0 px-4 pt-4 pb-3 border-b border-slate-800/60">
               <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-2">
                 <Sparkles size={13} /> AI Insight Feed

@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <body
-        className={`${outfit.className} antialiased min-h-screen bg-[#0A0015] overflow-hidden text-slate-100`}
+        className={`${outfit.className} antialiased min-h-screen bg-[#0A0015] overflow-y-auto lg:overflow-hidden text-slate-100`}
         role="application"
         aria-label="AI Stadium OS - FIFA World Cup 2026 Command Center"
       >

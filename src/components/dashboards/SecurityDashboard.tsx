@@ -25,7 +25,7 @@ export default function SecurityDashboard() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+    <div className="h-auto xl:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible xl:overflow-hidden p-4 xl:p-6 gap-6 relative">
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay z-0 pointer-events-none"></div>
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
@@ -50,7 +50,7 @@ export default function SecurityDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 flex gap-6 min-h-0 z-10">
+      <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         {/* Main Operational Visualization (Stadium Security Map) */}
         <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-0 flex flex-col relative overflow-hidden group shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>

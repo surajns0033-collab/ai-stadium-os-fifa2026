@@ -14,7 +14,7 @@ export default function TransportDashboard() {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+    <div className="h-auto xl:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible xl:overflow-hidden p-4 xl:p-6 gap-6 relative">
       
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay z-0 pointer-events-none"></div>
@@ -41,7 +41,7 @@ export default function TransportDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 flex gap-6 min-h-0 z-10">
+      <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         
         {/* Main SVG Visualization */}
         <div className="flex-1 glass-panel rounded-3xl p-0 flex flex-col relative overflow-hidden group border border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
