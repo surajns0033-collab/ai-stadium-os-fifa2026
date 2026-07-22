@@ -177,7 +177,7 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
   };
 
   return (
-    <div className="w-[400px] glass-panel border-l border-slate-700/50 h-full flex flex-col z-20 relative bg-[#0A0015]/90 backdrop-blur-2xl">
+    <div className="w-full lg:w-[400px] glass-panel lg:border-l border-t lg:border-t-0 border-slate-700/50 h-[500px] lg:h-full flex flex-col z-20 relative bg-[#0A0015]/90 backdrop-blur-2xl">
       
       {/* Header & Copilot Selector */}
       <div className="p-4 border-b border-slate-700/50 relative">

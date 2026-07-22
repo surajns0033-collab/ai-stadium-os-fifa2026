@@ -95,15 +95,15 @@ export default function Header({ onOpenLogin }: { onOpenLogin?: () => void }) {
             <span className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
           </button>
 
-          <div className="w-px h-6 bg-slate-700/50 mx-2"></div>
+          <div className="hidden sm:block w-px h-6 bg-slate-700/50 mx-2"></div>
 
           {/* Emergency Button */}
-          <button className="flex items-center bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-4 py-1.5 rounded-full text-sm font-bold transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]">
-            <ShieldAlert size={16} className="mr-2 animate-pulse" />
-            EMERGENCY
+          <button className="flex items-center bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-1.5 sm:px-4 rounded-full text-sm font-bold transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+            <ShieldAlert size={16} className="sm:mr-2 animate-pulse" />
+            <span className="hidden sm:inline">EMERGENCY</span>
           </button>
 
-          <div className="w-px h-6 bg-slate-700/50 mx-2"></div>
+          <div className="hidden sm:block w-px h-6 bg-slate-700/50 mx-2"></div>
 
           {/* User Profile or Login */}
           {currentUser ? (

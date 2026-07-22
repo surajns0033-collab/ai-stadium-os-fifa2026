@@ -307,7 +307,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   const isFullBleedWorkspace = fullBleedTabs.includes(activeTab);
 
   return (
-    <div className="h-screen w-full bg-[#0A0015] overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30">
+    <div className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30">
       
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -319,7 +319,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       <Header onOpenLogin={onOpenLogin} />
 
       {/* Main Layout Area */}
-      <div className="flex-1 flex overflow-hidden z-10 relative">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-visible lg:overflow-hidden z-10 relative">
         
         {/* Persistent Left Navigation */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -330,7 +330,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
           </main>
         ) : (
           /* Central Workspace (Split View Layout) */
-          <main className="flex-1 flex flex-col h-full overflow-hidden p-4">
+          <main className="flex-1 flex flex-col min-h-[800px] lg:min-h-0 lg:h-full overflow-visible lg:overflow-hidden p-4">
             
             <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
               

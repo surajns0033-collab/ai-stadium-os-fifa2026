@@ -31,7 +31,7 @@ export default function ExecutiveCommandDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 flex gap-6 min-h-0 z-10">
+      <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         
         {/* Main Operational Visualization (Multi-Stadium Overview Map) */}
         <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
@@ -91,7 +91,7 @@ export default function ExecutiveCommandDashboard() {
             </svg>
           </div>
           
-          <div className="grid grid-cols-4 gap-4 mt-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
              <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
                <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Total F&B Rev</div>
                <div className="text-lg font-black text-white">$4.8M</div>
