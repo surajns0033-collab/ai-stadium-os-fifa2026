@@ -315,7 +315,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
     <div className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0">
       
       {/* Background Ambience */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#2B7CE4]/10 rounded-full blur-[140px] animate-pulse-slow"></div>
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#E20074]/10 rounded-full blur-[140px] animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
       </div>

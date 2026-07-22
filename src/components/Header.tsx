@@ -36,7 +36,7 @@ export default function Header({ onOpenLogin, onToggleMobileMenu }: { onOpenLogi
 
   return (
     <>
-      <header className="h-16 glass-panel border-b border-slate-700/50 flex items-center justify-between px-4 lg:px-6 z-20 relative">
+      <header className="h-16 glass-panel border-b border-slate-700/50 flex items-center justify-between px-3 sm:px-4 lg:px-6 z-20 relative w-full max-w-full overflow-hidden shrink-0">
         {/* Mobile Hamburger Menu Button (3-Line Icon) */}
         <button
           onClick={onToggleMobileMenu}
@@ -55,8 +55,8 @@ export default function Header({ onOpenLogin, onToggleMobileMenu }: { onOpenLogi
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearchSubmit}
-              placeholder="Natural Language AI Search (e.g. 'Why is Gate B crowded?')..." 
-              className="w-full bg-slate-900/50 border border-slate-700/50 rounded-full py-2 pl-10 pr-12 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all shadow-inner"
+              placeholder="AI Search..." 
+              className="w-full bg-slate-900/50 border border-slate-700/50 rounded-full py-1.5 sm:py-2 pl-9 sm:pl-10 pr-10 sm:pr-12 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all shadow-inner"
             />
             <button aria-label="Voice search" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-400 transition-colors">
               <Mic size={18} />
@@ -65,7 +65,7 @@ export default function Header({ onOpenLogin, onToggleMobileMenu }: { onOpenLogi
         </div>
 
         {/* Toolbar Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-1.5 sm:space-x-4 shrink-0">
           {/* Language Profile */}
           <div className="relative">
             <button 
