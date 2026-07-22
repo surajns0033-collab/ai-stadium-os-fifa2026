@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
+import MobileDrawer from '@/components/MobileDrawer';
 import HeroAICard from './HeroAICard';
 import dynamic from 'next/dynamic';
 
@@ -154,6 +155,7 @@ const DASHBOARD_CONFIGS: Record<string, SpecializedDashboardProps> = {
 
 export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () => void }) {
   const [activeTab, setActiveTab] = useState('Home');
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const renderMainContent = () => {
     if (activeTab === 'Home') {
@@ -316,37 +318,15 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       </div>
 
       {/* Top AI Toolbar */}
-      <Header onOpenLogin={onOpenLogin} />
+      <Header onOpenLogin={onOpenLogin} onToggleMobileMenu={() => setIsMobileDrawerOpen(true)} />
 
-      {/* Mobile Navigation Bar */}
-      <div className="lg:hidden flex overflow-x-auto gap-2 p-2.5 bg-[#05000A] border-b border-slate-700/50 shrink-0 custom-scrollbar z-30">
-        {[
-          { id: 'Home', label: 'Command Center' },
-          { id: 'Data Center', label: 'Data Center' },
-          { id: 'Digital Twin', label: 'Digital Twin' },
-          { id: 'Venue Operations', label: 'Venue Infrastructure' },
-          { id: 'Language Center', label: 'Language Center' },
-          { id: 'Crowd', label: 'Crowd' },
-          { id: 'Gates', label: 'Gates' },
-          { id: 'Transportation', label: 'Transit' },
-          { id: 'Food', label: 'Food' },
-          { id: 'Medical', label: 'Medical' },
-          { id: 'Security', label: 'Security' },
-          { id: 'AI Operations', label: 'AI Ops' }
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-              activeTab === tab.id 
-                ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.6)] border border-blue-400/50' 
-                : 'bg-slate-900/90 text-slate-300 border border-slate-700/60 hover:text-white hover:border-slate-500'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {/* Mobile Slide-Out Navigation Drawer */}
+      <MobileDrawer 
+        isOpen={isMobileDrawerOpen} 
+        onClose={() => setIsMobileDrawerOpen(false)} 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+      />
 
       {/* Main Layout Area */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-visible lg:overflow-hidden z-10 relative">

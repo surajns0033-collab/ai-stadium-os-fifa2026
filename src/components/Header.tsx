@@ -9,11 +9,11 @@
  */
 "use client";
 import React, { useState } from 'react';
-import { Search, Mic, Bell, Globe, User, ShieldAlert } from 'lucide-react';
+import { Search, Mic, Bell, Globe, User, ShieldAlert, Menu } from 'lucide-react';
 import { useAppContext } from '@/context/AppContext';
 import UniversalWorkflowModal, { WorkflowContext } from './UniversalWorkflowModal';
 
-export default function Header({ onOpenLogin }: { onOpenLogin?: () => void }) {
+export default function Header({ onOpenLogin, onToggleMobileMenu }: { onOpenLogin?: () => void; onToggleMobileMenu?: () => void }) {
   const { currentUser, globalLang, setGlobalLang } = useAppContext();
   const [searchQuery, setSearchQuery] = useState('');
   const [workflowContext, setWorkflowContext] = useState<WorkflowContext | null>(null);
@@ -36,7 +36,16 @@ export default function Header({ onOpenLogin }: { onOpenLogin?: () => void }) {
 
   return (
     <>
-      <header className="h-16 glass-panel border-b border-slate-700/50 flex items-center justify-between px-6 z-20 relative">
+      <header className="h-16 glass-panel border-b border-slate-700/50 flex items-center justify-between px-4 lg:px-6 z-20 relative">
+        {/* Mobile Hamburger Menu Button (3-Line Icon) */}
+        <button
+          onClick={onToggleMobileMenu}
+          className="lg:hidden p-2 mr-2 rounded-xl bg-slate-900/80 border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors shrink-0"
+          title="Open Navigation Menu"
+        >
+          <Menu size={20} />
+        </button>
+
         {/* Search Bar - Top AI Toolbar */}
         <div className="flex-1 flex items-center max-w-2xl">
           <div className="relative w-full group">
