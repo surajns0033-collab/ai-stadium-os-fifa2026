@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { Bot, Sparkles, X } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import MobileDrawer from '@/components/MobileDrawer';
@@ -156,6 +157,7 @@ const DASHBOARD_CONFIGS: Record<string, SpecializedDashboardProps> = {
 export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () => void }) {
   const [activeTab, setActiveTab] = useState('Home');
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+  const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
 
   const renderMainContent = () => {
     if (activeTab === 'Home') {
@@ -369,10 +371,36 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
           </main>
         )}
 
-        {/* Right AI Assistant Panel */}
+        {/* Right AI Assistant Panel (Desktop) */}
         <AICopilotsPanel onNavigate={setActiveTab} />
 
       </div>
+
+      {/* Floating 'Ask Me' AI Bot Button (Mobile Only) */}
+      <button
+        onClick={() => setIsMobileChatOpen(!isMobileChatOpen)}
+        className="lg:hidden fixed bottom-5 right-5 z-40 flex items-center gap-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-[#E20074] text-white px-4 py-3 rounded-full shadow-[0_0_25px_rgba(226,0,116,0.5)] border border-white/20 active:scale-95 transition-all hover:brightness-110"
+        aria-label="Ask Me AI Copilot"
+      >
+        <div className="relative">
+          <Bot size={20} className="animate-bounce" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-black animate-ping"></span>
+        </div>
+        <span className="font-black text-xs tracking-wider uppercase flex items-center gap-1">
+          Ask Me <Sparkles size={12} className="text-yellow-300" />
+        </span>
+      </button>
+
+      {/* Slide-Up Mobile AI Chat Modal */}
+      {isMobileChatOpen && (
+        <div className="fixed inset-x-3 bottom-3 top-16 z-50 lg:hidden rounded-3xl overflow-hidden border border-slate-700/80 shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-fade-in flex flex-col bg-[#0A0015]">
+          <AICopilotsPanel 
+            onNavigate={setActiveTab} 
+            isMobilePopup={true} 
+            onCloseMobile={() => setIsMobileChatOpen(false)} 
+          />
+        </div>
+      )}
     </div>
   );
 }

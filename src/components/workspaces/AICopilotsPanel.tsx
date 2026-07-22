@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { Bot, MessageSquare, Globe, Lightbulb, ChevronDown, CheckCircle2, CircleDashed, Brain } from 'lucide-react';
+import { Bot, MessageSquare, Globe, Lightbulb, ChevronDown, CheckCircle2, CircleDashed, Brain, X } from 'lucide-react';
 import UniversalAIResponse, { AIResponseData } from './UniversalAIResponse';
 import { useAIMemory } from '@/context/AIMemoryContext';
 
@@ -33,7 +33,13 @@ type Message = {
   responseData?: AIResponseData;
 };
 
-export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: string) => void }) {
+interface AICopilotsPanelProps {
+  onNavigate?: (tab: string) => void;
+  isMobilePopup?: boolean;
+  onCloseMobile?: () => void;
+}
+
+export default function AICopilotsPanel({ onNavigate, isMobilePopup, onCloseMobile }: AICopilotsPanelProps) {
   const { memory } = useAIMemory();
   const [activeCopilot, setActiveCopilot] = useState('Orchestrator AI');
   const [isCopilotMenuOpen, setIsCopilotMenuOpen] = useState(false);
@@ -177,12 +183,16 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
   };
 
   return (
-    <div className="w-full lg:w-[400px] glass-panel lg:border-l border-t lg:border-t-0 border-slate-700/50 h-[500px] lg:h-full flex flex-col z-20 relative bg-[#0A0015]/90 backdrop-blur-2xl">
+    <div className={`glass-panel flex flex-col z-20 relative bg-[#0A0015]/95 backdrop-blur-2xl ${
+      isMobilePopup 
+        ? 'w-full h-full border-0' 
+        : 'hidden lg:flex w-[400px] border-l border-slate-700/50 h-full'
+    }`}>
       
       {/* Header & Copilot Selector */}
-      <div className="p-4 border-b border-slate-700/50 relative">
+      <div className="p-4 border-b border-slate-700/50 relative flex items-center justify-between gap-2">
         <div 
-          className="flex items-center justify-between bg-slate-800/50 hover:bg-slate-800 rounded-lg p-2 cursor-pointer transition-colors border border-slate-700"
+          className="flex-1 flex items-center justify-between bg-slate-800/50 hover:bg-slate-800 rounded-lg p-2 cursor-pointer transition-colors border border-slate-700"
           onClick={() => setIsCopilotMenuOpen(!isCopilotMenuOpen)}
         >
           <div className="flex items-center">
@@ -194,6 +204,15 @@ export default function AICopilotsPanel({ onNavigate }: { onNavigate?: (tab: str
           </div>
           <ChevronDown size={18} className="text-slate-400" />
         </div>
+
+        {isMobilePopup && (
+          <button 
+            onClick={onCloseMobile}
+            className="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white border border-slate-700 shrink-0"
+          >
+            <X size={18} />
+          </button>
+        )}
 
         {/* Dropdown Menu */}
         {isCopilotMenuOpen && (
