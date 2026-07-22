@@ -10,7 +10,7 @@ export default function ExecutiveCommandDashboard() {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-hidden p-6 gap-6 relative">
+    <div className="h-full w-full flex flex-col bg-[#0A0015] text-white overflow-y-auto p-4 lg:p-6 gap-6 relative">
       <div className="flex justify-between items-end shrink-0 z-10">
         <div>
           <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3">
@@ -93,19 +93,19 @@ export default function ExecutiveCommandDashboard() {
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
              <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
-               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Total F&B Rev</div>
+               <div className="text-xs text-slate-400 font-bold uppercase mb-1">Total F&B Rev</div>
                <div className="text-lg font-black text-white">$4.8M</div>
              </div>
              <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
-               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Merch Rev</div>
+               <div className="text-xs text-slate-400 font-bold uppercase mb-1">Merch Rev</div>
                <div className="text-lg font-black text-white">$2.1M</div>
              </div>
              <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
-               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">Energy Offset</div>
+               <div className="text-xs text-slate-400 font-bold uppercase mb-1">Energy Offset</div>
                <div className="text-lg font-black text-emerald-400">14.2MWh</div>
              </div>
              <div className="bg-slate-900/80 border border-slate-700 p-3 rounded-xl">
-               <div className="text-[10px] text-slate-500 font-bold uppercase mb-1">System Health</div>
+               <div className="text-xs text-slate-400 font-bold uppercase mb-1">System Health</div>
                <div className="text-lg font-black text-emerald-400">99.98%</div>
              </div>
           </div>
