@@ -30,15 +30,15 @@ export default function SecurityDashboard() {
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay z-0 pointer-events-none"></div>
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-      <div className="flex justify-between items-end shrink-0 z-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 shrink-0 z-10">
         <div>
-          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
             Security & Threat Intelligence
             <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-red-500/20 text-red-400 rounded-sm border border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse">Defcon 4</span>
           </h2>
           <p className="text-slate-400 text-sm mt-1 font-medium">Live patrol tracking, CCTV grid, and AI threat assessment</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <div className="glass-panel border-white/10 hover:border-white/30 transition-all rounded-xl px-5 py-3 text-right cursor-default shadow-[0_4px_20px_rgba(0,0,0,0.5)]" onMouseEnter={playHover}>
             <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Active Patrols</div>
             <div className="text-2xl font-black text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">42 <span className="text-xs text-slate-400 font-medium ml-1">Units</span></div>

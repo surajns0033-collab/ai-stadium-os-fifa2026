@@ -21,15 +21,15 @@ export default function ParkingDashboard() {
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
       {/* Header */}
-      <div className="flex justify-between items-end shrink-0 z-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 shrink-0 z-10">
         <div>
-          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
             Intelligent Parking Operations
             <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-blue-500/20 text-blue-400 rounded-sm border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.5)] animate-pulse">Live Data</span>
           </h2>
           <p className="text-slate-400 text-sm mt-1 font-medium">AI-driven capacity prediction, EV monitoring, and dynamic flow routing</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <div className="glass-panel border-white/10 hover:border-white/30 transition-all rounded-xl px-5 py-3 text-right cursor-default shadow-[0_4px_20px_rgba(0,0,0,0.5)]" onMouseEnter={playHover}>
             <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Total Occupancy</div>
             <div className="text-2xl font-black text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">84% <span className="text-xs text-yellow-400 font-bold uppercase tracking-widest ml-1 animate-pulse">Filling</span></div>
@@ -304,12 +304,12 @@ export default function ParkingDashboard() {
           <div className="grid grid-cols-2 gap-4 flex-1">
             <div className="glass-panel border-white/10 hover:border-green-500/50 p-4 rounded-2xl flex flex-col justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all cursor-pointer group" onMouseEnter={playHover} onClick={playClick}>
               <Zap size={20} className="text-green-400 mb-2 group-hover:animate-bounce" />
-              <div className="text-3xl font-black text-white drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">12</div>
+              <div className="text-xl sm:text-3xl font-black text-white drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">12</div>
               <div className="text-[9px] text-slate-400 uppercase font-bold tracking-widest mt-1">EV Free</div>
             </div>
             <div className="glass-panel border-white/10 hover:border-indigo-500/50 p-4 rounded-2xl flex flex-col justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all cursor-pointer group" onMouseEnter={playHover} onClick={playClick}>
               <Accessibility size={20} className="text-indigo-400 mb-2 group-hover:animate-pulse" />
-              <div className="text-3xl font-black text-white drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]">5</div>
+              <div className="text-xl sm:text-3xl font-black text-white drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]">5</div>
               <div className="text-[9px] text-slate-400 uppercase font-bold tracking-widest mt-1">Acc. Free</div>
             </div>
             <div className="glass-panel border-white/10 hover:border-white/30 p-4 rounded-2xl flex flex-col justify-center col-span-2 relative overflow-hidden group cursor-pointer transition-all shadow-[0_4px_20px_rgba(0,0,0,0.5)]" onMouseEnter={playHover} onClick={playClick}>

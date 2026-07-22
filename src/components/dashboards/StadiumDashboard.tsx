@@ -37,9 +37,9 @@ export default function StadiumDashboard() {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#1AA65D]/5 rounded-full blur-[140px] animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="p-6 pb-2 z-10 flex justify-between items-end">
+      <div className="p-4 sm:p-6 pb-2 z-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
-          <h2 className="text-3xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
             Stadium Occupancy
           </h2>
           <p className="text-slate-400 text-sm mt-1">Live section status, entry flows & capacity limits</p>

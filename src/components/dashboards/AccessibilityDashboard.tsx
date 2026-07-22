@@ -30,9 +30,9 @@ export default function AccessibilityDashboard() {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[140px] animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="p-6 pb-2 z-10 flex justify-between items-end">
+      <div className="p-4 sm:p-6 pb-2 z-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
-          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
             Accessibility Operations
             <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-blue-500/30 text-blue-300 rounded border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.5)] animate-pulse">INCLUSIVE AI</span>
           </h2>

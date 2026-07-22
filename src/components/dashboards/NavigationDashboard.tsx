@@ -11,15 +11,15 @@ export default function NavigationDashboard() {
 
   return (
     <div className="h-auto xl:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible xl:overflow-hidden p-4 xl:p-6 gap-6 relative">
-      <div className="flex justify-between items-end shrink-0 z-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 shrink-0 z-10">
         <div>
-          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-3">
             Intelligent Navigation & Wayfinding
             <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-blue-500/20 text-blue-400 rounded border border-blue-500/30">Live Routing</span>
           </h2>
           <p className="text-slate-400 text-sm mt-1">Indoor/Outdoor flow paths, turn-by-turn guidance, and dynamic route drawing</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <div className="bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-2 text-right">
             <div className="text-[10px] text-slate-500 font-bold uppercase">Active Users Navigating</div>
             <div className="text-xl font-black text-white">12,450</div>

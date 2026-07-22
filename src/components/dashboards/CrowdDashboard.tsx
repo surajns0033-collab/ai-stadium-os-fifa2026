@@ -17,15 +17,15 @@ export default function CrowdDashboard() {
     <div className="h-auto xl:h-full w-full flex flex-col bg-[#0A0015] text-white overflow-visible xl:overflow-hidden p-4 xl:p-6 gap-6 relative">
       
       {/* Header */}
-      <div className="flex justify-between items-end shrink-0 z-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 shrink-0 z-10">
         <div>
-          <h2 className="text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-3 gaming-text-shadow">
             Crowd Intelligence
             <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-blue-500/30 text-blue-300 rounded border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.5)]">Live Telemetry</span>
           </h2>
           <p className="text-slate-400 text-sm mt-1 font-medium">Advanced biometric flow & high-density capacity mapping</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <div className="glass-panel border-blue-500/30 rounded-xl px-4 py-2 text-right">
             <div className="text-[10px] text-blue-300 font-bold uppercase">System Confidence</div>
             <div className="text-xl font-black text-white flex items-center gap-2">98.4% <Activity size={14} className="text-blue-400 animate-pulse"/></div>
