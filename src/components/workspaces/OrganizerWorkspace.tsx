@@ -330,9 +330,9 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
           </main>
         ) : (
           /* Central Workspace (Split View Layout) */
-          <main className="flex-1 flex flex-col min-h-[800px] lg:min-h-0 lg:h-full overflow-visible lg:overflow-hidden p-4">
+          <main className="flex-1 flex flex-col h-auto lg:h-full overflow-visible lg:overflow-hidden p-4">
             
-            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 h-auto lg:min-h-0">
               
               {/* Left Column in Workspace */}
               <div className="flex-1 flex flex-col gap-4 min-w-0">
