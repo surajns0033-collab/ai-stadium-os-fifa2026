@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   X, LayoutDashboard, Database, Map, LineChart, Building2, Languages, Users, 
   DoorOpen, Train, Car, HeartPulse, ShieldAlert, Utensils, Droplets, Navigation, 
@@ -47,6 +47,10 @@ const CATEGORIES = [
 ];
 
 export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab }: MobileDrawerProps) {
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
   if (!isOpen) return null;
 
   const handleSelect = (id: string) => {
@@ -54,16 +58,57 @@ export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab 
     onClose();
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - touchStartX.current;
+    
+    // Track leftward drag (closing gesture) or apply small elasticity when dragging right
+    if (diff <= 0) {
+      setDragOffset(diff);
+    } else {
+      setDragOffset(diff * 0.2);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    touchStartX.current = null;
+    
+    // If dragged more than 90px left, dismiss drawer
+    if (dragOffset < -90) {
+      onClose();
+    }
+    setDragOffset(0);
+  };
+
+  const progressRatio = Math.max(0.1, 1 - Math.abs(dragOffset) / 350);
+
   return (
-    <div className="fixed inset-0 z-50 lg:hidden flex">
-      {/* Dark Blur Backdrop */}
+    <div className="fixed inset-0 z-50 lg:hidden flex overflow-hidden">
+      {/* Dark Blur Backdrop (Opacity syncs 1:1 with finger drag) */}
       <div 
-        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity animate-fade-in"
+        className={`fixed inset-0 bg-black/80 backdrop-blur-md ${isDragging ? '' : 'transition-opacity duration-250'}`}
+        style={{ opacity: progressRatio }}
         onClick={onClose}
       />
 
-      {/* Slide-out Panel */}
-      <div className="relative w-full h-full bg-[#05000A] flex flex-col z-10 shadow-2xl animate-fade-in overflow-hidden">
+      {/* Slide Panel (Tracks finger 1:1 in real-time) */}
+      <div 
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ 
+          transform: `translateX(${dragOffset}px)`,
+          transition: isDragging ? 'none' : 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)' 
+        }}
+        className="relative w-full h-full bg-[#05000A] flex flex-col z-10 shadow-2xl overflow-hidden"
+      >
         
         {/* Header */}
         <div className="p-4 border-b border-slate-700/50 flex items-center justify-between bg-slate-900/60 shrink-0">
