@@ -111,13 +111,13 @@ export default function DigitalTwinMap() {
               </div>
             );
           })}
-
-          {/* ── What-If Simulation Engine (Positioned inside cylinder graphic at bottom center) ── */}
-          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 z-50 w-[92%] sm:w-96 pointer-events-auto">
-            <SimulationEngine onTrigger={setSimulation} />
-          </div>
-
         </div>
+
+        {/* ── What-If Simulation Engine (Centered card outside stadium oval — Zero Overlap!) ── */}
+        <div className="w-full max-w-md mx-auto mt-4 pointer-events-auto z-40">
+          <SimulationEngine onTrigger={setSimulation} />
+        </div>
+
       </div>
     </div>
   );
