@@ -115,7 +115,7 @@ export default function DigitalTwinMap() {
       </div>
 
       {/* ── What-If Simulation Engine (Positioned Outside Stadium Graphic — Zero Overlap!) ── */}
-      <div className="w-full glass-panel p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-950/80 shadow-xl pointer-events-auto">
+      <div className="w-full max-w-5xl mx-auto glass-panel p-3 sm:p-4 rounded-2xl border border-slate-800 bg-slate-950/80 shadow-xl pointer-events-auto">
         <SimulationEngine onTrigger={setSimulation} />
       </div>
 
