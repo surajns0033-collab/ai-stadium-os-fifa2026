@@ -111,14 +111,14 @@ export default function DigitalTwinMap() {
               </div>
             );
           })}
+
+          {/* ── What-If Simulation Engine (Positioned inside cylinder graphic at bottom center) ── */}
+          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 z-50 w-[92%] sm:w-96 pointer-events-auto">
+            <SimulationEngine onTrigger={setSimulation} />
+          </div>
+
         </div>
       </div>
-
-      {/* ── What-If Simulation Engine (Centered Box Outside Stadium Graphic) ── */}
-      <div className="w-full sm:w-96 mx-auto glass-panel p-4 rounded-2xl border border-slate-800 bg-slate-950/90 shadow-xl pointer-events-auto flex flex-col items-center justify-center text-center my-2">
-        <SimulationEngine onTrigger={setSimulation} />
-      </div>
-
     </div>
   );
 }
