@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Bot, Sparkles, X } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
@@ -156,11 +156,28 @@ const DASHBOARD_CONFIGS: Record<string, SpecializedDashboardProps> = {
 };
 
 export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () => void }) {
-  const [activeTab, setActiveTab] = useState('Home');
+  const [activeTab, setActiveTabState] = useState('Home');
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
   const [drawerProgress, setDrawerProgress] = useState(0);
   const [isInteractiveDragging, setIsInteractiveDragging] = useState(false);
+
+  // Restore activeTab from localStorage on page refresh so layout remains identical
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTab = localStorage.getItem('stadium_os_active_tab');
+      if (savedTab) {
+        setActiveTabState(savedTab);
+      }
+    }
+  }, []);
+
+  const setActiveTab = (tab: string) => {
+    setActiveTabState(tab);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('stadium_os_active_tab', tab);
+    }
+  };
 
   // Touch Edge Drag-to-Open & Drag-to-Close 1:1 Real-time Interactive Finger Tracking
   const touchStartX = useRef<number | null>(null);
