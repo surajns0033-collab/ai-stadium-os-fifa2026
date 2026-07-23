@@ -380,7 +380,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="min-h-screen lg:h-screen w-full bg-[#0A0015] flex flex-col text-slate-100 selection:bg-[#E20074]/30 relative"
+      className="min-h-screen lg:h-screen w-full bg-[#0A0015] flex flex-col text-slate-100 selection:bg-[#E20074]/30 relative overflow-y-auto overflow-x-hidden"
     >
       
       {/* Background Ambience */}
@@ -406,7 +406,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       />
 
       {/* Main Layout Area */}
-      <div className="w-full flex flex-col lg:flex-row z-10 relative pt-16 pb-32 lg:pb-0 overflow-visible lg:overflow-hidden">
+      <div className="w-full flex-1 flex flex-col lg:flex-row z-10 relative pt-16 pb-32 lg:pb-0 overflow-y-auto overflow-x-hidden lg:overflow-hidden">
         
         {/* Persistent Left Navigation */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
