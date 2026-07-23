@@ -29,11 +29,11 @@ export default function DigitalTwinMap() {
   return (
     <div className="flex flex-col w-full gap-4">
       
-      {/* ── Top Layer Selector Toolbar (Zero Line Touch!) ── */}
-      <div className="w-full flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-lg pointer-events-auto z-40">
-        <div className="flex items-center gap-2 text-xs font-extrabold text-white uppercase tracking-wider">
+      {/* ── Top Layer Selector Toolbar ── */}
+      <div className="w-full flex flex-wrap items-center justify-start gap-3 sm:gap-4 px-4 py-3 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-lg pointer-events-auto z-40">
+        <div className="flex items-center gap-2 text-xs font-extrabold text-white uppercase tracking-wider shrink-0">
           <span className="w-2.5 h-2.5 rounded-full bg-[#E20074] animate-ping"></span>
-          Digital Twin Map Layers
+          Digital Twin Map Layers:
         </div>
 
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
