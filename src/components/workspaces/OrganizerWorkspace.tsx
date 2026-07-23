@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Bot, Sparkles, X } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
@@ -160,6 +160,40 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
 
+  // Touch Swipe Gesture Detection for Mobile Navigation Drawer
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+
+    const deltaX = touchEndX - touchStartX.current;
+    const deltaY = touchEndY - touchStartY.current;
+
+    // Detect horizontal swipe gesture (deltaX > 40px and horizontal movement exceeds vertical movement)
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      // Swipe Right from left edge or screen -> Open Drawer
+      if (deltaX > 40 && (touchStartX.current < 100 || !isMobileDrawerOpen)) {
+        setIsMobileDrawerOpen(true);
+      } 
+      // Swipe Left -> Close Drawer
+      else if (deltaX < -40 && isMobileDrawerOpen) {
+        setIsMobileDrawerOpen(false);
+      }
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
   const renderMainContent = () => {
     if (activeTab === 'Home') {
        return <ExecutiveCommandDashboard />;
@@ -312,7 +346,11 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   const isFullBleedWorkspace = fullBleedTabs.includes(activeTab);
 
   return (
-    <div className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0">
+    <div 
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0"
+    >
       
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
