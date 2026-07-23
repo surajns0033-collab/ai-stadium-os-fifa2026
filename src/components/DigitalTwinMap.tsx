@@ -30,18 +30,19 @@ export default function DigitalTwinMap() {
     <div className="flex flex-col w-full gap-4">
       
       {/* ── Top Layer Selector Toolbar ── */}
-      <div className="w-full flex flex-wrap items-center justify-start gap-3 sm:gap-4 px-4 py-3 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-lg pointer-events-auto z-40">
+      <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-start gap-2.5 sm:gap-4 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-lg pointer-events-auto z-40">
         <div className="flex items-center gap-2 text-xs font-extrabold text-white uppercase tracking-wider shrink-0">
           <span className="w-2.5 h-2.5 rounded-full bg-[#E20074] animate-ping"></span>
           Digital Twin Map Layers:
         </div>
 
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+        {/* Mobile: Horizontal Touch-Scroll Pill Bar | Desktop: Inline Next to Title */}
+        <div className="w-full sm:w-auto flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5 sm:py-0 flex-nowrap sm:flex-wrap shrink-0">
           {(['density', 'medical', 'security', 'accessibility', 'temperature'] as const).map(layer => (
             <button 
               key={layer}
               onClick={() => setActiveLayer(layer)}
-              className={`px-3 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                 activeLayer === layer 
                   ? 'bg-[#E20074] text-white shadow-[0_0_12px_rgba(226,0,116,0.6)] scale-105' 
                   : 'bg-slate-950 text-slate-300 border border-slate-700/80 hover:border-[#E20074]/50 hover:text-white'
