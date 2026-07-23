@@ -159,8 +159,10 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   const [activeTab, setActiveTab] = useState('Home');
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
+  const [drawerProgress, setDrawerProgress] = useState(0);
+  const [isInteractiveDragging, setIsInteractiveDragging] = useState(false);
 
-  // Touch Swipe Gesture Detection for Mobile Navigation Drawer
+  // Touch Edge Drag-to-Open & Drag-to-Close 1:1 Real-time Interactive Finger Tracking
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
 
@@ -169,27 +171,38 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
     touchStartY.current = e.touches[0].clientY;
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent) => {
     if (touchStartX.current === null || touchStartY.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const deltaX = currentX - touchStartX.current;
+    const deltaY = currentY - touchStartY.current;
 
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
+    // Detect edge drag-to-open starting near left edge (< 70px)
+    if (!isMobileDrawerOpen && touchStartX.current < 70 && deltaX > 5 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      setIsInteractiveDragging(true);
+      const maxW = Math.min(320, typeof window !== 'undefined' ? window.innerWidth : 320);
+      const progress = Math.min(1, Math.max(0, deltaX / maxW));
+      setDrawerProgress(progress);
+    } 
+    else if (isInteractiveDragging) {
+      const maxW = Math.min(320, typeof window !== 'undefined' ? window.innerWidth : 320);
+      const progress = Math.min(1, Math.max(0, deltaX / maxW));
+      setDrawerProgress(progress);
+    }
+  };
 
-    const deltaX = touchEndX - touchStartX.current;
-    const deltaY = touchEndY - touchStartY.current;
-
-    // Detect horizontal swipe gesture (deltaX > 40px and horizontal movement exceeds vertical movement)
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
-      // Swipe Right from left edge or screen -> Open Drawer
-      if (deltaX > 40 && (touchStartX.current < 100 || !isMobileDrawerOpen)) {
+  const handleTouchEnd = () => {
+    if (isInteractiveDragging) {
+      setIsInteractiveDragging(false);
+      if (drawerProgress > 0.3) {
         setIsMobileDrawerOpen(true);
-      } 
-      // Swipe Left -> Close Drawer
-      else if (deltaX < -40 && isMobileDrawerOpen) {
+        setDrawerProgress(1);
+      } else {
         setIsMobileDrawerOpen(false);
+        setDrawerProgress(0);
       }
     }
-
     touchStartX.current = null;
     touchStartY.current = null;
   };
@@ -348,6 +361,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
   return (
     <div 
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0"
     >
@@ -364,9 +378,14 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       {/* Mobile Slide-Out Navigation Drawer */}
       <MobileDrawer 
         isOpen={isMobileDrawerOpen} 
-        onClose={() => setIsMobileDrawerOpen(false)} 
+        onClose={() => {
+          setIsMobileDrawerOpen(false);
+          setDrawerProgress(0);
+        }} 
         activeTab={activeTab} 
         setActiveTab={setActiveTab} 
+        drawerProgress={drawerProgress}
+        isInteractiveDragging={isInteractiveDragging}
       />
 
       {/* Main Layout Area */}

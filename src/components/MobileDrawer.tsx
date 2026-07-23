@@ -5,13 +5,14 @@ import {
   DoorOpen, Train, Car, HeartPulse, ShieldAlert, Utensils, Droplets, Navigation, 
   Brain, Leaf, FileText, ChevronRight
 } from 'lucide-react';
-import { useAppContext } from '@/context/AppContext';
 
 interface MobileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  drawerProgress?: number; // 0 (hidden) to 1 (fully open)
+  isInteractiveDragging?: boolean;
 }
 
 const CATEGORIES = [
@@ -46,12 +47,23 @@ const CATEGORIES = [
   }
 ];
 
-export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab }: MobileDrawerProps) {
+export default function MobileDrawer({ 
+  isOpen, 
+  onClose, 
+  activeTab, 
+  setActiveTab,
+  drawerProgress = 0,
+  isInteractiveDragging = false
+}: MobileDrawerProps) {
   const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
+  const [isSelfDragging, setIsSelfDragging] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  if (!isOpen) return null;
+  const effectiveProgress = isInteractiveDragging 
+    ? drawerProgress 
+    : (isOpen ? Math.max(0, 1 + dragOffset / 300) : 0);
+
+  if (!isOpen && effectiveProgress <= 0.01) return null;
 
   const handleSelect = (id: string) => {
     setActiveTab(id);
@@ -60,7 +72,7 @@ export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab 
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
-    setIsDragging(true);
+    setIsSelfDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -68,7 +80,6 @@ export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab 
     const currentX = e.touches[0].clientX;
     const diff = currentX - touchStartX.current;
     
-    // Track leftward drag (closing gesture) or apply small elasticity when dragging right
     if (diff <= 0) {
       setDragOffset(diff);
     } else {
@@ -77,35 +88,38 @@ export default function MobileDrawer({ isOpen, onClose, activeTab, setActiveTab 
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
+    setIsSelfDragging(false);
     touchStartX.current = null;
     
-    // If dragged more than 90px left, dismiss drawer
-    if (dragOffset < -90) {
+    if (dragOffset < -80) {
       onClose();
     }
     setDragOffset(0);
   };
 
-  const progressRatio = Math.max(0.1, 1 - Math.abs(dragOffset) / 350);
+  const currentTranslateX = isInteractiveDragging 
+    ? -((1 - effectiveProgress) * 100)
+    : (isOpen ? Math.min(0, dragOffset) : -100);
+
+  const backdropOpacity = effectiveProgress * 0.8;
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden flex overflow-hidden">
-      {/* Dark Blur Backdrop (Opacity syncs 1:1 with finger drag) */}
+      {/* Dark Blur Backdrop (Opacity tracks finger 1:1) */}
       <div 
-        className={`fixed inset-0 bg-black/80 backdrop-blur-md ${isDragging ? '' : 'transition-opacity duration-250'}`}
-        style={{ opacity: progressRatio }}
+        className={`fixed inset-0 bg-black backdrop-blur-md ${isInteractiveDragging || isSelfDragging ? '' : 'transition-opacity duration-200'}`}
+        style={{ opacity: backdropOpacity }}
         onClick={onClose}
       />
 
-      {/* Slide Panel (Tracks finger 1:1 in real-time) */}
+      {/* Slide Panel (Glides 1:1 with finger in real-time) */}
       <div 
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         style={{ 
-          transform: `translateX(${dragOffset}px)`,
-          transition: isDragging ? 'none' : 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)' 
+          transform: `translateX(${currentTranslateX}%)`,
+          transition: isInteractiveDragging || isSelfDragging ? 'none' : 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)' 
         }}
         className="relative w-full h-full bg-[#05000A] flex flex-col z-10 shadow-2xl overflow-hidden"
       >
