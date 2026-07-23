@@ -363,7 +363,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="h-screen w-full bg-[#0A0015] overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 relative"
+      className="min-h-screen lg:h-screen w-full bg-[#0A0015] flex flex-col text-slate-100 selection:bg-[#E20074]/30 relative"
     >
       
       {/* Background Ambience */}
@@ -395,7 +395,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {isFullBleedWorkspace ? (
-          <main className="flex-1 flex flex-col h-full overflow-hidden">
+          <main className="flex-1 flex flex-col h-auto lg:h-full overflow-visible lg:overflow-hidden">
             {renderMainContent()}
           </main>
         ) : (
