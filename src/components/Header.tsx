@@ -36,7 +36,7 @@ export default function Header({ onOpenLogin, onToggleMobileMenu }: { onOpenLogi
 
   return (
     <>
-      <header className="h-16 glass-panel border-b border-slate-700/50 flex items-center justify-between px-3 sm:px-4 lg:px-6 z-20 relative w-full max-w-full overflow-hidden shrink-0">
+      <header className="h-16 sticky top-0 bg-[#0A0015]/95 backdrop-blur-xl border-b border-slate-700/50 flex items-center justify-between px-3 sm:px-4 lg:px-6 z-30 w-full max-w-full overflow-hidden shrink-0 shadow-lg">
         {/* Mobile Hamburger Menu Button (3-Line Icon) */}
         <button
           onClick={onToggleMobileMenu}
