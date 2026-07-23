@@ -363,7 +363,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0"
+      className="min-h-screen lg:h-screen w-full bg-[#0A0015] overflow-y-auto overflow-x-hidden lg:overflow-hidden flex flex-col text-slate-100 selection:bg-[#E20074]/30 pb-20 lg:pb-0 pt-16 lg:pt-0"
     >
       
       {/* Background Ambience */}
