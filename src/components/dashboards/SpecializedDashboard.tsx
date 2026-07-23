@@ -34,14 +34,14 @@ export default function SpecializedDashboard({
     <DashboardWrapper title={title} subtitle={subtitle} insights={insights}>
       
       {/* Visualizations Grid */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {visualizations.map((vis, idx) => (
           <div key={idx} className="glass-panel p-4 border border-slate-700/50 hover:border-slate-500 transition-colors cursor-pointer group relative overflow-hidden">
             <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{vis.label}</h4>
-            <div className="text-2xl font-black text-white flex items-center gap-2">
+            <div className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
               {vis.value}
               {vis.trend && (
-                <span className={`text-xs px-2 py-1 rounded-full border ${vis.trendUp ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-[#1AA65D]/10 text-[#1AA65D] border-[#1AA65D]/20'}`}>
+                <span className={`text-[10px] sm:text-xs px-2 py-0.5 rounded-full border ${vis.trendUp ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-[#1AA65D]/10 text-[#1AA65D] border-[#1AA65D]/20'}`}>
                   {vis.trend}
                 </span>
               )}
@@ -57,9 +57,9 @@ export default function SpecializedDashboard({
         ))}
       </div>
 
-      <div className="grid grid-cols-3 gap-6 h-full mt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[300px] mt-2">
         {/* Main Content Area / Map Placeholder */}
-        <div className="col-span-2 glass-panel border border-slate-700/50 flex flex-col relative overflow-hidden bg-slate-900/30">
+        <div className="col-span-1 lg:col-span-2 glass-panel min-h-[320px] border border-slate-700/50 flex flex-col relative overflow-hidden bg-slate-900/30">
            <div className="absolute top-4 left-4 z-10 flex gap-2">
              <span className="bg-[#E20074]/20 text-[#E20074] border border-[#E20074]/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2">
                <Zap size={14}/> Live Feed Active
@@ -67,7 +67,7 @@ export default function SpecializedDashboard({
            </div>
            
            {/* Placeholder for actual visual (Heatmap, map, timeline etc) */}
-           <div className="flex-1 flex items-center justify-center relative">
+           <div className="flex-1 flex items-center justify-center relative min-h-[250px]">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
              <div className="text-center z-10 p-8">
                <BarChart size={48} className="text-slate-700 mx-auto mb-4" />

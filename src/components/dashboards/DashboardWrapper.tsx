@@ -51,49 +51,49 @@ export default function DashboardWrapper({ title, subtitle, insights, children }
       <div className="w-full h-auto lg:h-full flex flex-col bg-[#0A0015] animate-fade-in overflow-visible lg:overflow-hidden">
 
         {/* ── Fixed Header ── */}
-        <div className="shrink-0 flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-800/60">
+        <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-6 pt-5 pb-4 border-b border-slate-800/60 gap-3">
           <div>
-            <h1 className="text-2xl font-black text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-3">
               {title}
               <span className="text-[10px] bg-[#E20074]/20 text-[#E20074] px-2 py-1 rounded-full border border-[#E20074]/30 uppercase tracking-widest font-bold">Live</span>
             </h1>
-            <p className="text-slate-400 text-sm mt-0.5">{subtitle}</p>
+            <p className="text-slate-400 text-xs sm:text-sm mt-0.5">{subtitle}</p>
           </div>
 
           {/* Actions toolbar */}
-          <div className="flex bg-slate-900/60 p-1.5 rounded-xl border border-slate-800">
+          <div className="flex flex-wrap bg-slate-900/60 p-1.5 rounded-xl border border-slate-800 shrink-0">
             {universalActions.map(action => (
               <button
                 key={action.id}
                 onClick={() => handleActionClick(action.id)}
-                className="p-2 rounded-lg transition-all hover:bg-slate-800 group relative"
+                className="p-1.5 sm:p-2 rounded-lg transition-all hover:bg-slate-800 group relative"
                 title={action.label}
               >
-                <action.icon size={17} className={`${action.color} group-hover:scale-110 transition-transform`} />
+                <action.icon size={16} className={`${action.color} group-hover:scale-110 transition-transform`} />
               </button>
             ))}
           </div>
         </div>
 
         {/* ── Body: left main + right AI feed ── */}
-        <div className="flex-1 flex flex-col lg:flex-row min-h-0 gap-0">
+        <div className="flex-1 flex flex-col lg:flex-row min-h-0 gap-0 overflow-visible lg:overflow-hidden">
 
-          {/* Main content — scrollable independently */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-5">
+          {/* Main content — scrollable independently on desktop, flows vertically on mobile */}
+          <div className="flex-1 overflow-visible lg:overflow-y-auto custom-scrollbar px-4 sm:px-6 py-5">
             <div className="flex flex-col gap-5">
               {children}
             </div>
           </div>
 
-          {/* AI Insight Feed sidebar — scrollable independently */}
-          <div className="w-full lg:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-slate-800/60 flex flex-col overflow-hidden">
+          {/* AI Insight Feed sidebar — scrollable independently on desktop, stacks vertically on mobile */}
+          <div className="w-full lg:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-slate-800/60 flex flex-col overflow-visible lg:overflow-hidden">
             <div className="shrink-0 px-4 pt-4 pb-3 border-b border-slate-800/60">
               <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-2">
                 <Sparkles size={13} /> AI Insight Feed
                 <span className="ml-auto w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
               </h3>
             </div>
-            <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-3 flex flex-col gap-3">
+            <div className="flex-1 overflow-visible lg:overflow-y-auto custom-scrollbar px-3 py-3 flex flex-col gap-3">
               {insights.map(insight => (
                 <div
                   key={insight.id}

@@ -389,7 +389,7 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
       />
 
       {/* Main Layout Area (Only this content scrolls on mobile!) */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto overflow-x-hidden lg:overflow-hidden z-10 relative pt-16 pb-20 lg:pb-0">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto overflow-x-hidden z-10 relative pt-16 pb-32 lg:pb-0 custom-scrollbar">
         
         {/* Persistent Left Navigation */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
