@@ -39,7 +39,7 @@ export default function WashroomDashboard() {
           
           <h3 className="font-bold text-lg mb-4 z-10 flex items-center gap-2"><Droplets size={18} className="text-blue-400"/> Facility Flow Map</h3>
           
-          <div className="flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
+          <div className="w-full min-h-[320px] lg:min-h-0 flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
             <svg viewBox="0 0 1000 600" className="w-full h-full">
               {/* Washroom Node 1 - Clean */}
               <g transform="translate(200, 150)">

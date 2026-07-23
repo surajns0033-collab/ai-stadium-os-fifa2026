@@ -39,7 +39,7 @@ export default function VenueOperationsDashboard() {
           
           <h3 className="font-bold text-lg mb-4 z-10 flex items-center gap-2"><Building2 size={18} className="text-orange-400"/> Facility Diagnostics Blueprint</h3>
           
-          <div className="flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
+          <div className="w-full min-h-[320px] lg:min-h-0 flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
             <svg viewBox="0 0 1000 600" className="w-full h-full">
               {/* Central Core */}
               <rect x="350" y="200" width="300" height="200" rx="20" fill="none" stroke="#334155" strokeWidth="4" />

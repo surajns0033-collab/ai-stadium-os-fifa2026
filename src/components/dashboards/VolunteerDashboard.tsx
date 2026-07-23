@@ -39,7 +39,7 @@ export default function VolunteerDashboard() {
           
           <h3 className="font-bold text-lg mb-4 z-10 flex items-center gap-2"><MapPin size={18} className="text-purple-400"/> Live Volunteer Map</h3>
           
-          <div className="flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
+          <div className="w-full min-h-[320px] lg:min-h-0 flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
             <svg viewBox="0 0 1000 600" className="w-full h-full">
               {/* Stadium Background */}
               <circle cx="500" cy="300" r="200" fill="none" stroke="#1e293b" strokeWidth="2" />

@@ -44,7 +44,7 @@ export default function FoodDashboard() {
       <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         
         {/* Main Operational Visualization (Complex Concourse Grid SVG) */}
-        <div className="flex-[2] glass-panel rounded-3xl p-0 flex flex-col relative overflow-hidden group border border-slate-700/50">
+        <div className="flex-[2] glass-panel min-h-[420px] lg:min-h-0 rounded-3xl p-0 flex flex-col relative overflow-hidden group border border-slate-700/50">
           <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
             <div className="bg-black/60 backdrop-blur border border-white/10 rounded-lg px-3 py-1.5 flex items-center gap-2">
               <ShoppingCart size={14} className="text-green-400"/>
@@ -58,7 +58,7 @@ export default function FoodDashboard() {
             </button>
           </div>
           
-          <div className="flex-1 relative bg-[#05000a] overflow-hidden">
+          <div className="w-full min-h-[320px] lg:min-h-0 flex-1 relative bg-[#05000a] overflow-hidden">
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
@@ -326,7 +326,7 @@ export default function FoodDashboard() {
         </div>
 
         {/* AI Recommendations & Interactive Controls */}
-        <div className="flex-1 flex flex-col gap-4 min-w-[320px] max-w-[400px]">
+        <div className="flex-1 flex flex-col gap-4 w-full lg:min-w-[320px] max-w-[400px]">
           
           <div className="glass-panel p-5 rounded-2xl border-yellow-500/30 flex flex-col h-[350px]">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-yellow-300 mb-3 flex items-center gap-2"><AlertCircle size={14} /> Supply Routing Alert</h3>

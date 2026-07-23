@@ -34,12 +34,12 @@ export default function NavigationDashboard() {
       <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         
         {/* Main Operational Visualization (Indoor/Outdoor Map & Routing) */}
-        <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
+        <div className="flex-[2] glass-panel min-h-[420px] lg:min-h-0 rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
           
           <h3 className="font-bold text-lg mb-4 z-10 flex items-center gap-2"><MapIcon size={18} className="text-blue-400"/> Wayfinding Grid (Indoor & Outdoor)</h3>
           
-          <div className="flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
+          <div className="w-full min-h-[320px] lg:min-h-0 flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden">
             <svg viewBox="0 0 1000 600" className="w-full h-full">
               
               {/* Stadium Base Structure (Indoor) */}
@@ -107,7 +107,7 @@ export default function NavigationDashboard() {
         </div>
 
         {/* Turn-by-Turn Guidance & Wayfinding Details */}
-        <div className="flex-1 flex flex-col gap-4 min-w-[320px]">
+        <div className="flex-1 flex flex-col gap-4 w-full lg:min-w-[320px]">
           
           {/* Turn-by-Turn Panel */}
           <div className="glass-panel p-5 rounded-2xl border border-blue-500/30 bg-blue-900/10">

@@ -58,7 +58,7 @@ export default function GatesDashboard() {
       </div>
 
       <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
-        <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
+        <div className="flex-[2] glass-panel min-h-[420px] lg:min-h-0 rounded-3xl border border-slate-700/50 p-6 flex flex-col relative overflow-hidden bg-slate-900/40">
           <div className="flex justify-between items-start mb-4 relative z-10">
             <h3 className="font-bold text-lg flex items-center gap-2"><DoorOpen size={18} className="text-purple-400"/> Turnstile Flow Simulation</h3>
             <div className="flex items-center gap-3 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/50 text-xs">
@@ -69,7 +69,7 @@ export default function GatesDashboard() {
             </div>
           </div>
           
-          <div className="flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden group">
+          <div className="w-full min-h-[320px] lg:min-h-0 flex-1 relative border border-slate-700 rounded-2xl bg-[#05000A] overflow-hidden group">
             <img 
               src="/stadium_gate_bg.png" 
               alt="Stadium Gate" 

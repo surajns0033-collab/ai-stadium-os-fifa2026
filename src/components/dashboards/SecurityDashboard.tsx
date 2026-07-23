@@ -52,7 +52,7 @@ export default function SecurityDashboard() {
 
       <div className="flex-1 flex flex-col xl:flex-row gap-6 min-h-0 z-10">
         {/* Main Operational Visualization (Stadium Security Map) */}
-        <div className="flex-[2] glass-panel rounded-3xl border border-slate-700/50 p-0 flex flex-col relative overflow-hidden group shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="flex-[2] glass-panel min-h-[420px] lg:min-h-0 rounded-3xl border border-slate-700/50 p-0 flex flex-col relative overflow-hidden group shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
           
           <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
@@ -201,7 +201,7 @@ export default function SecurityDashboard() {
         </div>
 
         {/* AI Threat Assessment & Incident Timeline */}
-        <div className="flex-1 flex flex-col gap-4 min-w-[320px]">
+        <div className="flex-1 flex flex-col gap-4 w-full lg:min-w-[320px]">
           
           {/* AI Threat Assessment */}
           <div className="glass-panel p-5 rounded-2xl border border-red-500/30 bg-red-900/10 shadow-[0_4px_20px_rgba(239,68,68,0.1)] hover:shadow-[0_4px_30px_rgba(239,68,68,0.2)] transition-shadow" onMouseEnter={playHover}>
