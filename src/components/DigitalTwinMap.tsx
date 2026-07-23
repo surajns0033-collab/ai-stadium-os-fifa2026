@@ -120,13 +120,19 @@ export default function DigitalTwinMap() {
             );
           })}
 
-          {/* ── What-If Simulation Engine (Dead Center of the 4 Gate Rectangle Object) ── */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[85%] sm:w-80 pointer-events-auto">
+          {/* ── What-If Simulation Engine (DESKTOP ONLY: Inside Center of 4 Gates) ── */}
+          <div className="hidden lg:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-80 pointer-events-auto">
             <SimulationEngine onTrigger={setSimulation} />
           </div>
 
         </div>
       </div>
+
+      {/* ── What-If Simulation Engine (MOBILE ONLY: Outside Away From Stadium Box) ── */}
+      <div className="block lg:hidden w-full sm:w-80 mx-auto mt-2 pointer-events-auto z-40">
+        <SimulationEngine onTrigger={setSimulation} />
+      </div>
+
     </div>
   );
 }
