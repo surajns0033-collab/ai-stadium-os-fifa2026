@@ -155,7 +155,7 @@ export default function DigitalTwinMap() {
       <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-start gap-2.5 sm:gap-4 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-lg pointer-events-auto z-40">
         <div className="flex items-center gap-2 text-xs font-extrabold text-white uppercase tracking-wider shrink-0">
           <span className="w-2.5 h-2.5 rounded-full bg-[#E20074] animate-ping"></span>
-          Digital Twin Map Layers (Click for AI Options):
+          Digital Twin Map Layers:
         </div>
 
         {/* Mobile: Horizontal Touch-Scroll Pill Bar | Desktop: Inline Next to Title */}
@@ -234,7 +234,7 @@ export default function DigitalTwinMap() {
                   )}
                 </div>
                 <div className="mt-2 px-3 py-1.5 bg-black/90 border border-[#E20074]/30 rounded-lg text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity absolute top-full pointer-events-none shadow-[0_0_15px_rgba(226,0,116,0.2)] backdrop-blur-md">
-                  <div className="font-bold text-white mb-1 uppercase tracking-wider">{gate.name} (Click AI)</div>
+                  <div className="font-bold text-white mb-1 uppercase tracking-wider">{gate.name}</div>
                   <div className={`flex items-center space-x-2 ${textClass} font-medium`}>
                     <Users size={12} />
                     <span>{capacity}% Occupied</span>
