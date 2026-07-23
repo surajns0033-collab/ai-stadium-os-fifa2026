@@ -405,8 +405,8 @@ export default function OrganizerWorkspace({ onOpenLogin }: { onOpenLogin?: () =
         isInteractiveDragging={isInteractiveDragging}
       />
 
-      {/* Main Layout Area (Only this content scrolls on mobile!) */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto overflow-x-hidden z-10 relative pt-16 pb-32 lg:pb-0 custom-scrollbar">
+      {/* Main Layout Area */}
+      <div className="w-full flex flex-col lg:flex-row z-10 relative pt-16 pb-32 lg:pb-0 overflow-visible lg:overflow-hidden">
         
         {/* Persistent Left Navigation */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
